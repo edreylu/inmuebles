@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout :: head">
+        
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body onload="nobackbutton();">
+        <header th:replace="layout :: header"></header>
+        <div class="container mt-2 col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <center><b class="tituloPrincipal">Agregar Capitulo</b></center>
+                </div>
+                <div class="card-body">
+                    
+                    <form method="post" action="#" th:action="@{/capitulos/add}" th:object="${capitulo}">
+                        
+                        <b class="tituloTexto">Capitulo</b>
+                        <input type="text" name="capitulo" class="form-control" required/>
+                        <b class="tituloTexto">Cuestionario</b>
+                        <select class="form-control" name="cuestionario.idCuestionario" required>
+                         <option value="">Selecciona...</option>
+                         <option th:each="cuestionario : ${cuestionarios}"
+                            th:value="${cuestionario.idCuestionario}"
+                            th:utext="${cuestionario.cuestionario}"/>
+                        </select>
+                        <div class="valid-feedback">
+                         Todo bien.
+                         </div>
+                        <div class="invalid-feedback">
+                         Por favor proporcione valido.
+                         </div>
+                        <br/>
+                        <br/>
+                        <input type="submit" class="btn btn-success" value="Agregar">
+                        <a href="principal">Regresar</a>
+                        
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </body>
+</html>

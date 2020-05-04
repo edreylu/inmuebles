@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout :: head">
+        
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body onload="nobackbutton();">
+        <header th:replace="layout :: header"></header>
+       <div class="container mt-2 col-lg-4">
+           <div class="card">
+                <div class="card-header">
+                    <center><b class="tituloPrincipal">Editar Rol</b></center>   
+                </div>
+                <div class="card-body">
+                    <form method="post" action="#" th:action="@{/roles/update/{id}(id=${rol.noRol})}" th:object="${rol}">
+                        <b class="tituloTexto">ROL</b>
+                        <input type="text" name="descripcion" class="form-control" th:value="${rol.descripcion}" required/>
+                        <br/>
+                        <div class="form-check">
+                            
+                        <input type="checkbox" class="form-check-input" id="consultar" name="consultar" th:field="${rol.consultarSel}" th:checked="${rol.consultarSel}">
+                        <label class="form-check-label tituloTexto" for="consultar">Consultar</label>
+                        </div>
+                        
+                        <div class="form-check">
+                        
+                        <input type="checkbox" class="form-check-input" id="insertar" name="insertar" th:field="${rol.insertarSel}" th:checked="${rol.insertarSel}">
+                        <label class="form-check-label tituloTexto" for="insertar">Insertar</label>
+                        </div>
+                        
+                        <div class="form-check">
+                        
+                        <input type="checkbox" class="form-check-input" id="actualizar" name="actualizar" th:field="${rol.actualizarSel}" th:checked="${rol.actualizarSel}">
+                        <label class="form-check-label tituloTexto" for="actualizar">Actualizar</label>
+                        </div>
+                        
+                        <div class="form-check">
+                        
+                        <input type="checkbox" class="form-check-input" id="eliminar" name="eliminar" th:field="${rol.eliminarSel}" th:checked="${rol.eliminarSel}">
+                        <label class="form-check-label tituloTexto" for="eliminar">Eliminar</label>
+                        </div>
+                        <br/>
+                        <br/>
+                        <input type="submit" class="btn btn-success" value="Actualizar">
+                        <a href="../principal">Regresar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+    </body>
+</html>

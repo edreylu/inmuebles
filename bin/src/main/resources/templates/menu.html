@@ -14,7 +14,22 @@ and open the template in the editor.
     <body>
         <header th:replace="layout :: header"></header>
         <div class="container">
-           
+            <br/>
+            <div class="card">
+                <div class="card-header">
+                    <b class="tituloPrincipal">BIENVENIDO:</b>
+                </div>
+                <div class="card-body mt-3">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6"><b class="tituloTexto">NOMBRE: </b><label th:if="${session.usuario!=null}" th:text="${session.usuario.nomUsuario}" />
+                            </div><div class="col-md-6"><b class="tituloTexto">USUARIO: </b><label th:if="${session.usuario!=null}" th:text="${session.usuario.clave}" /></div>
+                        </div>
+                        
+                    </div>
+                </div>
             </div>
+            
+                </div>
     </body>
 </html>

@@ -2,39 +2,123 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head th:replace="layout :: head">
-        
+        <title th:text="${titulo}"></title>
+
+        <link rel="stylesheet" href="style.css" type="text/css"/>
+
+
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        
     </head>
-    <body>
+    <body onload="nobackbutton();">
         <header th:replace="layout :: header"></header>
+        <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
+             class="alert alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <center><strong><div th:text="${mensaje}"></div></strong></center>
+        </div>
+        <div th:if="${param.error}" class="alert alert-danger alert-dismissable" role="alert">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <center><strong>Usuario o contraseña invalido.</strong></center>
+        </div>
+        <div th:if="${param.iguales}" class="alert alert-danger alert-dismissable" role="alert">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <center><strong>Usuario y contraseña no pueden ser iguales.</strong></center>
+        </div>
+        <div th:if="${param.logout}" class="alert alert-success alert-dismissable" role="alert">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <center><strong>Has salido de session.</strong></center>
+        </div>
         <div class="container mt-3 col-lg-3">
-        <div class="modal-dialog text-center">
-            <div class="modal-content">
-                <div class="col-12 user-img">
-                    <img th:src="@{/img/logo.png}" width="260" height="130"/>
-                </div>
-                <br/>
-                <form class="col-12" th:action="@{/login}" modelAttribute="login" method="post">
-                    <div class="form-group" id="user-group">
-                        <input type="text" class="form-control" placeholder="Nombre de usuario" name="username"/>
+           
+            <div class="modal-dialog text-center">
+                <div class="modal-content">
+                    <div class="col-12 user-img">
+                        <img th:src="@{/img/logosep.png}" width="220" height="100"/>
                     </div>
-                    <div class="form-group" id="contrasena-group">
-                        <input type="password" class="form-control" placeholder="Contrasena" name="password"/>
-                    </div>
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Ingresar </button>
-                </form>
-                <div class="col-12 forgot">
-                    <a href="#">¿Recordar contrasena?</a>
+                    <br/>
+                    
+                    <form id="loginForm" class="col-12" th:action="@{/loginProcess}" modelAttribute="login" method="post">
+                        <div class="form-group" id="user-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input id="usuario" type="text" class="form-control" placeholder="Usuario" name="usuario" required/>
+                        </div>
+                        <div class="form-group" id="user-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <div class="input-group">
+                                <input id="password" type="password" class="form-control" placeholder="Contraseña" name="contraseña" required>
+                                    <div class="input-group-append">
+                                        <button id="show_password" class="btn btn-primary" type="button" onclick="mostrarContrasena()"> <span class="fa fa-eye-slash icon"></span> </button>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="form-group" id="user-group">
+                            <div class="g-recaptcha" style="transform:scale(0.85);-webkit-transform:scale(0.85);transform-origin:0 0;-webkit-transform-origin:0 0;"
+                                 th:attr="data-sitekey=${key}" data-callback="enabledSubmit"></div>
+                        </div>
+                        <button id="submit" type="submit" class="btn btn-primary" disabled>
+                            <i class="fas fa-sign-in-alt"></i> <span>Ingresar</span> </button>
+                        <hr />
+                        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#cambiarContrasenaModal">Reiniciar Contraseña</button>
+                        
+                        <br/>
+                        <br/>
+                    </form>
+                    
+                    
                 </div>
-                <div th:if="${param.error}" class="alert alert-danger" role="alert">
-		            Invalido username o password.
-		        </div>
-		        <div th:if="${param.logout}" class="alert alert-success" role="alert">
-		            Has salido de session.
-		        </div>
             </div>
-    </div>
-            </div>
+            <br/>
+        </div>
+        
+        <div class="modal fade" id="cambiarContrasenaModal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				
+				<h4 class="modal-title" id="myModalLabel">Cambiar Contraseña</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+                        <form id="loginFormCambiar" onsubmit="refreshModal()" class="col-12" th:action="@{/loginCambiar}" modelAttribute="login" method="post">
+                        <div class="form-group" id="user-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <label>USUARIO</label>
+                            <input id="usuario1" type="text" class="form-control" placeholder="Usuario" name="usuario" required/>
+                        </div>
+                        <div class="form-group" id="user-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <label>PASSWORD ACTUAL</label>
+                            <div class="input-group">
+                                <input id="password1" type="password" class="form-control" placeholder="Contraseña" name="contraseña" required>
+                                    <div class="input-group-append">
+                                        <button id="show_password1" class="btn btn-primary" type="button" onclick="mostrarContrasena1()"> <span class="fa fa-eye-slash icon1"></span> </button>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="form-group" id="user-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <label>PASSWORD NUEVO</label>
+                            <div class="input-group">
+                                <input id="password2" type="password" class="form-control" placeholder="Nueva contraseña" name="contraseña2" required>
+                                    <div class="input-group-append">
+                                        <button id="show_password2" class="btn btn-primary" type="button" onclick="mostrarContrasena2()"> <span class="fa fa-eye-slash icon2"></span> </button>
+                                    </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <button id="submit1" type="submit" class="btn btn-primary">
+                            <i class="fas fa-sign-in-alt"></i> <span>Aceptar</span> </button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <br/>
+                    </form>
+			</div>
+		</div>
+	</div>
+        </div>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     </body>
 </html>

@@ -1,44 +1,137 @@
-
-function mensaje() {
-
-    alert('correcto!');
+function crearMenu(html){
+window.onload=()=>{
+    //$("#navbarSupportedContent").html(html);
+    document.getElementById("navbarSupportedContent").innerHTML = html;
+}
 }
 
-function mensaje2() {
-  swal({
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
-    type: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete it!'
-  }).then(function() {
-    swal(
-      'Deleted!',
-      'Your file has been deleted.',
-      'success'
-    )
-  })
+function mostrarContrasena(){
+      var pass = document.getElementById("password");
+		if(pass.type == "password"){
+			pass.type = "text";
+			$('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+		}else{
+			pass.type = "password";
+			$('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+		}
+	}
+        
+        function mostrarContrasena1(){
+      var pass = document.getElementById("password1");
+		if(pass.type == "password"){
+			pass.type = "text";
+			$('.icon1').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+		}else{
+			pass.type = "password";
+			$('.icon1').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+		}
+	}
+function mostrarContrasena2(){
+      var pass = document.getElementById("password2");
+		if(pass.type == "password"){
+			pass.type = "text";
+			$('.icon2').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+		}else{
+			pass.type = "password";
+			$('.icon2').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+		}
+	}
+        
+function mensajeActivarInactivar(id,idestatus) {
+console.log(idestatus);
+    Swal
+        .fire({
+            title: idestatus==2?"Activar":"Inactivar",
+            text: "¿Desea "+(idestatus==2?"Activar":"Inactivar")+"?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: "Si",
+            cancelButtonText: "No",
+        })
+        .then(resultado => {
+            if (resultado.value) {
+                // Hicieron click en "Sí"
+          idestatus=idestatus==2?1:2;
+          window.location = "eliminar/"+id+"/"+idestatus;
+                
+            } else {
+                // Dijeron que no
+                console.log("*NO se cerro*");
+            }
+        });
 }
 
-function mensaje3(){
-  swal({
-    title: 'Yeeeaaaah!!!',
-    text: '',
-    imageUrl: 'https://wasabiBD.github.io/test-repo/dia2/images/feito.png',
-    imageWidth: 164,
-    imageHeight: 205,
-    padding: 10,
-    animation: true,
-  });
+function mensajeEliminar(id) {
+console.log(id);
+    Swal
+        .fire({
+            title: "Eliminar",
+            text: "¿Desea Eliminar?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: "Si",
+            cancelButtonText: "No",
+        })
+        .then(resultado => {
+            if (resultado.value) {
+                // Hicieron click en "Sí"
+                window.location = "eliminar/"+id;
+            } else {
+                // Dijeron que no
+                console.log("*NO se cerro*");
+            }
+        });
+}
+
+function mensajeReiniciar(id) {
+console.log(id);
+    Swal
+        .fire({
+            title: "Reiniciar",
+            text: "¿Desea Reiniciar Usuario?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: "Si",
+            cancelButtonText: "No",
+        })
+        .then(resultado => {
+            if (resultado.value) {
+                // Hicieron click en "Sí"
+                window.location = "updatePassword/"+id;
+            } else {
+                // Dijeron que no
+                console.log("*NO se cerro*");
+            }
+        });
+}
+
+function mensajeCerrarSesion(){
+    var URLdomain = window.location.host;
+    
+    Swal
+        .fire({
+            title: "Cerrar Sesión",
+            text: "¿Desea cerrar sesión?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: "Si",
+            cancelButtonText: "No",
+        })
+        .then(resultado => {
+            if (resultado.value) {
+                // Hicieron click en "Sí"
+                window.location.replace("http://"+URLdomain+"/inmuebles/logout");
+            } else {
+                // Dijeron que no
+                console.log("*NO se cerro*");
+            }
+        });
 }
 
 function nobackbutton(){
 window.location.hash="no-back-button";
 window.location.hash="Again-No-back-button" //chrome
 window.onhashchange=function(){window.location.hash="no-back-button";}
-	
 }
 
 
@@ -93,13 +186,7 @@ LoadingSpinner.stop = function (element, spinner) {
         
 var loginForm = document.querySelector('#loginForm')
 var loginLoader = new LoadingSpinner(loginForm, 'Cargando...')
-//Delay submit so you can see the spinner spinning, then stop the loading spinner instead of submitting because we're on Codepen.
-loginForm.addEventListener('submit', function (event) {
-  event.preventDefault()
-  setTimeout(function () {
-    loginLoader.stop()
-  }, 2000)
-})
+
 
 // capcha
 function enabledSubmit() {
@@ -115,16 +202,53 @@ function miFuncion(a) {
         return false;
       event.preventDefault();
     } else {
-        
       return true;
     }
   }
   
   
   
+  // modal
   
-  $('.custom-file-input').on('change',function(){
-        $(this).next('.form-control-file').addClass("selected").html($(this).val());
-    })
+  function refreshModal()
+    {
+        $("#miModal").reload();
+        //document.getElementById("miModal").reload();
+    }
+
+ // inicializar datatable de jquery
+
+//$(document).ready
+$(() => {
+    $('#tablaDatos').DataTable( {
+        scrollY:        "230px",
+        scrollCollapse: false,
+        paging:         true,
+        searching: true,
+        info:     true,
+        ordering: false
+    } );
+} );
+
     
-    
+$(() => {
+  function rescaleCaptcha(){
+    var width = $('.g-recaptcha').parent().width();
+    console.log(width);
+    var scale;
+    if (width < 302) {
+      scale = width / 302;
+    } else{
+      scale = 1.0; 
+    }
+    console.log('scale: '+scale);
+    $('.g-recaptcha').css('transform', 'scale(' + scale + ')');
+    $('.g-recaptcha').css('-webkit-transform', 'scale(' + scale + ')');
+    $('.g-recaptcha').css('transform-origin', '0 0');
+    $('.g-recaptcha').css('-webkit-transform-origin', '0 0');
+  }
+
+  rescaleCaptcha();
+  $(window).resize(()=> rescaleCaptcha());
+
+});
