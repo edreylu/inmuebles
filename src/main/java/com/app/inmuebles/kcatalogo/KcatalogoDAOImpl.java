@@ -5,8 +5,6 @@
  */
 package com.app.inmuebles.kcatalogo;
 
-import com.app.inmuebles.kcatalogo.Kcatalogo;
-import com.app.inmuebles.kcatalogo.KcatalogoRowMapper;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -22,13 +20,13 @@ public class KcatalogoDAOImpl implements KcatalogoDAO{
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    List lista = null;
-    String sql = "";
-    int estatus = 1,
+    private List lista = null;
+    private String sql = "";
+    private int estatus = 1,
             valor = 0;
 
     @Override
-    public List<Kcatalogo> getRegistros() {
+    public List<Kcatalogo> getRecords() {
         sql = "select kca.idcuestionario,\n"
                 + "       (select cu.cuestionario from cuestionario cu where cu.idcuestionario = kca.idcuestionario) cuestionario,\n"
                 + "       kca.catalogo,\n"
@@ -50,7 +48,7 @@ public class KcatalogoDAOImpl implements KcatalogoDAO{
     }
 
     @Override
-    public List<String> getRegistrosLista() {
+    public List<String> getRecordsOnlyCatalogo() {
         sql = "select catalogo from kcatalogo GROUP BY catalogo order by 1";
 
         try {
@@ -83,7 +81,7 @@ public class KcatalogoDAOImpl implements KcatalogoDAO{
                     kca.getDescripCorta().toUpperCase(),
                     kca.getDescripcion().toUpperCase(),
                     kca.getObservaciones().toUpperCase(),
-                    1);
+                    estatus);
         } catch (DataAccessException e) {
             System.err.print(e);
         }
@@ -143,7 +141,7 @@ public class KcatalogoDAOImpl implements KcatalogoDAO{
     }
 
     @Override
-    public List<Kcatalogo> getRegistrosEncuesta(String catalogo) {
+    public List<Kcatalogo> getRecordsEncuesta(String catalogo) {
         sql = "select kca.idcuestionario,\n"
                 + "       (select cu.cuestionario from cuestionario cu where cu.idcuestionario = kca.idcuestionario) cuestionario,\n"
                 + "       kca.catalogo,\n"

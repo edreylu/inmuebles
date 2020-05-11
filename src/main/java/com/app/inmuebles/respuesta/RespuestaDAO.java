@@ -17,7 +17,7 @@ public interface RespuestaDAO {
 
     Procedure ActRespuesta(List<Respuesta> respuestas);
 
-    List<Respuesta> getRegistrosRespuestas(int idCuestionario, int noUsuario);
+    List<Respuesta> getRecordsRespuestas(int idCuestionario, int noUsuario);
     
     Respuesta getRespuesta(int idCuestionario, int noUsuario, int idPregunta);
 

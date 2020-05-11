@@ -5,9 +5,8 @@
  */
 package com.app.inmuebles.pregunta;
 
-import com.app.inmuebles.pregunta.Pregunta;
-import com.app.inmuebles.pregunta.PreguntaRowMapper;
 import java.util.List;
+import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,12 +21,12 @@ public class PreguntaDAOImpl implements PreguntaDAO{
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    List lista = null;
-    String sql = "";
-    int estatus = 1;
+    private List lista = null;
+    private String sql = "";
+    private final int estatus = 1;
 
     @Override
-    public List<Pregunta> getRegistros() {
+    public List<Pregunta> getRecords() {
         sql = "select pr.idcuestionario,\n"
                 + "(select cu.cuestionario from cuestionario cu where cu.idcuestionario = pr.idcuestionario) cuestionario,\n"
                 + "pr.idpregunta,\n"
@@ -111,13 +110,14 @@ public class PreguntaDAOImpl implements PreguntaDAO{
                     pr.getCuestionario().getIdCuestionario(),
                     pr.getIdPregunta(),
                     pr.getPregunta().toUpperCase(),
-                    1,
+                    estatus,
                     pr.getCapitulo().getIdCapitulo(),
                     pr.getSubCapitulo().getIdSubCapitulo(),
                     pr.getOrdenMostrar(),
                     pr.getInciso(),
                     pr.getOpcion(),
-                    pr.getInstruccionesLlenado() != null ? pr.getInstruccionesLlenado().toUpperCase() : pr.getInstruccionesLlenado(),
+                    Objects.nonNull(pr.getInstruccionesLlenado()) 
+                    ? pr.getInstruccionesLlenado().toUpperCase() : pr.getInstruccionesLlenado(),
                     pr.getOpcionMultiple(),
                     pr.getEnCatalogo(),
                     pr.getCatalogo(),
@@ -181,7 +181,8 @@ public class PreguntaDAOImpl implements PreguntaDAO{
                     pr.getOrdenMostrar(),
                     pr.getInciso(),
                     pr.getOpcion(),
-                    pr.getInstruccionesLlenado() != null ? pr.getInstruccionesLlenado().toUpperCase() : pr.getInstruccionesLlenado(),
+                    Objects.nonNull(pr.getInstruccionesLlenado()) 
+                    ? pr.getInstruccionesLlenado().toUpperCase() : pr.getInstruccionesLlenado(),
                     pr.getOpcionMultiple(),
                     pr.getEnCatalogo(),
                     pr.getCatalogo(),
@@ -264,7 +265,7 @@ public class PreguntaDAOImpl implements PreguntaDAO{
     }
 
     @Override
-    public List<Pregunta> getRegistrosPreguntas(int idCuestionario) {
+    public List<Pregunta> getRecordsPreguntas(int idCuestionario) {
         sql = "select pr.idcuestionario,\n"
                 + "                (select cu.cuestionario from cuestionario cu where cu.idcuestionario = pr.idcuestionario) cuestionario,\n"
                 + "                pr.idpregunta,\n"

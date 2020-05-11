@@ -20,12 +20,11 @@ public class CapituloDAOImpl implements CapituloDAO{
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    List lista = null;
-    String sql;
-    int estatus = 1;
+    private List lista = null;
+    private String sql;
     
     @Override
-    public List<Capitulo> getRegistros() {
+    public List<Capitulo> getRecords() {
         sql = "select ca.idcuestionario, "
                 + "(select cu.cuestionario from cuestionario cu where cu.idcuestionario = ca.idcuestionario) cuestionario,"
                 + "ca.idcapitulo, "
@@ -48,7 +47,7 @@ public class CapituloDAOImpl implements CapituloDAO{
     }
     
     @Override
-    public List<Capitulo> getRegistrosPorCuestionario(int idCuestionario) {
+    public List<Capitulo> getRecordsByCuestionario(int idCuestionario) {
         sql = "select ca.idcuestionario, "
                 + "(select cu.cuestionario from cuestionario cu where cu.idcuestionario = ca.idcuestionario) cuestionario,"
                 + "ca.idcapitulo, "

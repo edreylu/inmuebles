@@ -7,7 +7,6 @@ package com.app.inmuebles.respuesta;
 
 import com.app.inmuebles.cuestionario.Cuestionario;
 import com.app.inmuebles.util.Procedure;
-import com.app.inmuebles.respuesta.Respuesta;
 import java.util.List;
 
 /**
@@ -20,7 +19,7 @@ public interface RespuestaService {
     
     Procedure ActRespuesta(List<Respuesta> respuestas);
     
-    List<Respuesta> getRegistrosRespuestas(int idCuestionario, int noUsuario);
+    List<Respuesta> listRespuestasByIdAndUsuario(int idCuestionario, int noUsuario);
     
     Respuesta getRespuesta(int idCuestionario, int noUsuario, int idPregunta);
     

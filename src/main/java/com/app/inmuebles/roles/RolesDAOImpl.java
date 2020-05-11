@@ -6,8 +6,6 @@
 package com.app.inmuebles.roles;
 
 import com.app.inmuebles.formasMenu.FormasMenu;
-import com.app.inmuebles.roles.Roles;
-import com.app.inmuebles.roles.RolesRowMapper;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +22,11 @@ public class RolesDAOImpl implements RolesDAO{
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    List lista = null;
-    String sql = "";
+    private List lista = null;
+    private String sql = "";
 
     @Override
-    public List<Roles> getRegistros() {
+    public List<Roles> getRecords() {
         sql = "SELECT  NO_ROL, DESCRIPCION, INSERTAR, ACTUALIZAR, ELIMINAR, CONSULTAR, DESCARGAR \n"
                 + "      FROM ROLES order by 1 ";
 
@@ -84,10 +82,10 @@ public class RolesDAOImpl implements RolesDAO{
     }
 
     @Override
-    public Roles getRol(int id) {
+    public Roles getRol(int noRol) {
         Roles rol = null;
         sql = "SELECT  NO_ROL, DESCRIPCION, INSERTAR, ACTUALIZAR, ELIMINAR, CONSULTAR, DESCARGAR \n"
-                + "      FROM ROLES where no_rol =" + id;
+                + "      FROM ROLES where no_rol =" + noRol;
         try {
             rol = jdbcTemplate.queryForObject(sql, new RolesRowMapper());
         } catch (DataAccessException e) {
@@ -97,11 +95,11 @@ public class RolesDAOImpl implements RolesDAO{
     }
 
     @Override
-    public int deleteRol(int id) {
+    public int deleteRol(int noRol) {
         int valor = 0;
         sql = "delete from ROLES where no_rol = ?";
         try {
-            valor = jdbcTemplate.update(sql, id);
+            valor = jdbcTemplate.update(sql, noRol);
         } catch (DataAccessException e) {
             System.err.print(e);
         }
@@ -109,42 +107,43 @@ public class RolesDAOImpl implements RolesDAO{
     }
 
     @Override
-    public void assignFormaMenu(int rol, int forma) {
+    public void assignFormaMenu(int noRol, int noForma) {
         sql = "INSERT INTO ROLES_FORMAS_MENU (no_rol, no_forma, prioridad, idestatus) "
                 + "VALUES (?,?,?,?)";
         try {
             jdbcTemplate.update(sql, new Object[]{
-                rol,
-                forma, 0, 1});
+                noRol,
+                noForma, 0, 1});
         } catch (DataAccessException e) {
             System.err.print(e);
         }
     }
 
     @Override
-    public void deleteFormaMenu(int rol) {
+    public void deleteFormaMenu(int noRol) {
         sql = "DELETE FROM ROLES_FORMAS_MENU WHERE no_rol = ? ";
         try {
             jdbcTemplate.update(sql, new Object[]{
-                rol});
+                noRol});
         } catch (DataAccessException e) {
             System.err.print(e);
         }
     }
 
     @Override
-    public int deleteRolUsuario(int id) {
+    public int deleteRolToUsuario(int noUsuario) {
         int valor = 0;
         sql = "DELETE FROM ROLES_USUARIOS WHERE no_usuario = ?";
         try {
-            valor = jdbcTemplate.update(sql, id);
+            valor = jdbcTemplate.update(sql, noUsuario);
         } catch (DataAccessException e) {
             System.err.print(e);
         }
         return valor;
     }
 
-    public boolean existsRolUsuarios(int noRol) {
+    @Override
+    public boolean existsRolesUsuarios(int noRol) {
         int valor = 0;
         sql = "  SELECT COUNT(1) "
                 + "  FROM ROLES_USUARIOS "
@@ -160,7 +159,7 @@ public class RolesDAOImpl implements RolesDAO{
     }
 
     @Override
-    public boolean existsRolFormas(int noRol) {
+    public boolean existsRolesFormas(int noRol) {
         int valor = 0;
         sql = "  SELECT COUNT(1) "
                 + "  FROM ROLES_FORMAS_MENU "
@@ -175,7 +174,7 @@ public class RolesDAOImpl implements RolesDAO{
     }
 
     @Override
-    public List<FormasMenu> getRegistrosFormas(int noRol) {
+    public List<FormasMenu> getRecordsFormas(int noRol) {
         
         List<FormasMenu> listaFormas = new ArrayList<>();
         sql = "SELECT  ME.NO_FORMA AS ID_MENU , ME.TITULO AS DESCRIPCION, ME.URL AS ENLACE, ME.ICONO AS ICONO, ME.NO_FORMA_PADRE AS ID_MENU_PADRE,\n"

@@ -75,10 +75,5 @@ public class Respuesta {
         this.operacion = respuesta.getOperacion();    
     }
 
-    @Override
-    public String toString() {
-        return "Respuesta{" + "idRespuesta=" + idRespuesta + ", cuestionario=" + cuestionario + ", pregunta=" + pregunta + ", inmueble=" + inmueble + ", catalogo=" + catalogo + ", claveCatalogo=" + claveCatalogo + ", respuesta=" + respuesta + ", respuestaEspecifica=" + respuestaEspecifica + ", observaciones=" + observaciones + ", fechaRegistro=" + fechaRegistro + ", fechaRegistroStr=" + fechaRegistroStr + ", cicloEscolar=" + cicloEscolar + ", idRevision=" + idRevision + ", centroTrabajo=" + centroTrabajo + ", claveCct=" + claveCct + ", turno=" + turno + ", aulas=" + aulas + ", laboratorios=" + laboratorios + ", talleres=" + talleres + ", usuarioRegistro=" + usuarioRegistro + ", usuarioModif=" + usuarioModif + ", operacion=" + operacion + '}';
-    }
-    
     
 }

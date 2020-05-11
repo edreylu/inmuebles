@@ -5,10 +5,7 @@
  */
 package com.app.inmuebles.cuestionario;
 
-import com.app.inmuebles.cuestionario.Cuestionario;
-import com.app.inmuebles.cuestionario.CuestionarioRowMapper;
 import java.util.List;
-import org.springframework.dao.DataAccessException;
 
 /**
  *
@@ -16,7 +13,7 @@ import org.springframework.dao.DataAccessException;
  */
 public interface CuestionarioDAO {
     
-    List<Cuestionario> getRegistros();
+    List<Cuestionario> getRecords();
 
     int addCuestionario(Cuestionario cu);
 

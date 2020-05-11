@@ -5,8 +5,6 @@
  */
 package com.app.inmuebles.subCapitulo;
 
-import com.app.inmuebles.subCapitulo.SubCapitulo;
-import com.app.inmuebles.subCapitulo.SubCapituloRowMapper;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -22,12 +20,12 @@ public class SubCapituloDAOImpl implements SubCapituloDAO{
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    List lista = null;
-    String sql = "";
-    int estatus = 1;
+    private List lista = null;
+    private String sql = "";
+    private final int estatus = 1;
 
     @Override
-    public List<SubCapitulo> getRegistros() {
+    public List<SubCapitulo> getRecords() {
         sql = "select sc.idcuestionario,\n"
                 + "       (select cu.cuestionario from cuestionario cu where cu.idcuestionario = sc.idcuestionario) cuestionario,\n"
                 + "       sc.idsubcapitulo, \n"
@@ -44,7 +42,7 @@ public class SubCapituloDAOImpl implements SubCapituloDAO{
     }
 
     @Override
-    public List<SubCapitulo> getRegistrosPorCuestionario(int idCuestionario) {
+    public List<SubCapitulo> getRecordsByCuestionario(int idCuestionario) {
         sql = "select sc.idcuestionario,\n"
                 + "       (select cu.cuestionario from cuestionario cu where cu.idcuestionario = sc.idcuestionario) cuestionario,\n"
                 + "       sc.idsubcapitulo, \n"
@@ -75,7 +73,7 @@ public class SubCapituloDAOImpl implements SubCapituloDAO{
                     sc.getCuestionario().getIdCuestionario(),
                     sc.getIdSubCapitulo(),
                     sc.getSubCapitulo().toUpperCase(),
-                    1);
+                    estatus);
         } catch (DataAccessException e) {
             System.err.print(e);
         }

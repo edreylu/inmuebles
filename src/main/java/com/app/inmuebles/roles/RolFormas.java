@@ -25,4 +25,5 @@ import lombok.Setter;
 public class RolFormas {
   List<FormasMenu> formas = new ArrayList<>();
   String rol;
+  int noRol;
 }

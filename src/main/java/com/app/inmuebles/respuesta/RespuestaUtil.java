@@ -69,7 +69,7 @@ public class RespuestaUtil {
                 Optional<Respuesta> respuestaOp = respuestas.stream()
                         .filter((res) -> res.getPregunta().getIdPregunta() == pregunta.getIdPregunta())
                         .findFirst();
-
+                
                 Respuesta respuesta = respuestaOp.orElse(new Respuesta());
                 //inicializa variables de apoyo en caso de respuesta
                 initializeVariablesRespuesta(respuesta);
@@ -155,7 +155,7 @@ public class RespuestaUtil {
         String especificarOtro = pregunta.getOtroEspecificar();
         String enCatalogo = pregunta.getEnCatalogo();
         if (Objects.equals(enCatalogo, "S"))
-            catalogos = kcatalogoService.getRegistrosEncuesta(catalogoPregunta);
+            catalogos = kcatalogoService.listCatalogoEncuesta(catalogoPregunta);
 
         //opciones multiple
         if (Objects.equals(opcionMultiple, "S")) {
@@ -474,9 +474,9 @@ public class RespuestaUtil {
                 + "        <br/>\n";
     }
     
-    public Respuesta respuestaMapeada(Respuesta res) {
+    public Respuesta respuestaMap(Respuesta res) {
 
-        Objects.nonNull(res);
+        Objects.requireNonNull(res);
         if (res.getPregunta().getOpcionMultiple().equals("S") && Objects.nonNull(res.getRespuesta())) {
             res.setRespuesta(replaceCaracter(res.getRespuesta(), 1));
         }

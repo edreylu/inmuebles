@@ -120,7 +120,7 @@ function mensajeCerrarSesion(){
         .then(resultado => {
             if (resultado.value) {
                 // Hicieron click en "Sí"
-                window.location.replace("http://"+URLdomain+"/inmuebles/logout");
+                window.location.replace("http://"+URLdomain+"/riife/logout");
             } else {
                 // Dijeron que no
                 console.log("*NO se cerro*");
@@ -193,18 +193,6 @@ function enabledSubmit() {
  var botonSubmit = document.getElementById("submit");
  botonSubmit.disabled = false;
 }
-
-function miFuncion(a) {
-    var response = grecaptcha.getResponse();
-
-    if(response.length == 0){
-        alert("Captcha no verificado, favor de verificar");
-        return false;
-      event.preventDefault();
-    } else {
-      return true;
-    }
-  }
   
   
   

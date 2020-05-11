@@ -6,7 +6,7 @@
 package com.app.inmuebles.roles;
 
 import com.app.inmuebles.formasMenu.FormasMenu;
-import com.app.inmuebles.roles.Roles;
+import com.app.inmuebles.util.Mensaje;
 import java.util.List;
 
 /**
@@ -17,23 +17,17 @@ public interface RolesService {
     
     List<Roles> listAll();
 
-    int addRole(Roles role);
+    Mensaje addRole(Roles role);
 
-    Roles getRole(int id);
+    Roles getRole(int noRol);
 
-    int editRole(Roles role);
+    Mensaje editRole(Roles role);
 
-    int deleteRole(int id);
+    Mensaje deleteRole(int noRol);
 
-    void assignFormaMenu(int rol, int forma);
+    Mensaje assignFormaMenu(RolFormas rolFormas);
 
-    void deleteFormaMenu(int rol);
+    int deleteRolUsuario(int noRol);
 
-    int deleteRolUsuario(int id);
-
-    boolean existsRolUsuarios(int noRol);
-
-    boolean existsRolFormas(int noRol);
-
-    List<FormasMenu> getRegistrosFormas(int noRol);
+    List<FormasMenu> listFormasById(int noRol);
 }

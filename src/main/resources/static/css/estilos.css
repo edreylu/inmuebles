@@ -29,11 +29,18 @@ footer .info-copyrigth a {
 }
 
 .tituloTexto{
-    color: #800040
+    color: #800040;
+    font-size: larger;
 }
+
+.descTexto{
+    font-size: larger;
+}
+
 .tituloPrincipal{
     color: #800040;
     font-size: large;
+    text-align: center;
 }
 
 button * {

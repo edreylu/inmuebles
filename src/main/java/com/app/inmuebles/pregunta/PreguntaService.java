@@ -5,7 +5,7 @@
  */
 package com.app.inmuebles.pregunta;
 
-import com.app.inmuebles.pregunta.Pregunta;
+import com.app.inmuebles.util.Mensaje;
 import java.util.List;
 
 /**
@@ -16,13 +16,13 @@ public interface PreguntaService {
     
     List<Pregunta> listAll();
 
-    int addPregunta(Pregunta pr);
+    Mensaje addPregunta(Pregunta pr);
 
     Pregunta getPregunta(int id);
 
-    int editPregunta(Pregunta pr);
+    Mensaje editPregunta(Pregunta pr);
 
-    int deletePregunta(int id, int opcion);
+    Mensaje deletePregunta(int id, int opcion);
 
-    List<Pregunta> getRegistrosPreguntas(int idCuestionario);
+    List<Pregunta> listPreguntasById(int idCuestionario);
 }

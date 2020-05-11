@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.app.inmuebles.util;
+package com.app.inmuebles.inicio;
+
+import java.util.Objects;
 
 
 /**
@@ -24,7 +26,7 @@ public class Login {
     }
 
     public void setUsuario(String usuario) {
-        this.usuario = usuario != null ? usuario.toUpperCase() : usuario;
+        this.usuario = Objects.nonNull(usuario) ? usuario.toUpperCase() : usuario;
     }
 
     public String getContraseña() {
@@ -32,7 +34,7 @@ public class Login {
     }
 
     public void setContraseña(String contraseña) {
-        this.contraseña = contraseña != null ? contraseña.toUpperCase() : contraseña;
+        this.contraseña = Objects.nonNull(contraseña) ? contraseña.toUpperCase() : contraseña;
     }
 
     public String getContraseña2() {
@@ -40,7 +42,7 @@ public class Login {
     }
 
     public void setContraseña2(String contraseña2) {
-        this.contraseña2 = contraseña2 != null ? contraseña2.toUpperCase() : contraseña2;
+        this.contraseña2 = Objects.nonNull(contraseña2) ? contraseña2.toUpperCase() : contraseña2;
     }
   
   

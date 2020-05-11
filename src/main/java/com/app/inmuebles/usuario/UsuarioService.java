@@ -5,7 +5,8 @@
  */
 package com.app.inmuebles.usuario;
 
-import com.app.inmuebles.usuario.Usuario;
+import com.app.inmuebles.inicio.Login;
+import com.app.inmuebles.util.Mensaje;
 import java.util.List;
 
 /**
@@ -13,28 +14,21 @@ import java.util.List;
  * @author Edward Reyes
  */
 public interface UsuarioService {
-    
-    public List<Usuario> listAll();
 
-    public int addUsuario(Usuario usuario);
+    List<Usuario> listAll();
 
-    public Usuario getUsuario(int id);
+    Mensaje addUsuario(Usuario usuario);
 
-    public int editUsuario(Usuario usuario);
+    Usuario getUsuario(int id);
 
-    public int deleteUsuario(int id, int opcion);
+    Mensaje editUsuario(Usuario usuario);
 
-    public Usuario existsUsuario(String clave, String pass);
+    Mensaje deleteUsuario(int id, int opcion);
 
-    public int assignRolUsuario(int usuario, int rol);
+    Usuario existsUsuario(Login login);
 
-    public int deleteRolUsuario(int id);
+    Mensaje resetPasaporte(int id);
 
-    public int resetPasaporte(int us);
+    Mensaje changePasaporte(Login login);
 
-    public int changePasaporte(int us, String contra);
-
-    public boolean existsRolUsuario(int noUsuario);
-
-    public boolean existsRolUsuarioAsignar(int noUsuario, int noRol);
 }

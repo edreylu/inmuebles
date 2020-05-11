@@ -6,7 +6,8 @@
 package com.app.inmuebles.roles;
 
 import com.app.inmuebles.formasMenu.FormasMenu;
-import com.app.inmuebles.roles.Roles;
+import com.app.inmuebles.util.Mensaje;
+import java.util.Iterator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,15 +21,22 @@ public class RolesServiceImpl implements RolesService{
 
     @Autowired
     private RolesDAO rolesDAO;
+    private Mensaje msg;
 
     @Override
     public List<Roles> listAll() {
-        return rolesDAO.getRegistros();
+        return rolesDAO.getRecords();
     }
 
     @Override
-    public int addRole(Roles role) {
-        return rolesDAO.addRol(role);
+    public Mensaje addRole(Roles role) {
+        int valor = rolesDAO.addRol(role);
+        if (valor >= 1) {
+            msg = new Mensaje("Agregado correctamente", 1);
+        } else {
+            msg = new Mensaje("No se pudo agregar", 2);
+        }
+        return msg;
     }
 
     @Override
@@ -37,42 +45,61 @@ public class RolesServiceImpl implements RolesService{
     }
 
     @Override
-    public int editRole(Roles role) {
-        return rolesDAO.editRol(role);
+    public Mensaje editRole(Roles role) {
+        int valor = rolesDAO.editRol(role);
+        if (valor >= 1) {
+            msg = new Mensaje("Editado correctamente", 1);
+        } else {
+            msg = new Mensaje("No se pudo editar", 2);
+        }
+        return msg;
     }
 
     @Override
-    public int deleteRole(int id) {
-        return rolesDAO.deleteRol(id);
+    public Mensaje deleteRole(int noRol) {
+        boolean rolUsuarios = rolesDAO.existsRolesUsuarios(noRol);
+        boolean rolFormas = rolesDAO.existsRolesFormas(noRol);
+        if (rolUsuarios) {
+            msg = new Mensaje("No se pudo eliminar rol por que esta en uso", 2);
+        } else if (rolFormas) {
+            msg = new Mensaje("No se pudo eliminar rol por que tiene formas asignadas", 2);
+        } else {
+            int valor = rolesDAO.deleteRol(noRol);
+            if (valor >= 1) {
+                msg = new Mensaje("Eliminado correctamente", 1);
+            } else {
+                msg = new Mensaje("No se pudo eliminar", 2);
+            }
+        }
+        return msg;
     }
 
     @Override
-    public void assignFormaMenu(int rol, int forma) {
-        rolesDAO.assignFormaMenu(rol, forma);
+    public Mensaje assignFormaMenu(RolFormas rolFormas) {
+        boolean existe = rolesDAO.existsRolesFormas(rolFormas.getNoRol());
+        if (existe) {
+            rolesDAO.deleteFormaMenu(rolFormas.getNoRol());
+        }
+        for (Iterator it = rolFormas.getFormas().iterator(); it.hasNext();) {
+            FormasMenu x = (FormasMenu) it.next();
+            if (x.isMenuSeleccionado()) {
+                rolesDAO.assignFormaMenu(rolFormas.getNoRol(), x.getNoFormaMenu());
+            }
+            if (!it.hasNext()) {
+                msg = new Mensaje("Pantallas asignadas correctamente", 1);
+            }
+        }
+        return msg;
+    }
+
+
+    @Override
+    public int deleteRolUsuario(int noRol) {
+        return rolesDAO.deleteRolToUsuario(noRol);
     }
 
     @Override
-    public void deleteFormaMenu(int rol) {
-        rolesDAO.deleteFormaMenu(rol);
-    }
-
-    @Override
-    public int deleteRolUsuario(int id) {
-        return rolesDAO.deleteRolUsuario(id);
-    }
-
-    @Override
-    public boolean existsRolUsuarios(int noRol) {
-        return rolesDAO.existsRolUsuarios(noRol);
-    }
-
-    @Override
-    public boolean existsRolFormas(int noRol) {
-        return rolesDAO.existsRolFormas(noRol);
-    }
-
-    @Override
-    public List<FormasMenu> getRegistrosFormas(int noRol) {
-        return rolesDAO.getRegistrosFormas(noRol);
+    public List<FormasMenu> listFormasById(int noRol) {
+        return rolesDAO.getRecordsFormas(noRol);
     }
 }

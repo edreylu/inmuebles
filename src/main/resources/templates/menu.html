@@ -17,13 +17,38 @@ and open the template in the editor.
             <br/>
             <div class="card">
                 <div class="card-header">
-                    <b class="tituloPrincipal">BIENVENIDO:</b>
+                    <div class="tituloPrincipal">INFORMACIÓN DE USUARIO</div>
                 </div>
                 <div class="card-body mt-3">
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-md-6"><b class="tituloTexto">NOMBRE: </b><label th:if="${session.usuario!=null}" th:text="${session.usuario.nomUsuario}" />
-                            </div><div class="col-md-6"><b class="tituloTexto">USUARIO: </b><label th:if="${session.usuario!=null}" th:text="${session.usuario.clave}" /></div>
+                            <div class="col-md-6"><b class="tituloTexto">NOMBRE: </b><label class="descTexto" th:text="${session.usuario.nomUsuario}" />
+                            </div><div class="col-md-6"><b class="tituloTexto">USUARIO: </b><label class="descTexto" th:if="${session.isLogin}" th:text="${session.usuario.clave}" /></div>
+                        </div>
+                        <hr>
+                         <div class="row">
+                            <div class="col-md-6"><b class="tituloTexto">CORREO: </b><label class="descTexto" th:text="${session.usuario.correo}" />
+                            </div><div class="col-md-6"><b class="tituloTexto">TELEFONO: </b><label class="descTexto" th:text="${session.usuario.telefono}" /></div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="tituloPrincipal">PUBLICACIONES</div>
+                </div>
+                <div class="card-body mt-3">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6"><b class="tituloTexto">NOMBRE: </b><label class="descTexto" th:text="${session.usuario.nomUsuario}" />
+                            </div><div class="col-md-6"><b class="tituloTexto">USUARIO: </b><label class="descTexto" th:if="${session.isLogin}" th:text="${session.usuario.clave}" /></div>
+                        </div>
+                        <hr>
+                         <div class="row">
+                            <div class="col-md-6"><b class="tituloTexto">CORREO: </b><label class="descTexto" th:text="${session.usuario.correo}" />
+                            </div><div class="col-md-6"><b class="tituloTexto">TELEFONO: </b><label class="descTexto" th:text="${session.usuario.telefono}" /></div>
                         </div>
                         
                     </div>

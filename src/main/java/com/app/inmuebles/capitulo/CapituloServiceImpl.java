@@ -5,6 +5,7 @@
  */
 package com.app.inmuebles.capitulo;
 
+import com.app.inmuebles.util.Mensaje;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,15 +19,22 @@ public class CapituloServiceImpl implements CapituloService{
 
     @Autowired
     private CapituloDAO capituloDAO;
-
+    private Mensaje msg;
+    
     @Override
     public List<Capitulo> listAll() {
-        return capituloDAO.getRegistros();
+        return capituloDAO.getRecords();
     }
 
     @Override
-    public int addCapitulo(Capitulo capitulo) {
-        return capituloDAO.addCapitulo(capitulo);
+    public Mensaje addCapitulo(Capitulo capitulo) {
+        int valor = capituloDAO.addCapitulo(capitulo);
+        if (valor >= 1) {
+            msg = new Mensaje("Agregado correctamente", 1);
+        } else {
+            msg = new Mensaje("No se pudo agregar", 2);
+        }
+        return msg;
     }
 
     @Override
@@ -35,18 +43,30 @@ public class CapituloServiceImpl implements CapituloService{
     }
 
     @Override
-    public int editCapitulo(Capitulo capitulo) {
-        return capituloDAO.editCapitulo(capitulo);
+    public Mensaje editCapitulo(Capitulo capitulo) {
+        int valor = capituloDAO.editCapitulo(capitulo);
+        if (valor >= 1) {
+            msg = new Mensaje("Editado correctamente", 1);
+        } else {
+            msg = new Mensaje("No se pudo editar", 2);
+        }
+        return msg;
     }
 
     @Override
-    public int deleteCapitulo(int id, int opcion) {
-        return capituloDAO.deleteCapitulo(id, opcion);
+    public Mensaje deleteCapitulo(int id, int opcion) {
+        int valor = capituloDAO.deleteCapitulo(id, opcion);
+        if (valor >= 1) {
+            msg = new Mensaje("Ejecutado correctamente", 1);
+        } else {
+            msg = new Mensaje("No se pudo ejecutar", 1);
+        }
+        return msg;
     }
 
     @Override
-    public List<Capitulo> getRegistrosPorCuestionario(int idCuestionario) {
-        return capituloDAO.getRegistrosPorCuestionario(idCuestionario);
+    public List<Capitulo> listByCuestionario(int idCuestionario) {
+        return capituloDAO.getRecordsByCuestionario(idCuestionario);
     }
 
 }

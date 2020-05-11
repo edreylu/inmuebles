@@ -1,13 +1,13 @@
 package com.app.inmuebles.inicio;
 
 import com.app.inmuebles.formasMenu.FormasMenu;
-import com.app.inmuebles.util.Login;
 import com.app.inmuebles.util.Mensaje;
 import com.app.inmuebles.formasMenu.FormasMenuService;
 import com.app.inmuebles.usuario.Usuario;
 import com.app.inmuebles.usuario.UsuarioService;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,20 +19,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-public class AppControl {
+public class AppControl implements NavBarUtil{
 
     @Autowired
-    HttpSession session;
+    private HttpSession session;
     @Autowired
-    UsuarioService usuarioService;
+    private UsuarioService usuarioService;
     @Autowired
-    FormasMenuService formasMenuService;
+    private FormasMenuService formasMenuService;
     private List<String> pantallas;
     private Usuario usuario;
     private List<FormasMenu> formas;
     Mensaje msg = new Mensaje();
     @Value("${google.recaptcha.secret}")
     private String key;
+    @Value("${server.servlet.contextPath}")
+    private String contextPath;
 
     //accesos a aplicacion desde el login hacia el menu cuando si accede y 403 cuando no hay permisos.
     @GetMapping("/")
@@ -48,12 +50,11 @@ public class AppControl {
 
     @PostMapping(value = "loginProcess")
     public String login(@ModelAttribute("login") Login login) throws SQLException {
-        String url = "";
-        if (!login.getUsuario().equals(login.getContraseña())) {
-            usuario = usuarioService.existsUsuario(login.getUsuario(), login.getContraseña());
-            if (login.getUsuario() != null && login.getContraseña() != null && usuario.getNoUsuario() > 0) {
-                url = "redirect:/menu";
-                pantallas = formasMenuService.getPermisoPantalla(usuario.getNoUsuario());
+        String url = "redirect:/menu";
+        if (!Objects.equals(login.getUsuario(), login.getContraseña())) {
+            usuario = usuarioService.existsUsuario(login);
+            if (usuario.getNoUsuario() > 0) {
+                pantallas = formasMenuService.getPermissionToPages(usuario.getNoUsuario());
                 formas = formasMenuService.getMenu(usuario.getNoUsuario());
                 String html = menuHtml();
                 session.setAttribute("usuario", usuario);
@@ -63,7 +64,8 @@ public class AppControl {
             } else {
                 url = "redirect:/login?error=true";
             }
-        } else {
+        }
+        else {
             url = "redirect:/login?iguales=true";
         }
 
@@ -72,22 +74,12 @@ public class AppControl {
 
     @GetMapping("menu")
     public String menu() {
-        return session.getAttribute("usuario") != null ? "/menu" : "redirect:/login";
-    }
-
-    @GetMapping("403")
-    public String Error403() {
-        return "403";
-    }
-
-    @GetMapping("404")
-    public String Error404() {
-        return "404";
+        return Objects.nonNull(session.getAttribute("usuario")) ? "/menu" : "redirect:/login";
     }
 
     @GetMapping("/logout")
     public String logout() {
-        System.out.println("com.app.curso.controller.AppControl.logout()");
+        System.out.println("logout()");
         session.removeAttribute("usuario");
         session.removeAttribute("pantallas");
         session.removeAttribute("html");
@@ -96,85 +88,53 @@ public class AppControl {
     }
 
     @PostMapping(value = "loginCambiar")
-    public String cambiar(@ModelAttribute("login") Login login, RedirectAttributes redirectAttrs){
-        boolean isValidUser = false;
-        int valor = 0;
-        if (login.getContraseña().equals(login.getContraseña2())) {
-            msg.danger("Contraseña actual y nueva no pueden ser iguales", redirectAttrs);
-            System.out.println("contraseñas iguales");
-        } else if (login.getUsuario().equals(login.getContraseña2())) {
-            msg.danger("Contraseña nueva y usuario no pueden ser iguales", redirectAttrs);
-            System.out.println("contraseña nueva y usuario iguales");
-        } else {
-            usuario = usuarioService.existsUsuario(login.getUsuario(), login.getContraseña());
-            if (login.getUsuario() != null && login.getContraseña() != null && usuario.getNoUsuario() > 0) {
-                isValidUser = true;
-                valor = usuarioService.changePasaporte(usuario.getNoUsuario(), login.getContraseña2());
-                isValidUser = valor > 0;
-                if (isValidUser) {
-                    msg.success("Cambiado correctamente", redirectAttrs);
-                    System.out.println("se actualizo registro: ");
-                } else {
-                    msg.danger("No se pudo Actualizar Password", redirectAttrs);
-                    System.out.println("NO se actualizo registro: ");
-                }
-            } else {
-                msg.danger("No existe Usuario", redirectAttrs);
-                System.out.println("NO existe Usuario");
-            }
-        }
+    public String cambiar(@ModelAttribute("login") Login login, RedirectAttributes redirectAttrs) {
+        msg.crearMensaje(usuarioService.changePasaporte(login), redirectAttrs);
 
         return "redirect:/login";
     }
 
     public String menuHtml() {
+        
         StringBuilder html = new StringBuilder();
-        String nombrePapa = "";
-        int contador = 0;
-        String menu = "inmuebles/menu";
-        for (FormasMenu men : formas) {
-            if (contador == 0) {
-                html.append(" <ul class=\"navbar-nav\"> \n"
-                        + "<a class=\"navbar-brand\" href=\"/" + menu + "\"><i class=\"fas fa-home\"></i></a>\n");
-            }
-            if (!men.getNombrePapa().equals(nombrePapa)) {
-
-                html.append(" <li class=\"nav-item dropdown\">\n"
-                        + "        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownMenuLink\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"> <i class='" + men.getIconoPapa() + "'></i>" + men.getNombrePapa() + "</a> \n"
-                        + "        <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdownMenuLink\">");
-            }
-            men.setUrl("inmuebles/" + men.getUrl() + "/principal");
-                html.append(" <a class=\"dropdown-item\" href=\"/").append(men.getUrl()).append("\"><i class='").append(men.getIcono()).append("'></i>").append(men.getTitulo()).append("</a> \n");
-
-            if (!men.getNombrePapa().equals(nombrePapa)) {
-                nombrePapa = men.getNombrePapa();
-
-            }
-            if (!formas.get(contador).getNombrePapa()
-                    .equals(formas.get(contador < formas.size() - 1 ? contador + 1 : contador).getNombrePapa()) 
-                    || contador + 1 == formas.size()) {
-                
-                html.append("  </div> </li> \n");
-
-            }
-            if (formas.size() == contador + 1) {
-                        html.append("</ul> \n <ul class=\"navbar-nav ml-auto nav-flex-icons\">\n"
-                        + "      <li class=\"nav-item dropdown\">\n"
-                        + "        <a class=\"nav-link dropdown-toggle\" id=\"navbarDropdownMenuLink-333\" data-toggle=\"dropdown\"\n"
-                        + "          aria-haspopup=\"true\" aria-expanded=\"false\">\n"
-                        + "          <i class=\"fas fa-user\"> " + usuario.getNomUsuario() + "</i>\n"
-                        + "        </a>\n"
-                        + "        <div class=\"dropdown-menu dropdown-menu-right dropdown-default\"\n"
-                        + "          aria-labelledby=\"navbarDropdownMenuLink-333\">\n"
-                        + "          <a class=\"dropdown-item\" onclick=\"mensajeCerrarSesion()\"><i class=\"fas fa-share-square\"></i> Cerrar Sesion</a>\n"
-                        + "        </div>\n"
-                        + "      </li>\n"
-                        + "    </ul>");
-            }
+        int contador = 1, sizeList = formas.size();
+        String menu = "riife/menu", nombrePapa = "";
+        
+        for (FormasMenu forma : formas) {
+            
+            //inicio del navbar
+            if (contador == 1)
+                html.append(String.format(BEGIN_NAV, menu));
+            
+            //creacion de los padres o titulos principales
+            if (!Objects.equals(forma.getNombrePapa(), nombrePapa))
+                html.append(String.format(FATHER, forma.getIconoPapa(),
+                        forma.getNombrePapa()));
+            
+            //creacion de los hijos u opciones que contienen url
+            html.append(String.format(CHILD_LINKS, contextPath,
+                    forma.getUrl(),
+                    forma.getIcono(),
+                    forma.getTitulo()));
+            
+            if (!Objects.equals(forma.getNombrePapa(),
+                    nombrePapa)) 
+                nombrePapa = forma.getNombrePapa();
+            
+            //Se cierra padre cuando se acaben las ligas hijas para continuar con otro padre o finalizar.
+            int idProximaForma = contador >= sizeList ? contador - 1 : contador;
+            if (!Objects.equals(forma.getNombrePapa(), formas.get(idProximaForma).getNombrePapa())
+                    || contador == sizeList) 
+                html.append(FINAL_FATHER);
+            
+            //si el contador + 1 es igual al tamaño de la lista de opciones construye el final del navbar con el username.
+            if (sizeList == contador) 
+                html.append(String.format(NavBarUtil.USER_AND_FINISH_NAV, usuario.getNomUsuario()));
 
             contador++;
         }
-        
+
         return html.toString();
     }
+
 }

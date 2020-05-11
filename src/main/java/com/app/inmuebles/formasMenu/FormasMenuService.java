@@ -5,8 +5,7 @@
  */
 package com.app.inmuebles.formasMenu;
 
-import com.app.inmuebles.formasMenu.FormasMenu;
-import java.util.ArrayList;
+import com.app.inmuebles.util.Mensaje;
 import java.util.List;
 
 /**
@@ -19,15 +18,15 @@ public interface FormasMenuService {
 
     List<FormasMenu> listAllFathers();
 
-    int addFormasMenu(FormasMenu formasMenu);
+    Mensaje addFormasMenu(FormasMenu formasMenu);
 
     FormasMenu getFormasMenu(int id);
 
-    int editFormasMenu(FormasMenu formasMenu);
+    Mensaje editFormasMenu(FormasMenu formasMenu);
 
-    int deleteFormasMenu(int id);
+    Mensaje deleteFormasMenu(int id);
 
-    List<String> getPermisoPantalla(int noUsuario);
+    List<String> getPermissionToPages(int noUsuario);
 
     List<FormasMenu> getMenu(int noUsuario);
 

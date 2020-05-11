@@ -5,10 +5,9 @@
  */
 package com.app.inmuebles.formasMenu;
 
-import com.app.inmuebles.formasMenu.FormasMenu;
-import com.app.inmuebles.formasMenu.FormasMenuRowMapper;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -23,12 +22,12 @@ public class FormasMenuDAOImpl implements FormasMenuDAO{
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    List lista = null;
-    String sql = "";
-    int estatus = 1;
+    private List lista = null;
+    private String sql = "";
+    private final int estatus = 1;
 
     @Override
-    public List<FormasMenu> getRegistros() {
+    public List<FormasMenu> getRecords() {
         sql = "SELECT ME.NO_FORMA as ID_MENU,ME.TITULO as DESCRIPCION,ME.URL as ENLACE,ME.ICONO as ICONO,\n"
                 + "                        DECODE((SELECT ME1.NO_FORMA_PADRE  \n"
                 + "                                    FROM FORMAS_MENU ME1 \n"
@@ -48,7 +47,7 @@ public class FormasMenuDAOImpl implements FormasMenuDAO{
     }
 
     @Override
-    public List<FormasMenu> getRegistrosp() {
+    public List<FormasMenu> getRecordsFather() {
         List listaFormas = null;
         sql = "SELECT NO_FORMA as ID_MENU, TITULO as DESCRIPCION,'' as ENLACE,'' as ICONO, '' as PADRE, '' AS ID_MENU_PADRE\n"
                 + "              FROM FORMAS_MENU            \n"
@@ -73,10 +72,10 @@ public class FormasMenuDAOImpl implements FormasMenuDAO{
                 + "VALUES (?,?,?,?,?,?,?)";
         try {
             valor = jdbcTemplate.update(sql, menu.getNoFormaMenu(),
-                    menu.getTitulo(),
+                    Objects.nonNull(menu.getTitulo()) ? menu.getTitulo().toUpperCase() : menu.getTitulo(),
                     menu.getUrl(),
                     menu.getIcono(),
-                    1,
+                    estatus,
                     tipoForma,
                     menu.getNoFormaPadre());
         } catch (DataAccessException e) {
@@ -92,7 +91,8 @@ public class FormasMenuDAOImpl implements FormasMenuDAO{
         sql = "UPDATE FORMAS_MENU set TITULO = ? ,URL = ? ,ICONO = ? ,NO_TIPO_FORMA = ? , NO_FORMA_PADRE = ? "
                 + " where NO_FORMA = ? ";
         try {
-            valor = jdbcTemplate.update(sql, menu.getTitulo(),
+            valor = jdbcTemplate.update(sql, Objects.nonNull(menu.getTitulo()) 
+                    ? menu.getTitulo().toUpperCase() : menu.getTitulo(),
                     menu.getUrl(),
                     menu.getIcono(),
                     tipoForma,
@@ -138,7 +138,7 @@ public class FormasMenuDAOImpl implements FormasMenuDAO{
     }
 
     @Override
-    public List<String> getPermisoPantalla(int noUsuario) {
+    public List<String> getPermissionToPages(int noUsuario) {
         
         List<String> permisos = new ArrayList<>();
         sql = "  select fm.url \n"
@@ -149,7 +149,8 @@ public class FormasMenuDAOImpl implements FormasMenuDAO{
                 + "     and ru.no_rol = rfm.no_rol\n"
                 + "     and ru.no_usuario= ? and ru.idestatus=1 ";
         try {
-            permisos = jdbcTemplate.query(sql, new Object[]{noUsuario}, (rs) -> {
+            permisos = jdbcTemplate.query(sql, new Object[]{noUsuario}, 
+                    (rs) -> {
                 List<String> per = new ArrayList<>();
                 while (rs.next()) {
                     per.add(rs.getString("url"));

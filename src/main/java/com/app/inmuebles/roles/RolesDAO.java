@@ -6,11 +6,7 @@
 package com.app.inmuebles.roles;
 
 import com.app.inmuebles.formasMenu.FormasMenu;
-import com.app.inmuebles.roles.Roles;
-import com.app.inmuebles.roles.RolesRowMapper;
-import java.util.ArrayList;
 import java.util.List;
-import org.springframework.dao.DataAccessException;
 
 /**
  *
@@ -18,25 +14,25 @@ import org.springframework.dao.DataAccessException;
  */
 public interface RolesDAO {
     
-    List<Roles> getRegistros();
+    List<Roles> getRecords();
 
     int addRol(Roles rol);
 
     int editRol(Roles rol);
 
-    Roles getRol(int id);
+    Roles getRol(int noRol);
 
-    int deleteRol(int id);
+    int deleteRol(int noRol);
 
-    void assignFormaMenu(int rol, int forma);
+    void assignFormaMenu(int noRol, int noForma);
 
-    void deleteFormaMenu(int rol);
+    void deleteFormaMenu(int noRol);
 
-    int deleteRolUsuario(int id);
+    int deleteRolToUsuario(int noUsuario);
 
-    boolean existsRolUsuarios(int noRol);
+    boolean existsRolesUsuarios(int noRol);
 
-    boolean existsRolFormas(int noRol);
+    boolean existsRolesFormas(int noRol);
 
-    List<FormasMenu> getRegistrosFormas(int noRol);
+    List<FormasMenu> getRecordsFormas(int noRol);
 }

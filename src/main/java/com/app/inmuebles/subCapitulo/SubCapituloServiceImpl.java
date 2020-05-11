@@ -5,7 +5,7 @@
  */
 package com.app.inmuebles.subCapitulo;
 
-import com.app.inmuebles.subCapitulo.SubCapitulo;
+import com.app.inmuebles.util.Mensaje;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,15 +19,22 @@ public class SubCapituloServiceImpl implements SubCapituloService{
 
     @Autowired
     private SubCapituloDAO subCapituloDAO;
+    private Mensaje msg;
 
     @Override
     public List<SubCapitulo> listAll() {
-        return subCapituloDAO.getRegistros();
+        return subCapituloDAO.getRecords();
     }
 
     @Override
-    public int addSubCapitulo(SubCapitulo subCapitulo) {
-        return subCapituloDAO.addSubCapitulo(subCapitulo);
+    public Mensaje addSubCapitulo(SubCapitulo subCapitulo) {
+        int valor = subCapituloDAO.addSubCapitulo(subCapitulo);
+        if (valor >= 1) {
+            msg = new Mensaje("Agregado correctamente", 1);
+        } else {
+            msg = new Mensaje("No se pudo agregar", 2);
+        }
+        return msg;
     }
 
     @Override
@@ -36,18 +43,30 @@ public class SubCapituloServiceImpl implements SubCapituloService{
     }
 
     @Override
-    public int editSubCapitulo(SubCapitulo subCapitulo) {
-        return subCapituloDAO.editSubCapitulo(subCapitulo);
+    public Mensaje editSubCapitulo(SubCapitulo subCapitulo) {
+        int valor = subCapituloDAO.editSubCapitulo(subCapitulo);
+        if (valor >= 1) {
+            msg = new Mensaje("Editado correctamente", 1);
+        } else {
+            msg = new Mensaje("No se pudo editar", 2);
+        }
+        return msg;
     }
 
     @Override
-    public int deleteSubCapitulo(int id, int opcion) {
-        return subCapituloDAO.deleteSubCapitulo(id, opcion);
+    public Mensaje deleteSubCapitulo(int id, int opcion) {
+        int valor = subCapituloDAO.deleteSubCapitulo(id, opcion);
+        if (valor >= 1) {
+            msg = new Mensaje("Ejecutado correctamente", 1);
+        } else {
+            msg = new Mensaje("No se pudo ejecutar", 2);
+        }
+        return msg;
     }
 
     @Override
-    public List<SubCapitulo> getRegistrosPorCuestionario(int idCuestionario) {
-        return subCapituloDAO.getRegistrosPorCuestionario(idCuestionario);
+    public List<SubCapitulo> listByCuestionario(int idCuestionario) {
+        return subCapituloDAO.getRecordsByCuestionario(idCuestionario);
     }
 
 }

@@ -7,11 +7,11 @@ package com.app.inmuebles.pregunta;
 
 import com.app.inmuebles.capitulo.Capitulo;
 import com.app.inmuebles.cuestionario.Cuestionario;
-import com.app.inmuebles.pregunta.Pregunta;
 import com.app.inmuebles.subCapitulo.SubCapitulo;
 import com.app.inmuebles.usuario.Usuario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 import org.springframework.jdbc.core.RowMapper;
 
 /**
@@ -74,6 +74,12 @@ public class PreguntaRowMapper implements RowMapper<Pregunta> {
         pr.setUsuarioModif(usuarioModif);
         pr.setFechaModif(rs.getDate("fechamodif"));
         pr.setEspecificarPor("N");
+        if (Objects.equals(pr.getEspecificarxCatalogo(), "S"))
+            pr.setEspecificarPor("C");
+
+        else if (Objects.equals(pr.getOtroEspecificar(), "S"))
+            pr.setEspecificarPor("O");
+        
         return pr;
 
     }

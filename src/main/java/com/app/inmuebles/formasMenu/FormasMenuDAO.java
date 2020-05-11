@@ -5,7 +5,6 @@
  */
 package com.app.inmuebles.formasMenu;
 
-import com.app.inmuebles.formasMenu.FormasMenu;
 import java.util.List;
 
 /**
@@ -14,9 +13,9 @@ import java.util.List;
  */
 public interface FormasMenuDAO {
     
-    List<FormasMenu> getRegistros();
+    List<FormasMenu> getRecords();
 
-    List<FormasMenu> getRegistrosp();
+    List<FormasMenu> getRecordsFather();
 
     int addFormaMenu(FormasMenu menu);
 
@@ -26,7 +25,7 @@ public interface FormasMenuDAO {
 
     int deleteFormaMenu(int id);
 
-    List<String> getPermisoPantalla(int noUsuario);
+    List<String> getPermissionToPages(int noUsuario);
 
     List<FormasMenu> getMenu(int noUsuario);
 

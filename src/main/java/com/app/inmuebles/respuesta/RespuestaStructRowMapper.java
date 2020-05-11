@@ -5,7 +5,6 @@
  */
 package com.app.inmuebles.respuesta;
 
-import com.app.inmuebles.respuesta.Respuesta;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Struct;

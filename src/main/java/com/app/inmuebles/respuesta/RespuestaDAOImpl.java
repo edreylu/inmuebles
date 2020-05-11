@@ -6,8 +6,6 @@
 package com.app.inmuebles.respuesta;
 
 import com.app.inmuebles.util.Procedure;
-import com.app.inmuebles.respuesta.Respuesta;
-import com.app.inmuebles.respuesta.RespuestaRowMapper;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -29,9 +27,9 @@ public class RespuestaDAOImpl implements RespuestaDAO {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    List lista = null;
-    String sql;
-    int estatus = 1;
+    private List lista = null;
+    private String sql;
+    private final int estatus = 1;
 
     @Override
     public Procedure ActRespuesta(List<Respuesta> respuestas) {
@@ -88,7 +86,7 @@ public class RespuestaDAOImpl implements RespuestaDAO {
     }
 
     @Override
-    public List<Respuesta> getRegistrosRespuestas(int idCuestionario, int noUsuario) {
+    public List<Respuesta> getRecordsRespuestas(int idCuestionario, int noUsuario) {
         sql = "select re.IDRESPUESTA,\n"
                 + "re.IDCUESTIONARIO,\n"
                 + "(select cu.cuestionario from cuestionario cu where cu.idcuestionario = re.idcuestionario) cuestionario,\n"

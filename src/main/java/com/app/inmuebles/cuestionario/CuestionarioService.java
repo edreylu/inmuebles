@@ -5,7 +5,7 @@
  */
 package com.app.inmuebles.cuestionario;
 
-import com.app.inmuebles.cuestionario.Cuestionario;
+import com.app.inmuebles.util.Mensaje;
 import java.util.List;
 
 /**
@@ -16,11 +16,11 @@ public interface CuestionarioService {
     
     List<Cuestionario> listAll();
     
-    int addCuestionario(Cuestionario cuestionario);
+    Mensaje addCuestionario(Cuestionario cuestionario);
     
     Cuestionario getCuestionario(int id);
     
-    int editCuestionario(Cuestionario cuestionario);
+    Mensaje editCuestionario(Cuestionario cuestionario);
     
-    int deleteCuestionario(int id, int opcion);
+    Mensaje deleteCuestionario(int id, int opcion);
 }

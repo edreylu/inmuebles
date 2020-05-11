@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.app.inmuebles.util;
+package com.app.inmuebles.respuesta;
 
 import com.app.inmuebles.respuesta.Respuesta;
 import java.util.ArrayList;

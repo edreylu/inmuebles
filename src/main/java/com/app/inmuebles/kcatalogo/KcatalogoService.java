@@ -5,6 +5,7 @@
  */
 package com.app.inmuebles.kcatalogo;
 
+import com.app.inmuebles.util.Mensaje;
 import java.util.List;
 
 /**
@@ -15,15 +16,15 @@ public interface KcatalogoService {
     
     List<Kcatalogo> listAll();
 
-    int addKcatalogo(Kcatalogo kcatalogo);
+    Mensaje addKcatalogo(Kcatalogo kcatalogo);
 
     Kcatalogo getKcatalogo(String id);
 
-    int editKcatalogo(Kcatalogo kcatalogo);
+    Mensaje editKcatalogo(Kcatalogo kcatalogo);
     
-    int deleteKcatalogo(String id, int opcion);
+    Mensaje deleteKcatalogo(String id, int opcion);
 
-    List<Kcatalogo> getRegistrosEncuesta(String catalogo);
+    List<Kcatalogo> listCatalogoEncuesta(String catalogo);
 
-    List<String> getRegistrosLista();
+    List<String> listOnlyCatalogo();
 }

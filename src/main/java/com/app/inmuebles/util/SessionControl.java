@@ -7,6 +7,7 @@ package com.app.inmuebles.util;
 
 import com.app.inmuebles.usuario.Usuario;
 import java.util.ArrayList;
+import java.util.Objects;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,36 +22,36 @@ import org.springframework.web.context.annotation.SessionScope;
 public class SessionControl {
 
     @Autowired
-    HttpSession session;
-    Usuario usuario;
-    String retorno;
-    boolean contiene;
+    private HttpSession session;
+    private Usuario usuario;
+    private boolean contiene;
 
-    public SessionControl() {
-        retorno = "";
-    }
 
     public String url(String url) {
         contiene = false;
         ArrayList<String> pantallas = (ArrayList<String>) session.getAttribute("pantallas");
-        if (session.getAttribute("usuario") != null) {
-            for (int i = 0; i < pantallas.size(); i++) {
-                if (url.contains(pantallas.get(i))) {
+        if (Objects.nonNull(session.getAttribute("usuario"))) {
+            for (String pantalla : pantallas) {
+                if (url.contains(pantalla)) {
                     contiene = true;
                 }
             }
         }
 
-        return retorno = !contiene ? "redirect:/menu" : url;
+        return contiene ? url : "redirect:/menu";
     }
 
     public Usuario getUsuario() {
-        if (session.getAttribute("usuario") != null) {
+        if (Objects.nonNull(session.getAttribute("usuario"))) {
             usuario = (Usuario) session.getAttribute("usuario");
         } else {
             usuario = new Usuario();
         }
         return usuario;
+    }
+    
+    public final int noUsuarioActivo(){
+    return getUsuario().getNoUsuario();
     }
 
 }

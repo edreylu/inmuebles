@@ -5,7 +5,6 @@
  */
 package com.app.inmuebles.pregunta;
 
-import com.app.inmuebles.pregunta.Pregunta;
 import java.util.List;
 
 /**
@@ -14,7 +13,7 @@ import java.util.List;
  */
 public interface PreguntaDAO {
     
-    List<Pregunta> getRegistros();
+    List<Pregunta> getRecords();
 
     int addPregunta(Pregunta pr);
 
@@ -24,5 +23,5 @@ public interface PreguntaDAO {
 
     int deletePregunta(int id, int opcion);
     
-    List<Pregunta> getRegistrosPreguntas(int idCuestionario);
+    List<Pregunta> getRecordsPreguntas(int idCuestionario);
 }

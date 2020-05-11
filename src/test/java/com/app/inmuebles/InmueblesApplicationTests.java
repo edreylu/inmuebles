@@ -8,6 +8,7 @@ class InmueblesApplicationTests {
 
 	@Test
 	void contextLoads() {
+            
 	}
 
 }

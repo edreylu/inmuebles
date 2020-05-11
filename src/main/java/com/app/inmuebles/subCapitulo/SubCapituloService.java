@@ -5,7 +5,7 @@
  */
 package com.app.inmuebles.subCapitulo;
 
-import com.app.inmuebles.subCapitulo.SubCapitulo;
+import com.app.inmuebles.util.Mensaje;
 import java.util.List;
 
 /**
@@ -16,13 +16,13 @@ public interface SubCapituloService {
     
     List<SubCapitulo> listAll();
 
-    int addSubCapitulo(SubCapitulo subCapitulo);
+    Mensaje addSubCapitulo(SubCapitulo subCapitulo);
     
     SubCapitulo getSubCapitulo(int id);
 
-    int editSubCapitulo(SubCapitulo subCapitulo);
+    Mensaje editSubCapitulo(SubCapitulo subCapitulo);
 
-    int deleteSubCapitulo(int id, int opcion);
+    Mensaje deleteSubCapitulo(int id, int opcion);
 
-    List<SubCapitulo> getRegistrosPorCuestionario(int idCuestionario);
+    List<SubCapitulo> listByCuestionario(int idCuestionario);
 }

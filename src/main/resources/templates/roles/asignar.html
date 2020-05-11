@@ -16,12 +16,12 @@ and open the template in the editor.
            <div class="card">
                 <div class="card-header">
                     <center><b class="tituloPrincipal">Asignar formas a Rol: </b>
-                        <label style="font-size: medium;" th:text="${formasRol.rol}"></label></center>   
+                        <label style="font-size: medium;" th:text="${rolFormas.rol}"></label></center>   
                 </div>
                 <div class="card-body">
                     
                     
-                    <form method="post" action="#" th:action="@{/roles/updateAgregarFormas/{id}(id=${noRol})}" th:object="${formasRol}">
+                    <form method="post" action="#" th:action="@{/roles/updateAgregarFormas/{id}(id=${noRol})}" th:object="${rolFormas}">
                    
                     <table class="table table-sm table-striped table-hover table-bordered table-wrapper-scroll-y my-custom-scrollbar" id="tablaDatos">
                     <thead>
@@ -32,7 +32,7 @@ and open the template in the editor.
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="dato, stat: ${formasRol.formas}">
+                        <tr th:each="dato, stat: ${rolFormas.formas}">
                             <td style="width: 20%;" th:text="${dato.noFormaMenu}"></td>
                             <td style="width: 60%;" th:text="${dato.titulo}"></td>
                             <td style="width: 20%;">

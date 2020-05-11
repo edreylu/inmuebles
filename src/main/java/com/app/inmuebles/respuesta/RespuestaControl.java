@@ -9,7 +9,6 @@ import com.app.inmuebles.util.SessionControl;
 import com.app.inmuebles.cuestionario.Cuestionario;
 import com.app.inmuebles.util.Mensaje;
 import com.app.inmuebles.pregunta.Pregunta;
-import com.app.inmuebles.util.ObjectRespuestas;
 import com.app.inmuebles.util.Procedure;
 import com.app.inmuebles.cuestionario.CuestionarioService;
 import com.app.inmuebles.pregunta.PreguntaService;
@@ -32,7 +31,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class RespuestaControl {
 
     @Autowired
-    SessionControl session;
+    private SessionControl session;
     @Autowired
     private RespuestaService encuestaService;
     @Autowired
@@ -43,28 +42,28 @@ public class RespuestaControl {
     private RespuestaService respuestaService;
     @Autowired
     private RespuestaUtil respuestaUtil;
-    List<Cuestionario> datos;
-    List<Pregunta> preguntas;
-    List<Respuesta> respuestas;
-    List<Respuesta> respuestasToSend;
-    List<String> forms;
-    ObjectRespuestas objectRespuestas;
-    String html;
-    int idCapitulo;
-    Mensaje msg = new Mensaje();
+    private List<Cuestionario> cuestionarios;
+    private List<Pregunta> preguntas;
+    private List<Respuesta> respuestas;
+    private List<Respuesta> respuestasToSend;
+    private List<String> forms;
+    private ObjectRespuestas objectRespuestas;
+    private String html;
+    private int idCapitulo;
+    private final Mensaje msg = new Mensaje();
 
     @GetMapping("encuestas/principal")
     public String listar(Model model) {
-        datos = cuestionarioService.listAll();
-        model.addAttribute("lista", datos);
+        cuestionarios = cuestionarioService.listAll();
+        model.addAttribute("lista", cuestionarios);
         return session.url("encuestas/principal");
     }
 
     @GetMapping(value = "encuestas/responder/{id}")
     public String responder(@PathVariable("id") int id, Model model) {
         idCapitulo = 0;
-        preguntas = preguntaService.getRegistrosPreguntas(id);
-        respuestas = respuestaService.getRegistrosRespuestas(id, session.getUsuario().getNoUsuario());
+        preguntas = preguntaService.listPreguntasById(id);
+        respuestas = respuestaService.listRespuestasByIdAndUsuario(id, session.getUsuario().getNoUsuario());
 
         forms = obtenerEncuesta();
         return "redirect:/encuestas/respuestas";
@@ -74,9 +73,10 @@ public class RespuestaControl {
     public String responder(@PathVariable("id") int id, @PathVariable("idCapitulo") int idCap,
             @ModelAttribute("preguntasRespuestas") ObjectRespuestas respuestasEnTurno) {
 
-        respuestasToSend = respuestasEnTurno.getRespuestas().stream()
+        respuestasToSend = respuestasEnTurno.getRespuestas()
+                .stream()
                 .filter(respuesta -> respuesta.getPregunta().getIdPregunta() != 0)
-                .map(respuestaUtil::respuestaMapeada)
+                .map(respuestaUtil::respuestaMap)
                 .collect(Collectors.toList());
 
         Procedure proc = encuestaService.ActRespuesta(respuestasToSend);
@@ -100,7 +100,7 @@ public class RespuestaControl {
     }
 
     public List<String> obtenerEncuesta() {
-        Objects.nonNull(preguntas);
+        Objects.requireNonNull(preguntas);
         List<String> listaForms = respuestaUtil.getPreguntasHtml(preguntas, respuestas);
         return listaForms;
     }

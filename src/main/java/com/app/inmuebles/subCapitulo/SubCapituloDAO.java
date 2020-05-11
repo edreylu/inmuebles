@@ -14,9 +14,9 @@ import java.util.List;
  */
 public interface SubCapituloDAO {
     
-    List<SubCapitulo> getRegistros();
+    List<SubCapitulo> getRecords();
 
-    List<SubCapitulo> getRegistrosPorCuestionario(int idCuestionario);
+    List<SubCapitulo> getRecordsByCuestionario(int idCuestionario);
 
     int addSubCapitulo(SubCapitulo sc);
 

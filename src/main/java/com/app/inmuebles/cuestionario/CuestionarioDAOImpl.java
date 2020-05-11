@@ -5,8 +5,6 @@
  */
 package com.app.inmuebles.cuestionario;
 
-import com.app.inmuebles.cuestionario.Cuestionario;
-import com.app.inmuebles.cuestionario.CuestionarioRowMapper;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -22,12 +20,11 @@ public class CuestionarioDAOImpl implements CuestionarioDAO{
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    List lista = null;
-    String sql;
-    int estatus = 1;
+    private List lista = null;
+    private String sql;
 
     @Override
-    public List<Cuestionario> getRegistros() {
+    public List<Cuestionario> getRecords() {
         sql = "select cu.idcuestionario, "
                 + "cu.cuestionario, "
                 + "cu.fecharegistro, "

@@ -36,5 +36,9 @@ public class Usuario {
      private String telefono2;
      private Integer noPersonalBm;
      private String nomUsuario;
+
+    public Usuario(int noUsuario) {
+        this.noUsuario = noUsuario;
+    }
     
 }

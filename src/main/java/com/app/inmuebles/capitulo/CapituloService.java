@@ -5,6 +5,7 @@
  */
 package com.app.inmuebles.capitulo;
 
+import com.app.inmuebles.util.Mensaje;
 import java.util.List;
 
 /**
@@ -15,14 +16,14 @@ public interface CapituloService {
     
     List<Capitulo> listAll();
     
-    int addCapitulo(Capitulo capitulo);
+    Mensaje addCapitulo(Capitulo capitulo);
     
     Capitulo getCapitulo(int id);
     
-    int editCapitulo(Capitulo capitulo);
+    Mensaje editCapitulo(Capitulo capitulo);
     
-    int deleteCapitulo(int id, int opcion);
+    Mensaje deleteCapitulo(int id, int opcion);
     
-    List<Capitulo> getRegistrosPorCuestionario(int idCuestionario);
+    List<Capitulo> listByCuestionario(int idCuestionario);
     
 }

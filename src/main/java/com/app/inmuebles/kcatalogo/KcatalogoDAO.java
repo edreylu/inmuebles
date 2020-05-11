@@ -5,7 +5,6 @@
  */
 package com.app.inmuebles.kcatalogo;
 
-import com.app.inmuebles.kcatalogo.Kcatalogo;
 import java.util.List;
 
 /**
@@ -14,9 +13,9 @@ import java.util.List;
  */
 public interface KcatalogoDAO {
     
-    List<Kcatalogo> getRegistros();
+    List<Kcatalogo> getRecords();
 
-    List<String> getRegistrosLista();
+    List<String> getRecordsOnlyCatalogo();
 
     int addKcatalogo(Kcatalogo kca);
 
@@ -26,6 +25,6 @@ public interface KcatalogoDAO {
 
     int deleteKcatalogo(String llave, int opcion);
 
-    List<Kcatalogo> getRegistrosEncuesta(String catalogo);
+    List<Kcatalogo> getRecordsEncuesta(String catalogo);
     
 }

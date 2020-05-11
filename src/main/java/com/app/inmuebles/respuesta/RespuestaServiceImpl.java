@@ -27,7 +27,7 @@ public class RespuestaServiceImpl implements RespuestaService{
     
     @Override
     public List<Cuestionario> listAll() {
-        return cuestionarioDAO.getRegistros();
+        return cuestionarioDAO.getRecords();
     }
     
     @Override
@@ -36,8 +36,8 @@ public class RespuestaServiceImpl implements RespuestaService{
     }
     
     @Override
-    public List<Respuesta> getRegistrosRespuestas(int idCuestionario, int noUsuario) {
-    return respuestaDAO.getRegistrosRespuestas(idCuestionario, noUsuario);
+    public List<Respuesta> listRespuestasByIdAndUsuario(int idCuestionario, int noUsuario) {
+    return respuestaDAO.getRecordsRespuestas(idCuestionario, noUsuario);
     }
     
     @Override

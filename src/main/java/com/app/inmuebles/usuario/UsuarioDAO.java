@@ -5,7 +5,7 @@
  */
 package com.app.inmuebles.usuario;
 
-import com.app.inmuebles.usuario.Usuario;
+import com.app.inmuebles.inicio.Login;
 import java.util.List;
 
 /**
@@ -14,9 +14,9 @@ import java.util.List;
  */
 public interface UsuarioDAO {
      
-    Usuario existsUsuario(String clave, String pass);
+    Usuario existsUsuario(Login login);
 
-    List<Usuario> getRegistros();
+    List<Usuario> getRecords();
 
     int addUsuario(Usuario us);
 
@@ -26,15 +26,14 @@ public interface UsuarioDAO {
 
     int deleteUsuario(int id, int opcion);
 
-    int assignRolUsuario(int usuario, int rol);
+    int assignRolToUsuario(Usuario usuario);
 
-    int deleteRolUsuario(int id);
+    int deleteRolToUsuario(int id);
 
     int resetPasaporte(int us);
 
-    int changePasaporte(int us, String contra);
+    int changePasaporte(int noUsuario, String contraseñaNueva);
 
-    boolean existsRolUsuario(int noUsuario);
+    boolean existsRolAssignedToUsuario(int noUsuario);
 
-    boolean existsRolUsuarioAsignar(int noUsuario, int noRol);
 }

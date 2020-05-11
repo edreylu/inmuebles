@@ -5,8 +5,10 @@
  */
 package com.app.inmuebles.usuario;
 
-import com.app.inmuebles.usuario.Usuario;
+import com.app.inmuebles.inicio.Login;
+import com.app.inmuebles.util.Mensaje;
 import java.util.List;
+import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,15 +21,24 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     @Autowired
     private UsuarioDAO usuarioDAO;
+    private Mensaje msg;
 
     @Override
     public List<Usuario> listAll() {
-        return usuarioDAO.getRegistros();
+        return usuarioDAO.getRecords();
     }
 
     @Override
-    public int addUsuario(Usuario usuario) {
-        return usuarioDAO.addUsuario(usuario);
+    public Mensaje addUsuario(Usuario usuario) {
+        int valor = usuarioDAO.addUsuario(usuario);
+        if (valor >= 1) {
+            usuarioDAO.deleteRolToUsuario(usuario.getNoUsuario());
+            usuarioDAO.assignRolToUsuario(usuario);
+            msg = new Mensaje("Agregado correctamente", 1);
+        } else {
+            msg = new Mensaje("No se pudo agregar", 2);
+        }
+        return msg;
     }
 
     @Override
@@ -36,47 +47,74 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     @Override
-    public int editUsuario(Usuario usuario) {
-        return usuarioDAO.editUsuario(usuario);
+    public Mensaje editUsuario(Usuario usuario) {
+        int valor = usuarioDAO.editUsuario(usuario);
+        if (valor >= 1) {
+            usuarioDAO.deleteRolToUsuario(usuario.getNoUsuario());
+            usuarioDAO.assignRolToUsuario(usuario);
+            msg = new Mensaje("Editado correctamente", 1);
+        } else {
+            msg = new Mensaje("No se pudo editar", 2);
+        }
+        return msg;
     }
 
     @Override
-    public int deleteUsuario(int id, int opcion) {
-        return usuarioDAO.deleteUsuario(id, opcion);
+    public Mensaje deleteUsuario(int id, int opcion) {
+        int valor = usuarioDAO.deleteUsuario(id, opcion);
+        if (valor >= 1) {
+            boolean existe = usuarioDAO.existsRolAssignedToUsuario(id);
+            if (existe) {
+                usuarioDAO.deleteRolToUsuario(id);
+            }
+            msg = new Mensaje("Ejecutado correctamente", 1);
+        } else {
+            msg = new Mensaje("No se pudo ejecutar", 2);
+        }
+        return msg;
     }
 
     @Override
-    public Usuario existsUsuario(String clave, String pass) {
-        return usuarioDAO.existsUsuario(clave, pass);
+    public Usuario existsUsuario(Login login) {
+        return usuarioDAO.existsUsuario(login);
     }
 
     @Override
-    public int assignRolUsuario(int usuario, int rol) {
-        return usuarioDAO.assignRolUsuario(usuario, rol);
+    public Mensaje resetPasaporte(int id) {
+        int valor = usuarioDAO.resetPasaporte(id);
+        if (valor == 1) {
+            msg = new Mensaje("Actualizado correctamente", 1);
+        } else {
+            msg = new Mensaje("No se pudo Actualizar", 2);
+        }
+        return msg;
     }
 
     @Override
-    public int deleteRolUsuario(int id) {
-        return usuarioDAO.deleteRolUsuario(id);
+    public Mensaje changePasaporte(Login login) {
+        boolean isValidUser;
+        int valor = 0;
+        if (Objects.equals(login.getContraseña(), login.getContraseña2())) {
+            msg = new Mensaje("Contraseña actual y nueva no pueden ser iguales", 2);
+            
+        } else if (Objects.equals(login.getUsuario(), login.getContraseña2())) {
+            msg = new Mensaje("Contraseña nueva y usuario no pueden ser iguales", 2);
+        }
+          else {
+            Usuario usuario = usuarioDAO.existsUsuario(login);
+            if (usuario.getNoUsuario() > 0) {
+                valor = usuarioDAO.changePasaporte(usuario.getNoUsuario(), login.getContraseña2());
+                isValidUser = valor > 0;
+                if (isValidUser) {
+                    msg = new Mensaje("Cambiado correctamente", 1);
+                } else {
+                    msg = new Mensaje("No se pudo Actualizar Password", 2);
+                }
+            } else {
+                msg = new Mensaje("No existe Usuario", 2);
+            }
+        }
+        return msg;
     }
 
-    @Override
-    public int resetPasaporte(int us) {
-        return usuarioDAO.resetPasaporte(us);
-    }
-
-    @Override
-    public int changePasaporte(int us, String contra) {
-        return usuarioDAO.changePasaporte(us, contra);
-    }
-
-    @Override
-    public boolean existsRolUsuario(int noUsuario) {
-        return usuarioDAO.existsRolUsuario(noUsuario);
-    }
-
-    @Override
-    public boolean existsRolUsuarioAsignar(int noUsuario, int noRol) {
-        return usuarioDAO.existsRolUsuarioAsignar(noUsuario, noRol);
-    }
 }
