@@ -1,0 +1,29 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.app.riife.subCapitulo;
+
+import com.app.riife.subCapitulo.SubCapitulo;
+import java.util.List;
+
+/**
+ *
+ * @author Edward Reyes
+ */
+public interface SubCapituloDAO {
+    
+    List<SubCapitulo> getRecords();
+
+    List<SubCapitulo> getRecordsByCuestionario(int idCuestionario);
+
+    int addSubCapitulo(SubCapitulo sc);
+
+    int editSubCapitulo(SubCapitulo sc);
+
+    SubCapitulo getSubCapitulo(int id);
+
+    int deleteSubCapitulo(int id, int opcion);
+    
+}

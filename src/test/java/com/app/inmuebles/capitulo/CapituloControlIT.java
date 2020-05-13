@@ -5,7 +5,10 @@
  */
 package com.app.inmuebles.capitulo;
 
-import com.app.inmuebles.cuestionario.CuestionarioService;
+import com.app.riife.capitulo.Capitulo;
+import com.app.riife.capitulo.CapituloControl;
+import com.app.riife.capitulo.CapituloService;
+import com.app.riife.cuestionario.CuestionarioService;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

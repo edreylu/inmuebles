@@ -5,9 +5,12 @@
  */
 package com.app.inmuebles.capitulo;
 
-import com.app.inmuebles.cuestionario.Cuestionario;
-import com.app.inmuebles.usuario.Usuario;
-import com.app.inmuebles.util.Mensaje;
+import com.app.riife.capitulo.CapituloDAO;
+import com.app.riife.capitulo.Capitulo;
+import com.app.riife.capitulo.CapituloService;
+import com.app.riife.cuestionario.Cuestionario;
+import com.app.riife.usuario.Usuario;
+import com.app.riife.util.Mensaje;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;

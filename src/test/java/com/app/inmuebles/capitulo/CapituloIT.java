@@ -5,8 +5,9 @@
  */
 package com.app.inmuebles.capitulo;
 
-import com.app.inmuebles.cuestionario.Cuestionario;
-import com.app.inmuebles.usuario.Usuario;
+import com.app.riife.capitulo.Capitulo;
+import com.app.riife.cuestionario.Cuestionario;
+import com.app.riife.usuario.Usuario;
 import java.util.Date;
 import org.junit.After;
 import org.junit.AfterClass;

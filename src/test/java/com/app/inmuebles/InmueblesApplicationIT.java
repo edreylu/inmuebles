@@ -5,6 +5,7 @@
  */
 package com.app.inmuebles;
 
+import com.app.riife.RiifeApplication;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -44,7 +45,7 @@ public class InmueblesApplicationIT {
     public void testMain() {
         System.out.println("main");
         String[] args = null;
-        InmueblesApplication.main(args);
+        RiifeApplication.main(args);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

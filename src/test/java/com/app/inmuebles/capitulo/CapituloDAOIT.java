@@ -5,6 +5,9 @@
  */
 package com.app.inmuebles.capitulo;
 
+import com.app.riife.capitulo.CapituloDAO;
+import com.app.riife.capitulo.Capitulo;
+import com.app.riife.capitulo.CapituloDAOImpl;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
