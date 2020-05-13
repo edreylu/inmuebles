@@ -34,16 +34,11 @@ public class PreguntaControl {
 
     @Autowired
     private SessionControl session;
-    @Autowired
-    private PreguntaService preguntaService;
-    @Autowired
-    private CuestionarioService cuestionarioService;
-    @Autowired
-    private CapituloService capituloService;
-    @Autowired
-    private SubCapituloService subCapituloService;
-    @Autowired
-    private KcatalogoService kcatalogoService;
+    private final PreguntaService preguntaService;
+    private final CuestionarioService cuestionarioService;
+    private final CapituloService capituloService;
+    private final SubCapituloService subCapituloService;
+    private final KcatalogoService kcatalogoService;
     private List<Pregunta> preguntas;
     private List<Cuestionario> cuestionarios;
     private List<Capitulo> capitulos;
@@ -51,6 +46,17 @@ public class PreguntaControl {
     private List<String> catalogos;
     private Pregunta pregunta;
     private final Mensaje msg = new Mensaje();
+
+    @Autowired
+    public PreguntaControl(PreguntaService preguntaService, CuestionarioService cuestionarioService, 
+            CapituloService capituloService, SubCapituloService subCapituloService, KcatalogoService kcatalogoService) {
+        this.preguntaService = preguntaService;
+        this.cuestionarioService = cuestionarioService;
+        this.capituloService = capituloService;
+        this.subCapituloService = subCapituloService;
+        this.kcatalogoService = kcatalogoService;
+    }
+    
 
     @GetMapping("preguntas/principal")
     public String listar(Model model) {

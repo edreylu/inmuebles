@@ -32,14 +32,10 @@ public class RespuestaControl {
 
     @Autowired
     private SessionControl session;
-    @Autowired
-    private RespuestaService encuestaService;
-    @Autowired
-    private CuestionarioService cuestionarioService;
-    @Autowired
-    private PreguntaService preguntaService;
-    @Autowired
-    private RespuestaService respuestaService;
+    private final RespuestaService encuestaService;
+    private final CuestionarioService cuestionarioService;
+    private final PreguntaService preguntaService;
+    private final RespuestaService respuestaService;
     @Autowired
     private RespuestaUtil respuestaUtil;
     private List<Cuestionario> cuestionarios;
@@ -51,6 +47,17 @@ public class RespuestaControl {
     private String html;
     private int idCapitulo;
     private final Mensaje msg = new Mensaje();
+
+    @Autowired
+    public RespuestaControl(RespuestaService encuestaService, CuestionarioService cuestionarioService, 
+            PreguntaService preguntaService, RespuestaService respuestaService) {
+        this.encuestaService = encuestaService;
+        this.cuestionarioService = cuestionarioService;
+        this.preguntaService = preguntaService;
+        this.respuestaService = respuestaService;
+    }
+    
+    
 
     @GetMapping("encuestas/principal")
     public String listar(Model model) {

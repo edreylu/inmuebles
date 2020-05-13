@@ -17,9 +17,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class PreguntaServiceImpl implements PreguntaService{
 
-    @Autowired
-    private PreguntaDAO preguntaDAO;
+    private final PreguntaDAO preguntaDAO;
     private Mensaje msg;
+
+    @Autowired
+    public PreguntaServiceImpl(PreguntaDAO preguntaDAO) {
+        this.preguntaDAO = preguntaDAO;
+    }
+    
     @Override
     public List<Pregunta> listAll() {
         return preguntaDAO.getRecords();

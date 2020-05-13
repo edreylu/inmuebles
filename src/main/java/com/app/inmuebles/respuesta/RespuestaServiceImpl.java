@@ -8,7 +8,6 @@ package com.app.inmuebles.respuesta;
 import com.app.inmuebles.cuestionario.CuestionarioDAO;
 import com.app.inmuebles.cuestionario.Cuestionario;
 import com.app.inmuebles.util.Procedure;
-import com.app.inmuebles.respuesta.Respuesta;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,10 +19,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class RespuestaServiceImpl implements RespuestaService{
 
+    private final RespuestaDAO respuestaDAO;
+    private final CuestionarioDAO cuestionarioDAO;
+
     @Autowired
-    private RespuestaDAO respuestaDAO;
-    @Autowired
-    private CuestionarioDAO cuestionarioDAO;
+    public RespuestaServiceImpl(RespuestaDAO respuestaDAO, CuestionarioDAO cuestionarioDAO) {
+        this.respuestaDAO = respuestaDAO;
+        this.cuestionarioDAO = cuestionarioDAO;
+    }
     
     @Override
     public List<Cuestionario> listAll() {

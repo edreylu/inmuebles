@@ -17,10 +17,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class FormasMenuServiceImpl implements FormasMenuService{
 
-    @Autowired
-    private FormasMenuDAO formasMenuDAO;
+    
+    private final FormasMenuDAO formasMenuDAO;
     private Mensaje msg;
 
+    @Autowired
+    public FormasMenuServiceImpl(FormasMenuDAO formasMenuDAO) {
+        this.formasMenuDAO = formasMenuDAO;
+    }
+    
     @Override
     public List<FormasMenu> listAll() {
         return formasMenuDAO.getRecords();

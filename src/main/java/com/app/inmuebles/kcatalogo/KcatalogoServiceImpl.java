@@ -17,9 +17,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class KcatalogoServiceImpl implements KcatalogoService{
 
-    @Autowired
-    private KcatalogoDAO kcatalogoDAO;
+    private final KcatalogoDAO kcatalogoDAO;
     private Mensaje msg;
+    
+    @Autowired
+    public KcatalogoServiceImpl(KcatalogoDAO kcatalogoDAO) {
+        this.kcatalogoDAO = kcatalogoDAO;
+    }
+    
     @Override
     public List<Kcatalogo> listAll() {
         return kcatalogoDAO.getRecords();

@@ -19,9 +19,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class UsuarioServiceImpl implements UsuarioService{
 
-    @Autowired
-    private UsuarioDAO usuarioDAO;
+    private final UsuarioDAO usuarioDAO;
     private Mensaje msg;
+
+    @Autowired
+    public UsuarioServiceImpl(UsuarioDAO usuarioDAO) {
+        this.usuarioDAO = usuarioDAO;
+    }
 
     @Override
     public List<Usuario> listAll() {

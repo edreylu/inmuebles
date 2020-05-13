@@ -30,13 +30,17 @@ public class RolesControl {
 
     @Autowired
     private SessionControl session;
-    @Autowired
-    private RolesService rolesService;
+    private final RolesService rolesService;
     private List<Roles> roles;
     private List<FormasMenu> formas;
     private Roles rol;
     private final Mensaje msg = new Mensaje();
 
+    @Autowired
+    public RolesControl(RolesService rolesService) {
+        this.rolesService = rolesService;
+    }
+    
     @GetMapping("roles/principal")
     public String listar(Model model) {
         roles = rolesService.listAll();

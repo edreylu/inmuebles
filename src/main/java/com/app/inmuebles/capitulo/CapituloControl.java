@@ -26,18 +26,22 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 public class CapituloControl {
-
+    
     @Autowired
     private SessionControl session;
-    @Autowired
-    private CapituloService capituloService;
-    @Autowired
-    private CuestionarioService cuestionarioService;
+    private final CapituloService capituloService;
+    private final CuestionarioService cuestionarioService;
     private List<Capitulo> capitulos;
     private List<Cuestionario> cuestionarios;
     private Capitulo capitulo;
     private final Mensaje msg = new Mensaje();
-
+    
+    @Autowired
+    public CapituloControl(CapituloService capituloService, CuestionarioService cuestionarioService) {
+        this.capituloService = capituloService;
+        this.cuestionarioService = cuestionarioService;
+    }
+    
     @GetMapping("capitulos/principal")
     public String listar(Model model) {
         capitulos = capituloService.listAll();

@@ -27,12 +27,15 @@ public class CuestionarioControl {
 
     @Autowired
     private SessionControl session;
-    @Autowired
-    private CuestionarioService cuestionarioService;
+    private final CuestionarioService cuestionarioService;
     private List<Cuestionario> cuestionarios;
     private Cuestionario cuestionario;
     private final Mensaje msg = new Mensaje();
-
+    @Autowired
+    public CuestionarioControl(CuestionarioService cuestionarioService) {
+        this.cuestionarioService = cuestionarioService;
+    }
+    
     @GetMapping("cuestionarios/principal")
     public String listar(Model model) {
         cuestionarios = cuestionarioService.listAll();

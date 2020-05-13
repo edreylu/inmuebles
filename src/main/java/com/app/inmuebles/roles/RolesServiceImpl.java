@@ -19,9 +19,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class RolesServiceImpl implements RolesService{
 
-    @Autowired
-    private RolesDAO rolesDAO;
+    
+    private final RolesDAO rolesDAO;
     private Mensaje msg;
+
+    @Autowired
+    public RolesServiceImpl(RolesDAO rolesDAO) {
+        this.rolesDAO = rolesDAO;
+    }
 
     @Override
     public List<Roles> listAll() {

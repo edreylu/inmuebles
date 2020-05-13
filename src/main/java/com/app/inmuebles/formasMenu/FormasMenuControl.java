@@ -27,12 +27,16 @@ public class FormasMenuControl {
 
     @Autowired
     private SessionControl session;
-    @Autowired
-    private FormasMenuService formasMenuService;
+    private final FormasMenuService formasMenuService;
     private List<FormasMenu> formas;
     private List<FormasMenu> formasPadre;
     private FormasMenu forma;
     private final Mensaje msg = new Mensaje();
+    
+    @Autowired
+    public FormasMenuControl(FormasMenuService formasMenuService) {
+        this.formasMenuService = formasMenuService;
+    }
 
     @GetMapping("formas/principal")
     public String listar(Model model) {

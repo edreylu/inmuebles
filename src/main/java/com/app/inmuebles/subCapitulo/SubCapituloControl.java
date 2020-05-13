@@ -29,14 +29,18 @@ public class SubCapituloControl {
 
     @Autowired
     private SessionControl session;
-    @Autowired
-    private SubCapituloService subCapituloService;
-    @Autowired
-    private CuestionarioService cuestionarioService;
+    private final SubCapituloService subCapituloService;
+    private final CuestionarioService cuestionarioService;
     private List<SubCapitulo> subCapitulos;
     private List<Cuestionario> cuestionarios;
     private SubCapitulo subCapitulo;
     private final Mensaje msg = new Mensaje();
+
+    @Autowired
+    public SubCapituloControl(SubCapituloService subCapituloService, CuestionarioService cuestionarioService) {
+        this.subCapituloService = subCapituloService;
+        this.cuestionarioService = cuestionarioService;
+    }
 
     @GetMapping("subcapitulos/principal")
     public String listar(Model model) {

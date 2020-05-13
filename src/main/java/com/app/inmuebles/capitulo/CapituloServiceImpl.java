@@ -17,9 +17,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class CapituloServiceImpl implements CapituloService{
 
-    @Autowired
-    private CapituloDAO capituloDAO;
+    private final CapituloDAO capituloDAO;
     private Mensaje msg;
+    
+    @Autowired
+    public CapituloServiceImpl(CapituloDAO capituloDAO) {
+        this.capituloDAO = capituloDAO;
+    }
     
     @Override
     public List<Capitulo> listAll() {

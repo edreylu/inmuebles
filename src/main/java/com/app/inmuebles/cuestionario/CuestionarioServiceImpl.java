@@ -16,10 +16,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CuestionarioServiceImpl implements CuestionarioService{
-
-    @Autowired
-    private CuestionarioDAO cuestionarioDAO;
+    
+    private final CuestionarioDAO cuestionarioDAO;
     private Mensaje msg;
+    
+    @Autowired
+    public CuestionarioServiceImpl(CuestionarioDAO cuestionarioDAO) {
+        this.cuestionarioDAO = cuestionarioDAO;
+    }
 
     @Override
     public List<Cuestionario> listAll() {

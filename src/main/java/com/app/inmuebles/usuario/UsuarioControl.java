@@ -29,14 +29,18 @@ public class UsuarioControl {
 
     @Autowired
     private SessionControl session;
-    @Autowired
-    private UsuarioService usuarioService;
-    @Autowired
-    private RolesService rolesService;
+    private final UsuarioService usuarioService;
+    private final RolesService rolesService;
     private List<Usuario> usuarios;
     private List<Roles> roles;
     private Usuario usuario;
     private final Mensaje msg = new Mensaje();
+
+    @Autowired
+    public UsuarioControl(UsuarioService usuarioService, RolesService rolesService) {
+        this.usuarioService = usuarioService;
+        this.rolesService = rolesService;
+    }
 
     @GetMapping("usuarios/principal")
     public String listar(Model model) {

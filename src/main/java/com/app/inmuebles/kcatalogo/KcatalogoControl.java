@@ -29,14 +29,18 @@ public class KcatalogoControl {
 
     @Autowired
     private SessionControl session;
-    @Autowired
-    private KcatalogoService kcatalogoService;
-    @Autowired
-    private CuestionarioService cuestionarioService;
+    private final KcatalogoService kcatalogoService;
+    private final CuestionarioService cuestionarioService;
     private List<Kcatalogo> catalogos;
     private List<Cuestionario> cuestionarios;
     private Kcatalogo catalogo;
     private final Mensaje msg = new Mensaje();
+    
+    @Autowired
+    public KcatalogoControl(KcatalogoService kcatalogoService, CuestionarioService cuestionarioService) {
+        this.kcatalogoService = kcatalogoService;
+        this.cuestionarioService = cuestionarioService;
+    }
 
     @GetMapping("kcatalogos/principal")
     public String listar(Model model) {

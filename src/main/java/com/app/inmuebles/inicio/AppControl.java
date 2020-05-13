@@ -23,10 +23,8 @@ public class AppControl implements NavBarUtil{
 
     @Autowired
     private HttpSession session;
-    @Autowired
-    private UsuarioService usuarioService;
-    @Autowired
-    private FormasMenuService formasMenuService;
+    private final UsuarioService usuarioService;
+    private final FormasMenuService formasMenuService;
     private List<String> pantallas;
     private Usuario usuario;
     private List<FormasMenu> formas;
@@ -35,6 +33,12 @@ public class AppControl implements NavBarUtil{
     private String key;
     @Value("${server.servlet.contextPath}")
     private String contextPath;
+    
+    @Autowired
+    public AppControl(UsuarioService usuarioService, FormasMenuService formasMenuService) {
+        this.usuarioService = usuarioService;
+        this.formasMenuService = formasMenuService;
+    }
 
     //accesos a aplicacion desde el login hacia el menu cuando si accede y 403 cuando no hay permisos.
     @GetMapping("/")
