@@ -3,19 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.app.inmuebles.capitulo;
+package com.app.riife.capitulo;
 
-import com.app.riife.capitulo.Capitulo;
-import com.app.riife.capitulo.CapituloControl;
-import com.app.riife.capitulo.CapituloService;
-import com.app.riife.cuestionario.CuestionarioService;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.mockito.Mockito;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -24,10 +19,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @author Edward Reyes
  */
 public class CapituloControlIT {
-    
-    CapituloControl capituloControl;
-    CapituloService capituloService;
-    CuestionarioService cuestionarioService;
     
     public CapituloControlIT() {
     }
@@ -42,10 +33,6 @@ public class CapituloControlIT {
     
     @Before
     public void setUp() {
-    
-    capituloService = Mockito.mock(CapituloService.class);
-    cuestionarioService = Mockito.mock(CuestionarioService.class);
-    capituloControl = new CapituloControl(capituloService,cuestionarioService);
     }
     
     @After
@@ -59,8 +46,9 @@ public class CapituloControlIT {
     public void testListar() {
         System.out.println("listar");
         Model model = null;
-        String expResult = "capitulos/principal";
-        String result = capituloControl.listar(model);
+        CapituloControl instance = null;
+        String expResult = "";
+        String result = instance.listar(model);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -73,8 +61,9 @@ public class CapituloControlIT {
     public void testAgregar_Model() {
         System.out.println("agregar");
         Model model = null;
+        CapituloControl instance = null;
         String expResult = "";
-        String result = capituloControl.agregar(model);
+        String result = instance.agregar(model);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -88,8 +77,9 @@ public class CapituloControlIT {
         System.out.println("agregar");
         Capitulo ca = null;
         RedirectAttributes redirectAttrs = null;
+        CapituloControl instance = null;
         String expResult = "";
-        String result = capituloControl.agregar(ca, redirectAttrs);
+        String result = instance.agregar(ca, redirectAttrs);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -103,8 +93,9 @@ public class CapituloControlIT {
         System.out.println("editar");
         int id = 0;
         Model model = null;
+        CapituloControl instance = null;
         String expResult = "";
-        String result = capituloControl.editar(id, model);
+        String result = instance.editar(id, model);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -119,8 +110,9 @@ public class CapituloControlIT {
         int id = 0;
         Capitulo ca = null;
         RedirectAttributes redirectAttrs = null;
+        CapituloControl instance = null;
         String expResult = "";
-        String result = capituloControl.editar(id, ca, redirectAttrs);
+        String result = instance.editar(id, ca, redirectAttrs);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -135,8 +127,9 @@ public class CapituloControlIT {
         int id = 0;
         int idestatus = 0;
         RedirectAttributes redirectAttrs = null;
+        CapituloControl instance = null;
         String expResult = "";
-        String result = capituloControl.eliminar(id, idestatus, redirectAttrs);
+        String result = instance.eliminar(id, idestatus, redirectAttrs);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

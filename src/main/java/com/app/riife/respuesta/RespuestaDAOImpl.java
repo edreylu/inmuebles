@@ -24,12 +24,16 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class RespuestaDAOImpl implements RespuestaDAO {
-
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    
+    private final JdbcTemplate jdbcTemplate;
     private List lista = null;
     private String sql;
     private final int estatus = 1;
+
+    @Autowired
+    public RespuestaDAOImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     public Procedure ActRespuesta(List<Respuesta> respuestas) {

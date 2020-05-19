@@ -18,10 +18,15 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CapituloDAOImpl implements CapituloDAO{
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
     private List lista = null;
     private String sql;
+    
+    @Autowired
+    public CapituloDAOImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+    
     
     @Override
     public List<Capitulo> getRecords() {
@@ -45,7 +50,7 @@ public class CapituloDAOImpl implements CapituloDAO{
         }
         return lista;
     }
-    
+
     @Override
     public List<Capitulo> getRecordsByCuestionario(int idCuestionario) {
         sql = "select ca.idcuestionario, "

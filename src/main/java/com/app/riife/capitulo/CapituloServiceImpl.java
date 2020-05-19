@@ -24,6 +24,10 @@ public class CapituloServiceImpl implements CapituloService{
     public CapituloServiceImpl(CapituloDAO capituloDAO) {
         this.capituloDAO = capituloDAO;
     }
+
+    public CapituloServiceImpl() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     @Override
     public List<Capitulo> listAll() {

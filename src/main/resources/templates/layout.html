@@ -26,13 +26,17 @@
     <body>
         <header th:fragment="header">
             <nav class="navbar navbar-expand-lg navbar navbar-light fixed-top" id="fondoBanner">
-                <a class="navbar-brand" th:href="@{/}">
-                    <img th:src="@{/img/logosep.png}" width="100" height="35" alt="">
+                <a th:href="@{/}">
+                    <img th:src="@{/img/logosep.png}" width="140" height="45" alt="">
                 </a>
-                <div class="text-center"><strong>REGISTRO DE INFORMACIÓN DE LA INFRAESTRUCTURA FÍSICA ESCOLAR</strong></div>
+                <ul class="nav navbar-nav navbar-center" style="font-size: large">
+                <strong>REGISTRO DE INFORMACIÓN DE LA INFRAESTRUCTURA FÍSICA ESCOLAR</strong>
+                </ul>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		    <span class="navbar-toggler-icon"></span>
 		</button>
+            </nav>
+            <nav class="navbar navbar-expand-lg navbar navbar-light fixed-top" id="fondoBannerMenu">
                 <a class="navbar-brand" th:if="${session.usuario!=null}" ></a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <script th:inline="javascript" th:if="${session.usuario!=null}">

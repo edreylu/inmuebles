@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.app.inmuebles;
+package com.app.riife;
 
-import com.app.riife.RiifeApplication;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,9 +16,9 @@ import static org.junit.Assert.*;
  *
  * @author Edward Reyes
  */
-public class InmueblesApplicationIT {
+public class RiifeApplicationIT {
     
-    public InmueblesApplicationIT() {
+    public RiifeApplicationIT() {
     }
     
     @BeforeClass
@@ -39,7 +38,7 @@ public class InmueblesApplicationIT {
     }
 
     /**
-     * Test of main method, of class InmueblesApplication.
+     * Test of main method, of class RiifeApplication.
      */
     @Test
     public void testMain() {

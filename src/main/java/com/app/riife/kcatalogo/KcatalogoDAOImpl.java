@@ -18,12 +18,16 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class KcatalogoDAOImpl implements KcatalogoDAO{
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
     private List lista = null;
     private String sql = "";
     private int estatus = 1,
             valor = 0;
+
+    @Autowired
+    public KcatalogoDAOImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     public List<Kcatalogo> getRecords() {

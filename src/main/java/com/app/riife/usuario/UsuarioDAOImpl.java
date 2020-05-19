@@ -19,11 +19,15 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UsuarioDAOImpl implements UsuarioDAO{
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
     private String sql = "";
     private final int estatus = 1;
     private List lista = null;
+
+    @Autowired
+    public UsuarioDAOImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
     
     @Override
     public Usuario existsUsuario(Login login) {

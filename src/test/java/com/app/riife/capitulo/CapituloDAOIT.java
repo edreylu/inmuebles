@@ -3,11 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.app.inmuebles.capitulo;
+package com.app.riife.capitulo;
 
-import com.app.riife.capitulo.CapituloDAO;
-import com.app.riife.capitulo.Capitulo;
-import com.app.riife.capitulo.CapituloDAOImpl;
+import com.app.riife.TestDataBaseConfig;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -15,12 +13,20 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  *
  * @author Edward Reyes
  */
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = TestDataBaseConfig.class)
 public class CapituloDAOIT {
+    @Autowired
+    CapituloDAO capituloDAO;
     
     public CapituloDAOIT() {
     }
@@ -47,17 +53,13 @@ public class CapituloDAOIT {
     @Test
     public void testGetRecords() {
         System.out.println("getRecords");
-        CapituloDAO instance = new CapituloDAOImpl();
-        List<Capitulo> expResult = null;
-        List<Capitulo> result = instance.getRecords();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        List<Capitulo> result = capituloDAO.getRecords();
+        assertTrue(result.size() > 0);
     }
 
     /**
      * Test of getRecordsByCuestionario method, of class CapituloDAO.
-     */
+     
     @Test
     public void testGetRecordsByCuestionario() {
         System.out.println("getRecordsByCuestionario");
@@ -72,7 +74,7 @@ public class CapituloDAOIT {
 
     /**
      * Test of addCapitulo method, of class CapituloDAO.
-     */
+     
     @Test
     public void testAddCapitulo() {
         System.out.println("addCapitulo");
@@ -87,7 +89,7 @@ public class CapituloDAOIT {
 
     /**
      * Test of editCapitulo method, of class CapituloDAO.
-     */
+     
     @Test
     public void testEditCapitulo() {
         System.out.println("editCapitulo");
@@ -102,7 +104,7 @@ public class CapituloDAOIT {
 
     /**
      * Test of getCapitulo method, of class CapituloDAO.
-     */
+     
     @Test
     public void testGetCapitulo() {
         System.out.println("getCapitulo");
@@ -117,7 +119,7 @@ public class CapituloDAOIT {
 
     /**
      * Test of deleteCapitulo method, of class CapituloDAO.
-     */
+     
     @Test
     public void testDeleteCapitulo() {
         System.out.println("deleteCapitulo");
@@ -131,5 +133,6 @@ public class CapituloDAOIT {
         fail("The test case is a prototype.");
     }
 
+    */
     
 }

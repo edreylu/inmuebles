@@ -19,11 +19,15 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class PreguntaDAOImpl implements PreguntaDAO{
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
     private List lista = null;
     private String sql = "";
     private final int estatus = 1;
+
+    @Autowired
+    public PreguntaDAOImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     public List<Pregunta> getRecords() {

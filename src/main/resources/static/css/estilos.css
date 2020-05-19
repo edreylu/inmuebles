@@ -4,7 +4,7 @@ body {
 }
 
 .container {
-        padding-top: 65px;
+        padding-top: 100px;
 	margin-top: 20px;
         background-color: #ffffff;
         color: black;
@@ -159,13 +159,17 @@ background-color:#9c9c9c;
 }
 #fondoBanner{
 background: rgba(201,201,201,1);
-background: -moz-linear-gradient(top, rgba(201,201,201,1) 0%, rgba(196,196,196,1) 50%, rgba(186,186,186,1) 87%, rgba(227,227,227,1) 100%);
-background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(201,201,201,1)), color-stop(50%, rgba(196,196,196,1)), color-stop(87%, rgba(186,186,186,1)), color-stop(100%, rgba(227,227,227,1)));
-background: -webkit-linear-gradient(top, rgba(201,201,201,1) 0%, rgba(196,196,196,1) 50%, rgba(186,186,186,1) 87%, rgba(227,227,227,1) 100%);
-background: -o-linear-gradient(top, rgba(201,201,201,1) 0%, rgba(196,196,196,1) 50%, rgba(186,186,186,1) 87%, rgba(227,227,227,1) 100%);
-background: -ms-linear-gradient(top, rgba(201,201,201,1) 0%, rgba(196,196,196,1) 50%, rgba(186,186,186,1) 87%, rgba(227,227,227,1) 100%);
-background: linear-gradient(to bottom, rgba(201,201,201,1) 0%, rgba(196,196,196,1) 50%, rgba(186,186,186,1) 87%, rgba(227,227,227,1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c9c9c9', endColorstr='#e3e3e3', GradientType=0 );
+}
+#fondoBannerMenu{
+background: rgba(201,201,201,1);
+padding-top: 0; 
+padding-bottom: 0; 
+margin-top: 56px;
+}
+.navbar-nav.navbar-center {
+    position: absolute;
+    left: 40%;
+    transform: translatex(-30%);
 }
 
 

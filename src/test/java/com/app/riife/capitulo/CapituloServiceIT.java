@@ -3,15 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.app.inmuebles.capitulo;
+package com.app.riife.capitulo;
 
-import com.app.riife.capitulo.CapituloDAO;
-import com.app.riife.capitulo.Capitulo;
-import com.app.riife.capitulo.CapituloService;
-import com.app.riife.cuestionario.Cuestionario;
-import com.app.riife.usuario.Usuario;
+import com.app.riife.TestDataBaseConfig;
 import com.app.riife.util.Mensaje;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -19,16 +14,21 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.mockito.Mockito;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  *
  * @author Edward Reyes
  */
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = TestDataBaseConfig.class)
 public class CapituloServiceIT {
-    
-    CapituloDAO capituloDao;
+    @Autowired
     CapituloService capituloService;
+    
     public CapituloServiceIT() {
     }
     
@@ -42,15 +42,21 @@ public class CapituloServiceIT {
     
     @Before
     public void setUp() {
-        capituloDao = Mockito.mock(CapituloDAO.class);
-        capituloService = Mockito.mock(CapituloService.class);
     }
     
     @After
     public void tearDown() {
     }
 
-    
+    /**
+     * Test of listAll method, of class CapituloService.
+     */
+    @Test
+    public void testListAll() {
+        System.out.println("listAll");
+        List<Capitulo> result = capituloService.listAll();
+        assertTrue(result.size() >= 1);
+    }
 
     /**
      * Test of addCapitulo method, of class CapituloService.
@@ -58,11 +64,11 @@ public class CapituloServiceIT {
     @Test
     public void testAddCapitulo() {
         System.out.println("addCapitulo");
-        Capitulo capitulo = new Capitulo(new Cuestionario(), Integer.MIN_VALUE, "EDEDED", 0, null, null, new Usuario(), "ED", null);
-        Mensaje expResult = new Mensaje();
-        expResult.setResult(1);
-        Mensaje result = capituloService.addCapitulo(capitulo);
-        assertEquals(expResult.getResult(), result.getResult());
+        Capitulo capitulo = null;
+        CapituloService instance = new CapituloServiceImpl();
+        Mensaje expResult = null;
+        Mensaje result = instance.addCapitulo(capitulo);
+        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -74,8 +80,9 @@ public class CapituloServiceIT {
     public void testGetCapitulo() {
         System.out.println("getCapitulo");
         int id = 0;
+        CapituloService instance = new CapituloServiceImpl();
         Capitulo expResult = null;
-        Capitulo result = capituloService.getCapitulo(id);
+        Capitulo result = instance.getCapitulo(id);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -88,8 +95,9 @@ public class CapituloServiceIT {
     public void testEditCapitulo() {
         System.out.println("editCapitulo");
         Capitulo capitulo = null;
+        CapituloService instance = new CapituloServiceImpl();
         Mensaje expResult = null;
-        Mensaje result = capituloService.editCapitulo(capitulo);
+        Mensaje result = instance.editCapitulo(capitulo);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -103,8 +111,9 @@ public class CapituloServiceIT {
         System.out.println("deleteCapitulo");
         int id = 0;
         int opcion = 0;
+        CapituloService instance = new CapituloServiceImpl();
         Mensaje expResult = null;
-        Mensaje result = capituloService.deleteCapitulo(id, opcion);
+        Mensaje result = instance.deleteCapitulo(id, opcion);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -117,11 +126,39 @@ public class CapituloServiceIT {
     public void testListByCuestionario() {
         System.out.println("listByCuestionario");
         int idCuestionario = 0;
+        CapituloService instance = new CapituloServiceImpl();
         List<Capitulo> expResult = null;
-        List<Capitulo> result = capituloService.listByCuestionario(idCuestionario);
+        List<Capitulo> result = instance.listByCuestionario(idCuestionario);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
+    public class CapituloServiceImpl implements CapituloService {
+
+        public List<Capitulo> listAll() {
+            return null;
+        }
+
+        public Mensaje addCapitulo(Capitulo capitulo) {
+            return null;
+        }
+
+        public Capitulo getCapitulo(int id) {
+            return null;
+        }
+
+        public Mensaje editCapitulo(Capitulo capitulo) {
+            return null;
+        }
+
+        public Mensaje deleteCapitulo(int id, int opcion) {
+            return null;
+        }
+
+        public List<Capitulo> listByCuestionario(int idCuestionario) {
+            return null;
+        }
+    }
+    
 }
