@@ -59,7 +59,7 @@ public class UsuarioControl {
 
     @PostMapping(value = "usuarios/add")
     public String agregar(Usuario us, RedirectAttributes redirectAttrs) {
-        msg.crearMensaje(usuarioService.addUsuario(usuario), redirectAttrs);
+        msg.crearMensaje(usuarioService.addUsuario(us), redirectAttrs);
         
         return "redirect:/usuarios/principal";
     }

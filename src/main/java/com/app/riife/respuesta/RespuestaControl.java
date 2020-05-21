@@ -37,7 +37,7 @@ public class RespuestaControl {
     private final PreguntaService preguntaService;
     private final RespuestaService respuestaService;
     @Autowired
-    private RespuestaUtil respuestaUtil;
+    private RespuestaHtmlComponent respuestaHtmlComponent;
     private List<Cuestionario> cuestionarios;
     private List<Pregunta> preguntas;
     private List<Respuesta> respuestas;
@@ -83,7 +83,7 @@ public class RespuestaControl {
         respuestasToSend = respuestasEnTurno.getRespuestas()
                 .stream()
                 .filter(respuesta -> respuesta.getPregunta().getIdPregunta() != 0)
-                .map(respuestaUtil::respuestaMap)
+                .map(respuestaHtmlComponent::respuestaMap)
                 .collect(Collectors.toList());
 
         Procedure proc = encuestaService.ActRespuesta(respuestasToSend);
@@ -108,7 +108,7 @@ public class RespuestaControl {
 
     public List<String> obtenerEncuesta() {
         Objects.requireNonNull(preguntas);
-        List<String> listaForms = respuestaUtil.getPreguntasHtml(preguntas, respuestas);
+        List<String> listaForms = respuestaHtmlComponent.getPreguntasHtml(preguntas, respuestas);
         return listaForms;
     }
 

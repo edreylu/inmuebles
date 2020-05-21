@@ -53,7 +53,7 @@ public class UsuarioDAOImpl implements UsuarioDAO{
             }
             );
         } catch (DataAccessException e) {
-            System.err.print(e);
+            throw e;
         }
         return us;
     }
@@ -205,7 +205,7 @@ public class UsuarioDAOImpl implements UsuarioDAO{
         try {
             valor = jdbcTemplate.update(sql, new Object[]{contraseñaNueva, noUsuario});
         } catch (DataAccessException e) {
-            System.err.print(e);
+            throw e;
         }
         return valor;
     }

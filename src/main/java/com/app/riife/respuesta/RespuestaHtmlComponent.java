@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
  * @author Edward Reyes
  */
 @Component
-public class RespuestaUtil {
+public class RespuestaHtmlComponent {
 
     @Autowired
     SessionControl session;
