@@ -20,7 +20,7 @@ and open the template in the editor.
         <div th:case="*">
         <div class="card border-info">
             <div class="card-header text-white">
-                <a id="boton_agregar" style="font-size:15px;color: #333333;" title="Agregar Catalogo" href="agregar" class="fas fa-plus-circle"></a>
+                <a id="boton_agregar" style="font-size:15px;color: #333333;" title="Agregar Catalogo" th:href="@{/kcatalogos/agregar}" class="fas fa-plus-circle"></a>
             </div>
             <div class="card-body table-responsive-md">
                 <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" 
@@ -62,6 +62,7 @@ and open the template in the editor.
                                 <a id="boton_eliminar" href="#" style="font-size:15px;color: #333333;" th:href="@{/kcatalogos/eliminar/{idestatus}/{llave}(llave=${dato.llave},idestatus=${dato.idEstatus})}">
                                     <i class="fas fa-toggle-off" th:if="${dato.idEstatus==2}" title="Activar"></i><i class="fas fa-toggle-on" th:if="${dato.idEstatus==1}" title="Inactivar"></i>
                                 </a>
+                                <input type="hidden" value="kcatalogos" id="nombreModulo">
                             </td>
                         </tr>
                     </tbody>

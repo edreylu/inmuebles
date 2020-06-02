@@ -10,7 +10,7 @@ import com.app.riife.cuestionario.Cuestionario;
 import com.app.riife.util.Mensaje;
 import com.app.riife.subCapitulo.SubCapitulo;
 import com.app.riife.capitulo.CapituloService;
-import com.app.riife.util.SessionControl;
+import com.app.riife.inicio.SessionControl;
 import com.app.riife.cuestionario.CuestionarioService;
 import com.app.riife.kcatalogo.KcatalogoService;
 import com.app.riife.subCapitulo.SubCapituloService;
@@ -58,7 +58,7 @@ public class PreguntaControl {
     }
     
 
-    @GetMapping("preguntas/principal")
+    @GetMapping("preguntas")
     public String listar(Model model) {
         preguntas = preguntaService.listAll();
         model.addAttribute("lista", preguntas);
@@ -80,14 +80,14 @@ public class PreguntaControl {
         System.out.println(pregunta.toString());
         msg.crearMensaje(preguntaService.addPregunta(pregunta), redirectAttrs);
         
-        return "redirect:/preguntas/principal";
+        return "redirect:/preguntas";
     }
 
     @GetMapping(value = "preguntas/editar/{id}")
     public String editar(@PathVariable("id") int id, Model model) {
         
         pregunta = preguntaService.getPregunta(id);
-        String validUrl = "redirect:/preguntas/principal";
+        String validUrl = "redirect:/preguntas";
         if(Objects.nonNull(pregunta)){
         cuestionarios = cuestionarioService.listAll();
         capitulos = capituloService.listByCuestionario(pregunta.getCuestionario().getIdCuestionario());
@@ -113,7 +113,7 @@ public class PreguntaControl {
         System.out.println(pregunta.toString());
         msg.crearMensaje(preguntaService.editPregunta(pregunta), redirectAttrs);
         
-        return "redirect:/preguntas/principal";
+        return "redirect:/preguntas";
     }
 
     @GetMapping("preguntas/eliminar/{id}/{idestatus}")
@@ -121,7 +121,7 @@ public class PreguntaControl {
             RedirectAttributes redirectAttrs) {
         msg.crearMensaje(preguntaService.deletePregunta(id, idestatus), redirectAttrs);
         
-        return "redirect:/preguntas/principal";
+        return "redirect:/preguntas";
     }
 
     @GetMapping("preguntas/refreshCapitulos/{id}/{idPregunta}")

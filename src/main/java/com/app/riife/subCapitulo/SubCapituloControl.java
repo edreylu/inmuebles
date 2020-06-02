@@ -5,13 +5,12 @@
  */
 package com.app.riife.subCapitulo;
 
-import com.app.riife.util.SessionControl;
+import com.app.riife.inicio.SessionControl;
 import com.app.riife.cuestionario.Cuestionario;
 import com.app.riife.util.Mensaje;
 import com.app.riife.cuestionario.CuestionarioService;
 import java.util.List;
 import java.util.Objects;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,7 +41,7 @@ public class SubCapituloControl {
         this.cuestionarioService = cuestionarioService;
     }
 
-    @GetMapping("subcapitulos/principal")
+    @GetMapping("subcapitulos")
     public String listar(Model model) {
         subCapitulos = subCapituloService.listAll();
         model.addAttribute("lista", subCapitulos);
@@ -61,13 +60,13 @@ public class SubCapituloControl {
     public String agregar(SubCapitulo sc, RedirectAttributes redirectAttrs) {
         msg.crearMensaje(subCapituloService.addSubCapitulo(sc), redirectAttrs);
         
-        return "redirect:/subcapitulos/principal";
+        return "redirect:/subcapitulos";
     }
 
     @GetMapping(value = "subcapitulos/editar/{id}")
     public String editar(@PathVariable("id") int id, Model model) {
         subCapitulo = subCapituloService.getSubCapitulo(id);
-        String validUrl = "redirect:/subcapitulos/principal";
+        String validUrl = "redirect:/subcapitulos";
         if(Objects.nonNull(subCapitulo)){
         cuestionarios = cuestionarioService.listAll();
         model.addAttribute("subCapitulo", subCapitulo);
@@ -78,12 +77,12 @@ public class SubCapituloControl {
     }
 
     @PostMapping(value = "subcapitulos/update/{id}")
-    public String editar(@PathVariable("id") int id, @Valid SubCapitulo sc, 
+    public String editar(@PathVariable("id") int id, SubCapitulo sc, 
             RedirectAttributes redirectAttrs) {
         sc.setIdSubCapitulo(id);
         msg.crearMensaje(subCapituloService.editSubCapitulo(sc), redirectAttrs);
         
-        return "redirect:/subcapitulos/principal";
+        return "redirect:/subcapitulos";
     }
 
     @GetMapping("subcapitulos/eliminar/{id}/{idestatus}")
@@ -91,7 +90,7 @@ public class SubCapituloControl {
             RedirectAttributes redirectAttrs) {
 
         msg.crearMensaje(subCapituloService.deleteSubCapitulo(id, idestatus), redirectAttrs);
-        return "redirect:/subcapitulos/principal";
+        return "redirect:/subcapitulos";
     }
 
 }

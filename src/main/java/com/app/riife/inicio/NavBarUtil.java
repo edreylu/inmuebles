@@ -24,7 +24,7 @@ public interface NavBarUtil {
             + "        <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdownMenuLink\">";
 
     
-    public static final String CHILD_LINKS = " <a class=\"dropdown-item\" href=\"%s/%s/principal\">"
+    public static final String CHILD_LINKS = " <a class=\"dropdown-item\" href=\"%s/%s\">"
             + " <i class='%s'></i>%s</a> \n";
 
     

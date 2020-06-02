@@ -38,11 +38,12 @@ function mostrarContrasena2(){
 	}
         
 function mensajeActivarInactivar(id,idestatus) {
+let modulo = document.getElementById("nombreModulo").value;
 console.log(idestatus);
     Swal
         .fire({
             title: idestatus==2?"Activar":"Inactivar",
-            text: "¿Desea "+(idestatus==2?"Activar":"Inactivar")+"?",
+            text: "¿Desea "+(idestatus==2?"Activar":"Inactivar")+" "+modulo+"?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: "Si",
@@ -52,7 +53,7 @@ console.log(idestatus);
             if (resultado.value) {
                 // Hicieron click en "Sí"
           idestatus=idestatus==2?1:2;
-          window.location = "eliminar/"+id+"/"+idestatus;
+          window.location = modulo+"/eliminar/"+id+"/"+idestatus;
                 
             } else {
                 // Dijeron que no
@@ -62,11 +63,12 @@ console.log(idestatus);
 }
 
 function mensajeEliminar(id) {
+let modulo = document.getElementById("nombreModulo").value;
 console.log(id);
     Swal
         .fire({
             title: "Eliminar",
-            text: "¿Desea Eliminar?",
+            text: "¿Desea Eliminar "+modulo+" ?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: "Si",
@@ -75,7 +77,7 @@ console.log(id);
         .then(resultado => {
             if (resultado.value) {
                 // Hicieron click en "Sí"
-                window.location = "eliminar/"+id;
+                window.location = modulo+"/eliminar/"+id;
             } else {
                 // Dijeron que no
                 console.log("*NO se cerro*");
@@ -222,14 +224,12 @@ $(() => {
 $(() => {
   function rescaleCaptcha(){
     var width = $('.g-recaptcha').parent().width();
-    console.log(width);
     var scale;
     if (width < 302) {
       scale = width / 302;
     } else{
       scale = 1.0; 
     }
-    console.log('scale: '+scale);
     $('.g-recaptcha').css('transform', 'scale(' + scale + ')');
     $('.g-recaptcha').css('-webkit-transform', 'scale(' + scale + ')');
     $('.g-recaptcha').css('transform-origin', '0 0');

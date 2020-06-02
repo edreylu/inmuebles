@@ -20,7 +20,7 @@ and open the template in the editor.
         <div th:case="*">
         <div class="card border-info">
             <div class="card-header text-white">
-                <a id="boton_agregar" style="font-size:15px;color: #333333;" title="Agregar Subcapitulo" href="agregar" class="fas fa-plus-circle"></a>
+                <a id="boton_agregar" style="font-size:15px;color: #333333;" title="Agregar Subcapitulo" th:href="@{/subcapitulos/agregar}" class="fas fa-plus-circle"></a>
             </div>
             <div class="card-body table-responsive-md">
                 <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" 
@@ -53,8 +53,10 @@ and open the template in the editor.
                                 </a>
                             </td>
                             <td style="width:5%">
-                                <a id="boton_eliminar" href="#" style="font-size:15px;color: #333333;" th:onclick="'javascript:mensajeActivarInactivar(\''+ ${dato.idSubCapitulo} +'\',\''+ ${dato.idEstatus} +'\');'">
+                                <a id="boton_eliminar" href="#" style="font-size:15px;color: #333333;" 
+                                   th:onclick="'javascript:mensajeActivarInactivar(\''+ ${dato.idSubCapitulo} +'\',\''+ ${dato.idEstatus} +'\');'">
                                     <i class="fas fa-toggle-off" th:if="${dato.idEstatus==2}" title="Activar"></i><i class="fas fa-toggle-on" th:if="${dato.idEstatus==1}" title="Inactivar"></i>
+                                <input type="hidden" value="subcapitulos" id="nombreModulo">
                                 </a>
                             </td>
                         </tr>

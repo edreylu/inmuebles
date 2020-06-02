@@ -5,13 +5,12 @@
  */
 package com.app.riife.kcatalogo;
 
-import com.app.riife.util.SessionControl;
+import com.app.riife.inicio.SessionControl;
 import com.app.riife.cuestionario.Cuestionario;
 import com.app.riife.util.Mensaje;
 import com.app.riife.cuestionario.CuestionarioService;
 import java.util.List;
 import java.util.Objects;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,7 +41,7 @@ public class KcatalogoControl {
         this.cuestionarioService = cuestionarioService;
     }
 
-    @GetMapping("kcatalogos/principal")
+    @GetMapping("kcatalogos")
     public String listar(Model model) {
         catalogos = kcatalogoService.listAll();
         model.addAttribute("lista", catalogos);
@@ -60,13 +59,13 @@ public class KcatalogoControl {
     @PostMapping(value = "kcatalogos/add")
     public String agregar(Kcatalogo kca, RedirectAttributes redirectAttrs) {
         msg.crearMensaje(kcatalogoService.addKcatalogo(kca), redirectAttrs);
-        return "redirect:/kcatalogos/principal";
+        return "redirect:/kcatalogos";
     }
 
     @GetMapping(value = "kcatalogos/editar/{llave}")
     public String editar(@PathVariable("llave") String llave, Model model) {
         catalogo = kcatalogoService.getKcatalogo(llave);
-        String validUrl = "redirect:/kcatalogos/principal";
+        String validUrl = "redirect:/kcatalogos";
         if(Objects.nonNull(catalogo)){
         cuestionarios = cuestionarioService.listAll();
         model.addAttribute("kcatalogo", catalogo);
@@ -77,10 +76,10 @@ public class KcatalogoControl {
     }
 
     @PostMapping(value = "kcatalogos/update/{llave}")
-    public String editar(@PathVariable("llave") String llave, @Valid Kcatalogo kca, RedirectAttributes redirectAttrs) {
+    public String editar(@PathVariable("llave") String llave, Kcatalogo kca, RedirectAttributes redirectAttrs) {
         //kca.setClaveCatalogo(id);
         msg.crearMensaje(kcatalogoService.editKcatalogo(kca), redirectAttrs);
-        return "redirect:/kcatalogos/principal";
+        return "redirect:/kcatalogos";
     }
 
     @GetMapping("kcatalogos/eliminar/{idestatus}/{llave}")
@@ -88,7 +87,7 @@ public class KcatalogoControl {
             RedirectAttributes redirectAttrs) {
         idestatus = idestatus == 2 ? 1 : 2;
         msg.crearMensaje(kcatalogoService.deleteKcatalogo(llave, idestatus), redirectAttrs);
-        return "redirect:/kcatalogos/principal";
+        return "redirect:/kcatalogos";
     }
 
 }

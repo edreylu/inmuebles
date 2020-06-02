@@ -29,7 +29,7 @@ public class AppControl implements NavBarUtil{
     private Usuario usuario;
     private List<FormasMenu> formas;
     Mensaje msg = new Mensaje();
-    @Value("${google.recaptcha.secret}")
+    @Value("${google.recaptcha.sitio}")
     private String key;
     @Value("${server.servlet.contextPath}")
     private String contextPath;

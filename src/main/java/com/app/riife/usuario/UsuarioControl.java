@@ -5,13 +5,12 @@
  */
 package com.app.riife.usuario;
 
-import com.app.riife.util.SessionControl;
+import com.app.riife.inicio.SessionControl;
 import com.app.riife.util.Mensaje;
 import com.app.riife.roles.Roles;
 import com.app.riife.roles.RolesService;
 import java.util.List;
 import java.util.Objects;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,7 +41,7 @@ public class UsuarioControl {
         this.rolesService = rolesService;
     }
 
-    @GetMapping("usuarios/principal")
+    @GetMapping("usuarios")
     public String listar(Model model) {
         usuarios = usuarioService.listAll();
         model.addAttribute("lista", usuarios);
@@ -61,13 +60,13 @@ public class UsuarioControl {
     public String agregar(Usuario us, RedirectAttributes redirectAttrs) {
         msg.crearMensaje(usuarioService.addUsuario(us), redirectAttrs);
         
-        return "redirect:/usuarios/principal";
+        return "redirect:/usuarios";
     }
 
     @GetMapping(value = "usuarios/editar/{id}")
     public String editar(@PathVariable("id") int id, Model model) {
         usuario = usuarioService.getUsuario(id);
-        String validUrl = "redirect:/usuarios/principal";
+        String validUrl = "redirect:/usuarios";
         if(Objects.nonNull(usuario)){
         model.addAttribute("usuario", usuario);
         roles = rolesService.listAll();
@@ -78,11 +77,11 @@ public class UsuarioControl {
     }
 
     @PostMapping(value = "usuarios/update/{id}")
-    public String editar(@PathVariable("id") int id, @Valid Usuario us, RedirectAttributes redirectAttrs) {
+    public String editar(@PathVariable("id") int id, Usuario us, RedirectAttributes redirectAttrs) {
         us.setNoUsuario(id);
         msg.crearMensaje(usuarioService.editUsuario(us), redirectAttrs);
         
-        return "redirect:/usuarios/principal";
+        return "redirect:/usuarios";
     }
 
     @GetMapping("usuarios/eliminar/{id}/{idestatus}")
@@ -90,12 +89,12 @@ public class UsuarioControl {
             RedirectAttributes redirectAttrs) {
         msg.crearMensaje(usuarioService.deleteUsuario(id, idestatus), redirectAttrs);
         
-        return "redirect:/usuarios/principal";
+        return "redirect:/usuarios";
     }
 
     @GetMapping(value = "usuarios/updatePassword/{id}")
     public String modificarPasaporte(@PathVariable("id") int id, RedirectAttributes redirectAttrs) {
         msg.crearMensaje(usuarioService.resetPasaporte(id), redirectAttrs);
-        return "redirect:/usuarios/principal";
+        return "redirect:/usuarios";
     }
 }

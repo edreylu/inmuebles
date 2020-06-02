@@ -55,6 +55,7 @@ public class Pregunta {
     private Usuario usuarioModif = new Usuario();
     private Date fechaModif;
     private String especificarPor;
+    private String cabeceraPregunta;
     
     
     public static Pregunta preguntaAddAjustes(Pregunta pregunta){

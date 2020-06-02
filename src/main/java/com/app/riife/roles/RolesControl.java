@@ -5,13 +5,11 @@
  */
 package com.app.riife.roles;
 
-import com.app.riife.util.SessionControl;
+import com.app.riife.inicio.SessionControl;
 import com.app.riife.formasMenu.FormasMenu;
 import com.app.riife.util.Mensaje;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,7 +39,7 @@ public class RolesControl {
         this.rolesService = rolesService;
     }
     
-    @GetMapping("roles/principal")
+    @GetMapping("roles")
     public String listar(Model model) {
         roles = rolesService.listAll();
         model.addAttribute("lista", roles);
@@ -59,36 +57,36 @@ public class RolesControl {
         rol = Roles.inicializarAdd(rol);
         msg.crearMensaje(rolesService.addRole(rol), redirectAttrs);
         
-        return "redirect:/roles/principal";
+        return "redirect:/roles";
     }
 
     @GetMapping(value = "roles/editar/{id}")
     public String editar(@PathVariable("id") int id, Model model) {
         rol = rolesService.getRole(id);
-        String validUrl = Objects.isNull(rol) ? "redirect:/roles/principal" : "roles/editar";
+        String validUrl = Objects.isNull(rol) ? "redirect:/roles" : "roles/editar";
         model.addAttribute("rol", rol);
         return session.url(validUrl);
     }
 
     @PostMapping(value = "roles/update/{id}")
-    public String editar(@PathVariable("id") int id, @Valid Roles rol, RedirectAttributes redirectAttrs) {
+    public String editar(@PathVariable("id") int id, Roles rol, RedirectAttributes redirectAttrs) {
         rol.setNoRol(id);
         rol = Roles.inicializarEdit(rol);
         msg.crearMensaje(rolesService.editRole(rol), redirectAttrs);
         
-        return "redirect:/roles/principal";
+        return "redirect:/roles";
     }
 
     @GetMapping("roles/eliminar/{id}")
     public String eliminar(@PathVariable("id") int id, RedirectAttributes redirectAttrs) {
         msg.crearMensaje(rolesService.deleteRole(id), redirectAttrs);
-        return "redirect:/roles/principal";
+        return "redirect:/roles";
     }
 
     @GetMapping(value = "roles/asignar/{id}")
     public String asignar(@PathVariable("id") int id, Model model) {
         rol = rolesService.getRole(id);
-        String validUrl = "redirect:/roles/principal";
+        String validUrl = "redirect:/roles";
         if(Objects.nonNull(rol)){
         model.addAttribute("noRol", id);
         RolFormas rolFormas = new RolFormas();
@@ -105,7 +103,7 @@ public class RolesControl {
             RedirectAttributes redirectAttrs) {
         rolFormas.setNoRol(id);
         msg.crearMensaje(rolesService.assignFormaMenu(rolFormas), redirectAttrs);
-        return "redirect:/roles/principal";
+        return "redirect:/roles";
     }
 
 }

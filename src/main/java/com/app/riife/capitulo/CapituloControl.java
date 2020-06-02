@@ -7,11 +7,10 @@ package com.app.riife.capitulo;
 
 import com.app.riife.cuestionario.Cuestionario;
 import com.app.riife.util.Mensaje;
-import com.app.riife.util.SessionControl;
+import com.app.riife.inicio.SessionControl;
 import com.app.riife.cuestionario.CuestionarioService;
 import java.util.List;
 import java.util.Objects;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,7 +41,7 @@ public class CapituloControl {
         this.cuestionarioService = cuestionarioService;
     }
     
-    @GetMapping("capitulos/principal")
+    @GetMapping("capitulos")
     public String listar(Model model) {
         capitulos = capituloService.listAll();
         model.addAttribute("lista", capitulos);
@@ -61,7 +60,7 @@ public class CapituloControl {
     public String agregar(Capitulo ca, RedirectAttributes redirectAttrs) {
         ca.getUsuarioRegistro().setNoUsuario(session.noUsuarioActivo());
         msg.crearMensaje(capituloService.addCapitulo(ca), redirectAttrs);
-        return "redirect:/capitulos/principal";
+        return "redirect:/capitulos";
     }
 
     @GetMapping(value = "capitulos/editar/{id}")
@@ -78,18 +77,18 @@ public class CapituloControl {
     }
 
     @PostMapping(value = "capitulos/update/{id}")
-    public String editar(@PathVariable("id") int id, @Valid Capitulo ca, RedirectAttributes redirectAttrs) {
+    public String editar(@PathVariable("id") int id, Capitulo ca, RedirectAttributes redirectAttrs) {
         ca.getUsuarioModif().setNoUsuario(session.getUsuario().getNoUsuario());
         ca.setIdCapitulo(id);
         msg.crearMensaje(capituloService.editCapitulo(ca), redirectAttrs);
-        return "redirect:/capitulos/principal";
+        return "redirect:/capitulos";
     }
 
     @GetMapping("capitulos/eliminar/{id}/{idestatus}")
     public String eliminar(@PathVariable("id") int id, @PathVariable("idestatus") int idestatus,
             RedirectAttributes redirectAttrs) {
         msg.crearMensaje(capituloService.deleteCapitulo(id, idestatus), redirectAttrs);
-        return "redirect:/capitulos/principal";
+        return "redirect:/capitulos";
     }
 
 }

@@ -5,7 +5,7 @@
  */
 package com.app.riife.respuesta;
 
-import com.app.riife.util.SessionControl;
+import com.app.riife.inicio.SessionControl;
 import com.app.riife.cuestionario.Cuestionario;
 import com.app.riife.util.Mensaje;
 import com.app.riife.pregunta.Pregunta;
@@ -32,12 +32,12 @@ public class RespuestaControl {
 
     @Autowired
     private SessionControl session;
+    @Autowired
+    private RespuestaHtmlComponent respuestaHtmlComponent;
     private final RespuestaService encuestaService;
     private final CuestionarioService cuestionarioService;
     private final PreguntaService preguntaService;
     private final RespuestaService respuestaService;
-    @Autowired
-    private RespuestaHtmlComponent respuestaHtmlComponent;
     private List<Cuestionario> cuestionarios;
     private List<Pregunta> preguntas;
     private List<Respuesta> respuestas;
@@ -59,7 +59,7 @@ public class RespuestaControl {
     
     
 
-    @GetMapping("encuestas/principal")
+    @GetMapping("encuestas")
     public String listar(Model model) {
         cuestionarios = cuestionarioService.listAll();
         model.addAttribute("lista", cuestionarios);
@@ -73,7 +73,7 @@ public class RespuestaControl {
         respuestas = respuestaService.listRespuestasByIdAndUsuario(id, session.getUsuario().getNoUsuario());
 
         forms = obtenerEncuesta();
-        return "redirect:/encuestas/respuestas";
+        return session.url("redirect:/encuestas/respuestas");
     }
 
     @PostMapping(value = "encuestas/updateEncuesta/{id}/{idCapitulo}")
@@ -85,7 +85,7 @@ public class RespuestaControl {
                 .filter(respuesta -> respuesta.getPregunta().getIdPregunta() != 0)
                 .map(respuestaHtmlComponent::respuestaMap)
                 .collect(Collectors.toList());
-
+        respuestasToSend.forEach((res)-> System.out.println(res.getRespuesta()+": respuesta especifica:"+res.getRespuestaEspecifica()));
         Procedure proc = encuestaService.ActRespuesta(respuestasToSend);
         if (proc.getError() != -1) {
             System.out.println("CORRECTO!: " + proc.getMensaje());
@@ -94,7 +94,7 @@ public class RespuestaControl {
             System.err.println("NO SE CONCLUYO " + proc.getMensaje());
         }
         idCapitulo = idCap;
-        return "redirect:/encuestas/respuestas";
+        return session.url("redirect:/encuestas/respuestas");
     }
 
     @GetMapping(value = "encuestas/respuestas")

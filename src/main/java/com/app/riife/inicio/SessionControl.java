@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.app.riife.util;
+package com.app.riife.inicio;
 
 import com.app.riife.usuario.Usuario;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class SessionControl {
 
     public String url(String url) {
         contiene = false;
-        ArrayList<String> pantallas = (ArrayList<String>) session.getAttribute("pantallas");
+        List<String> pantallas = (ArrayList<String>) session.getAttribute("pantallas");
         if (Objects.nonNull(session.getAttribute("usuario"))) {
             for (String pantalla : pantallas) {
                 if (url.contains(pantalla)) {

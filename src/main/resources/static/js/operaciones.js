@@ -189,7 +189,24 @@ $(() => {
       }
       }
 });}
-   
+
+ function getOmec(idElement,clave,opcion) {
+      //$(document).ready
+      var etiqueta = document.getElementById("respuestas["+idElement+"].respuestaEspecifica_"+clave);
+      const visible = etiqueta.style.display;
+      console.log(opcion);
+$(() => {
+    if(opcion != 'NO TIENE'){
+      if(visible=='none'){
+      etiqueta.style.display = 'block';
+      etiqueta.required = true;
+      }
+      else{
+      etiqueta.style.display = 'none';
+      etiqueta.required = false;
+      }
+  }
+});}
    
 // valida numericos
 

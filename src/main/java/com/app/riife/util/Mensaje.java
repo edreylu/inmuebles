@@ -23,16 +23,15 @@ public class Mensaje {
     private String mensaje;
     private int result;
 
-public RedirectAttributes success(String mensaje, RedirectAttributes redirectAttrs){
-return redirectAttrs.addFlashAttribute("mensaje", mensaje).addFlashAttribute("clase", "success");
-}
-public RedirectAttributes danger(String mensaje, RedirectAttributes redirectAttrs){
-return redirectAttrs.addFlashAttribute("mensaje", mensaje).addFlashAttribute("clase", "danger");
-}
+    public RedirectAttributes mensaje(String mensaje, String clase, RedirectAttributes redirectAttrs) {
+        return redirectAttrs.addFlashAttribute("mensaje", mensaje).addFlashAttribute("clase", clase);
+    }
 
-public RedirectAttributes crearMensaje(Mensaje msg, RedirectAttributes redirectAttrs){
-return redirectAttrs.addFlashAttribute("mensaje", msg.getMensaje())
-        .addFlashAttribute("clase", msg.getResult()==1 ? "success" : "danger");
-}
+    public RedirectAttributes crearMensaje(Mensaje msg, RedirectAttributes redirectAttrs) {
+        String[] tipoMensajes = {"info", "success", "danger", "warning",
+            "primary", "secundary", "light", "dark"};
+        String clase = tipoMensajes[msg.getResult()];
+        return mensaje(msg.getMensaje(), clase, redirectAttrs);
+    }
    
 }

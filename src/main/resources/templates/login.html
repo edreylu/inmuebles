@@ -3,13 +3,9 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head th:replace="layout :: head">
         <title th:text="${titulo}"></title>
-
         <link rel="stylesheet" href="style.css" type="text/css"/>
-
-
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        
     </head>
     <body onload="nobackbutton();">
         <header th:replace="layout :: header"></header>
@@ -59,7 +55,7 @@
                         </div>
                         </center>
                         
-                        <button id="submit" type="submit" class="btn btn-primary" disabled>
+                        <button id="submit" type="submit" class="btn btn-primary" >
                             <i class="fas fa-sign-in-alt"></i> <span>Ingresar</span> </button>
                         <hr/>
                         <button type="button" class="btn btn-light" data-toggle="modal" data-target="#cambiarContrasenaModal">Reiniciar Contraseña</button>

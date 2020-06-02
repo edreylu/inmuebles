@@ -5,11 +5,10 @@
  */
 package com.app.riife.cuestionario;
 
-import com.app.riife.util.SessionControl;
+import com.app.riife.inicio.SessionControl;
 import com.app.riife.util.Mensaje;
 import java.util.List;
 import java.util.Objects;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,7 +35,7 @@ public class CuestionarioControl {
         this.cuestionarioService = cuestionarioService;
     }
     
-    @GetMapping("cuestionarios/principal")
+    @GetMapping("cuestionarios")
     public String listar(Model model) {
         cuestionarios = cuestionarioService.listAll();
         model.addAttribute("lista", cuestionarios);
@@ -53,32 +52,32 @@ public class CuestionarioControl {
     public String agregar(Cuestionario cu, RedirectAttributes redirectAttrs) {
         cu.getUsuarioRegistro().setNoUsuario(session.noUsuarioActivo());
         msg.crearMensaje(cuestionarioService.addCuestionario(cu), redirectAttrs);
-        return "redirect:/cuestionarios/principal";
+        return "redirect:/cuestionarios";
     }
 
     @GetMapping(value = "cuestionarios/editar/{id}")
     public String editar(@PathVariable("id") int id, Model model) {
         cuestionario = cuestionarioService.getCuestionario(id);
         String validUrl = Objects.isNull(cuestionario) ? 
-                "redirect:/cuestionarios/principal" : "cuestionarios/editar";
+                "redirect:/cuestionarios" : "cuestionarios/editar";
         model.addAttribute("cuestionario", cuestionario);
         return session.url(validUrl);
         
     }
 
     @PostMapping(value = "cuestionarios/update/{id}")
-    public String editar(@PathVariable("id") int id, @Valid Cuestionario cu, RedirectAttributes redirectAttrs) {
+    public String editar(@PathVariable("id") int id, Cuestionario cu, RedirectAttributes redirectAttrs) {
         cu.getUsuarioModif().setNoUsuario(session.noUsuarioActivo());
         cu.setIdCuestionario(id);
         msg.crearMensaje(cuestionarioService.editCuestionario(cu), redirectAttrs);
-        return "redirect:/cuestionarios/principal";
+        return "redirect:/cuestionarios";
     }
 
     @GetMapping("cuestionarios/eliminar/{id}/{idestatus}")
     public String eliminar(@PathVariable("id") int id, @PathVariable("idestatus") int idestatus, 
             RedirectAttributes redirectAttrs) {
         msg.crearMensaje(cuestionarioService.deleteCuestionario(id, idestatus), redirectAttrs);
-        return "redirect:/cuestionarios/principal";
+        return "redirect:/cuestionarios";
     }
 
 }
