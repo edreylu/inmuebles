@@ -37,61 +37,61 @@ public class FormasMenuServiceImpl implements FormasMenuService{
     }
 
     @Override
-    public Mensaje addFormasMenu(FormasMenu formasMenu) {
-        int valor =formasMenuDAO.addFormaMenu(formasMenu);
+    public Mensaje add(FormasMenu formasMenu) {
+        int valor =formasMenuDAO.add(formasMenu);
         if (valor >= 1) {
-            msg = new Mensaje("Agregado correctamente", 1);
+            msg = Mensaje.CREATE("Agregado correctamente", 1);
         } else {
-            msg = new Mensaje("No se pudo agregar", 2);
+            msg = Mensaje.CREATE("No se pudo agregar", 2);
         }
         return msg;
     }
 
     @Override
-    public FormasMenu getFormasMenu(int id) {
-        return formasMenuDAO.getFormaMenu(id);
+    public FormasMenu get(int id) {
+        return formasMenuDAO.get(id);
     }
 
     @Override
-    public Mensaje editFormasMenu(FormasMenu formasMenu) {
-        boolean existe = formasMenuDAO.existsHijos(formasMenu.getNoFormaMenu());
+    public Mensaje update(FormasMenu formasMenu) {
+        boolean existe = formasMenuDAO.existsChild(formasMenu.getNoFormaMenu());
         if (existe) {
             if (formasMenu.getNoFormaPadre() != 0) {
-                msg = new Mensaje("No se pudo editar", 2);
+                msg = Mensaje.CREATE("No se pudo editar", 2);
             } else {
-                int valor = formasMenuDAO.editFormaMenu(formasMenu);
+                int valor = formasMenuDAO.update(formasMenu);
                 if (valor >= 1) {
-                    msg = new Mensaje("Editado correctamente", 1);
+                    msg = Mensaje.CREATE("Editado correctamente", 1);
                 } else {
-                    msg = new Mensaje("No se pudo editar", 2);
+                    msg = Mensaje.CREATE("No se pudo editar", 2);
                 }
             }
         } else {
-            int valor = formasMenuDAO.editFormaMenu(formasMenu);
+            int valor = formasMenuDAO.update(formasMenu);
             if (valor >= 1) {
-                msg = new Mensaje("Editado correctamente", 1);
+                msg = Mensaje.CREATE("Editado correctamente", 1);
             } else {
-                msg = new Mensaje("No se pudo editar", 2);
+                msg = Mensaje.CREATE("No se pudo editar", 2);
             }
         }
         return msg;
     }
 
     @Override
-    public Mensaje deleteFormasMenu(int id) {
-        boolean existe = formasMenuDAO.existsHijos(id);
+    public Mensaje delete(int id) {
+        boolean existe = formasMenuDAO.existsChild(id);
         if (existe) {
-            msg = new Mensaje("No se pudo eliminar por que tiene pantallas asociadas", 2);
+            msg = Mensaje.CREATE("No se pudo eliminar por que tiene pantallas asociadas", 2);
         } else {
             boolean existe2 = formasMenuDAO.existsRolFormas(id);
             if (existe2) {
-                msg = new Mensaje("No se pudo eliminar por que la pantalla esta asignada a un Rol", 2);
+                msg = Mensaje.CREATE("No se pudo eliminar por que la pantalla esta asignada a un Rol", 2);
             } else {
-                int valor = formasMenuDAO.deleteFormaMenu(id);
+                int valor = formasMenuDAO.delete(id);
                 if (valor >= 1) {
-                    msg = new Mensaje("Eliminado correctamente", 1);
+                    msg = Mensaje.CREATE("Eliminado correctamente", 1);
                 } else {
-                    msg = new Mensaje("No se pudo eliminar", 2);
+                    msg = Mensaje.CREATE("No se pudo eliminar", 2);
                 }
             }
         }
@@ -109,8 +109,8 @@ public class FormasMenuServiceImpl implements FormasMenuService{
     }
 
     @Override
-    public boolean existsHijos(int clave) {
-        return formasMenuDAO.existsHijos(clave);
+    public boolean existsChild(int clave) {
+        return formasMenuDAO.existsChild(clave);
     }
 
     @Override

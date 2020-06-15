@@ -58,14 +58,14 @@ public class SubCapituloControl {
 
     @PostMapping(value = "subcapitulos/add")
     public String agregar(SubCapitulo sc, RedirectAttributes redirectAttrs) {
-        msg.crearMensaje(subCapituloService.addSubCapitulo(sc), redirectAttrs);
+        msg.crearMensaje(subCapituloService.add(sc), redirectAttrs);
         
         return "redirect:/subcapitulos";
     }
 
     @GetMapping(value = "subcapitulos/editar/{id}")
     public String editar(@PathVariable("id") int id, Model model) {
-        subCapitulo = subCapituloService.getSubCapitulo(id);
+        subCapitulo = subCapituloService.get(id);
         String validUrl = "redirect:/subcapitulos";
         if(Objects.nonNull(subCapitulo)){
         cuestionarios = cuestionarioService.listAll();
@@ -80,7 +80,7 @@ public class SubCapituloControl {
     public String editar(@PathVariable("id") int id, SubCapitulo sc, 
             RedirectAttributes redirectAttrs) {
         sc.setIdSubCapitulo(id);
-        msg.crearMensaje(subCapituloService.editSubCapitulo(sc), redirectAttrs);
+        msg.crearMensaje(subCapituloService.update(sc), redirectAttrs);
         
         return "redirect:/subcapitulos";
     }
@@ -89,7 +89,7 @@ public class SubCapituloControl {
     public String eliminar(@PathVariable("id") int id, @PathVariable("idestatus") int idestatus, 
             RedirectAttributes redirectAttrs) {
 
-        msg.crearMensaje(subCapituloService.deleteSubCapitulo(id, idestatus), redirectAttrs);
+        msg.crearMensaje(subCapituloService.delete(id, idestatus), redirectAttrs);
         return "redirect:/subcapitulos";
     }
 

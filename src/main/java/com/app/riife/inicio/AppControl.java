@@ -56,7 +56,7 @@ public class AppControl implements NavBarUtil{
     public String login(@ModelAttribute("login") Login login) throws SQLException {
         String url = "redirect:/menu";
         if (!Objects.equals(login.getUsuario(), login.getContraseña())) {
-            usuario = usuarioService.existsUsuario(login);
+            usuario = usuarioService.exists(login);
             if (usuario.getNoUsuario() > 0) {
                 pantallas = formasMenuService.getPermissionToPages(usuario.getNoUsuario());
                 formas = formasMenuService.getMenu(usuario.getNoUsuario());
@@ -93,7 +93,7 @@ public class AppControl implements NavBarUtil{
 
     @PostMapping(value = "loginCambiar")
     public String cambiar(@ModelAttribute("login") Login login, RedirectAttributes redirectAttrs) {
-        msg.crearMensaje(usuarioService.changePasaporte(login), redirectAttrs);
+        msg.crearMensaje(usuarioService.changePass(login), redirectAttrs);
 
         return "redirect:/login";
     }

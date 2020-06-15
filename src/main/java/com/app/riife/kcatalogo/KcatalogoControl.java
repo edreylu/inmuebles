@@ -58,13 +58,13 @@ public class KcatalogoControl {
 
     @PostMapping(value = "kcatalogos/add")
     public String agregar(Kcatalogo kca, RedirectAttributes redirectAttrs) {
-        msg.crearMensaje(kcatalogoService.addKcatalogo(kca), redirectAttrs);
+        msg.crearMensaje(kcatalogoService.add(kca), redirectAttrs);
         return "redirect:/kcatalogos";
     }
 
     @GetMapping(value = "kcatalogos/editar/{llave}")
     public String editar(@PathVariable("llave") String llave, Model model) {
-        catalogo = kcatalogoService.getKcatalogo(llave);
+        catalogo = kcatalogoService.get(llave);
         String validUrl = "redirect:/kcatalogos";
         if(Objects.nonNull(catalogo)){
         cuestionarios = cuestionarioService.listAll();
@@ -78,7 +78,7 @@ public class KcatalogoControl {
     @PostMapping(value = "kcatalogos/update/{llave}")
     public String editar(@PathVariable("llave") String llave, Kcatalogo kca, RedirectAttributes redirectAttrs) {
         //kca.setClaveCatalogo(id);
-        msg.crearMensaje(kcatalogoService.editKcatalogo(kca), redirectAttrs);
+        msg.crearMensaje(kcatalogoService.update(kca), redirectAttrs);
         return "redirect:/kcatalogos";
     }
 
@@ -86,7 +86,7 @@ public class KcatalogoControl {
     public String eliminar(@PathVariable("idestatus") int idestatus, @PathVariable("llave") String llave,
             RedirectAttributes redirectAttrs) {
         idestatus = idestatus == 2 ? 1 : 2;
-        msg.crearMensaje(kcatalogoService.deleteKcatalogo(llave, idestatus), redirectAttrs);
+        msg.crearMensaje(kcatalogoService.delete(llave, idestatus), redirectAttrs);
         return "redirect:/kcatalogos";
     }
 

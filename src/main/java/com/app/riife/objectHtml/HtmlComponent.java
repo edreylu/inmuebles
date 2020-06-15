@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.app.riife.respuesta;
+package com.app.riife.objectHtml;
 
 import com.app.riife.cicloEscolar.CicloEscolar;
 import com.app.riife.inmueble.Inmueble;
@@ -11,6 +11,7 @@ import com.app.riife.kcatalogo.Kcatalogo;
 import com.app.riife.kcatalogo.KcatalogoService;
 import com.app.riife.pregunta.Pregunta;
 import com.app.riife.inicio.SessionControl;
+import com.app.riife.respuesta.Respuesta;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -23,14 +24,14 @@ import org.springframework.stereotype.Component;
  * @author Edward Reyes
  */
 @Component
-public class RespuestaHtmlComponent {
+public class HtmlComponent {
 
     @Autowired
     SessionControl session;
     @Autowired
     private KcatalogoService kcatalogoService;
     @Autowired
-    private OpcionHtmlComponent opcionHtml;
+    private FormBodyComponent formBody;
     private String fragmentoPregunta,
             capituloAnterior = "",
             subCapituloAnterior = "",
@@ -39,14 +40,14 @@ public class RespuestaHtmlComponent {
     private int noPregunta,
             noCapitulo,
             noRespuesta;
-    StringBuilder part;
-    List<Kcatalogo> catalogos;
+    private StringBuilder part;
+    private List<Kcatalogo> catalogos;
     
     public List<String> getPreguntasHtml(List<Pregunta> preguntas, List<Respuesta> respuestas) {
         noPregunta = 0;
         noRespuesta = 0;
         noCapitulo = 0;
-        List<String> listaForms = new ArrayList<>();
+        List<String> listForms = new ArrayList<>();
         StringBuilder htmlPreguntas = new StringBuilder();
 
         if (preguntas.size() > 0) {
@@ -59,42 +60,35 @@ public class RespuestaHtmlComponent {
                 
                 Respuesta respuesta = respuestaOp.orElse(new Respuesta());
                 respuesta.setPregunta(pregunta);
-                //contador numero de pregunta
                 noPregunta++;
-                //cabeceras y datos adicionales
-                cabeceraPregunta=opcionHtml.headerAndOther(respuesta,noRespuesta);
+                cabeceraPregunta=formBody.headerAndOther(respuesta,noRespuesta);
                 pregunta.setCabeceraPregunta(cabeceraPregunta);
                 respuesta.setPregunta(pregunta);
-                //titulo capitulo
                 htmlPreguntas.append(capitulo(pregunta));
-                //titulo subcapitulo
                 htmlPreguntas.append(subcapitulo(pregunta));
-                //obtiene cuerpo de pregunta
                 htmlPreguntas.append(bodyPregunta(respuesta, noRespuesta));
-                //obtiene capitulo de pregunta anterior al finalizar.
                 capituloAnterior = pregunta.getCapitulo().getCapitulo();
-                //obtiene subcapitulo de pregunta anterior al finalizar (si es que lo tiene).
                 subCapituloAnterior = Objects.isNull(pregunta.getSubCapitulo().getSubCapitulo())
                         ? "" : pregunta.getSubCapitulo().getSubCapitulo();
                 //este bloque coloca el boton siguiente que finaliza el capitulo y abre el siguiente.
                 if (!Objects.equals(capituloAnterior, preguntas.get(noPregunta < preguntas.size()
                         ? noPregunta : noRespuesta).getCapitulo().getCapitulo())) {
-                    htmlPreguntas.append(OpcionHtmlComponent.siguiente());
-                    listaForms.add(htmlPreguntas.toString());
+                    htmlPreguntas.append(FormBodyComponent.siguiente());
+                    listForms.add(htmlPreguntas.toString());
                     htmlPreguntas = new StringBuilder();
                 }
                 noRespuesta++;
             }
 
             //parte final de la encuesta
-            htmlPreguntas.append(OpcionHtmlComponent.finalizarEncuesta());
-            listaForms.add(htmlPreguntas.toString());
+            htmlPreguntas.append(FormBodyComponent.finalizarEncuesta());
+            listForms.add(htmlPreguntas.toString());
         }
         //no hay cuestionario
-        if (listaForms.size() < 1) {
-            listaForms.add(OpcionHtmlComponent.sinEncuesta());
+        if (listForms.size() < 1) {
+            listForms.add(FormBodyComponent.sinEncuesta());
         }
-        return listaForms;
+        return listForms;
     }
     
     private String bodyPregunta(Respuesta respuesta, int noRespuesta) {
@@ -105,23 +99,21 @@ public class RespuestaHtmlComponent {
         String especificarxcatalogo = pregunta.getEspecificarxCatalogo();
         String especificarOtro = pregunta.getOtroEspecificar();
         String enCatalogo = pregunta.getEnCatalogo();
+        
         if (Objects.equals(enCatalogo, "S"))
             catalogos = kcatalogoService.listCatalogoEncuesta(catalogoPregunta);
         //opciones multiple
+        ObjectHtml objectHtml = null;
         if (Objects.equals(opcionMultiple, "S")) {
 
-            //opciones multiple sin especificar
             if (Objects.equals(especificarxcatalogo, "N") && Objects.equals(especificarOtro, "N"))
-                part.append(opcionHtml.opcionMultipleSinEspecificar(catalogos, respuesta, noRespuesta));
+                objectHtml = new OpcionMultipleSinEspecificar();
             
-            //opciones multiple especificar por catalogo
             else if (Objects.equals(especificarxcatalogo, "S") && Objects.equals(especificarOtro, "N"))
-                part.append(opcionHtml.opcionMultipleEspecificarCatalogo(catalogos, respuesta, noRespuesta));
+                objectHtml = new OpcionMultipleEspecificarCatalogo();
             
-
-            //opciones multiple especificar por otro
             if (Objects.equals(especificarxcatalogo, "N") && Objects.equals(especificarOtro, "S"))
-                part.append(opcionHtml.opcionMultipleEspecificarOtro(catalogos, respuesta, noRespuesta));
+                objectHtml = new OpcionMultipleEspecificarOtro();
             
 
         } //No opcion multiple
@@ -130,18 +122,17 @@ public class RespuestaHtmlComponent {
             //No opcion multiple con catalogo
             if (Objects.equals(enCatalogo, "S")) {
 
-                //No opcion multiple con catalogo especificando otro dato
                 if (Objects.equals(especificarxcatalogo, "N") && Objects.equals(especificarOtro, "S"))
-                    part.append(opcionHtml.listaDesplegableEspecificarOtro(catalogos,respuesta, noRespuesta));
-                //No opcion multiple con catalogo sin especificar
+                    objectHtml = new ListaDesplegableEspecificarOtro();
+                
                 else if (Objects.equals(especificarxcatalogo, "N") && Objects.equals(especificarOtro, "N"))
-                    part.append(opcionHtml.listaDesplegableSinEspecificar(catalogos,respuesta, noRespuesta));
+                    objectHtml = new ListaDesplegableSinEspecificar();
                 
 
             } //Sin opcion multiple sin catalogo (abierto)
-            else part.append(opcionHtml.opcionTextoLibre(respuesta, noRespuesta));
+            else objectHtml = new OpcionTextoLibre();
         }
-
+        part.append(objectHtml.create(catalogos, respuesta, noRespuesta));
         return part.toString();
     }
 
@@ -149,7 +140,7 @@ public class RespuestaHtmlComponent {
         part = new StringBuilder();
         if (!Objects.equals(capituloAnterior, pregunta.getCapitulo().getCapitulo())) {
            noCapitulo++;
-           fragmentoPregunta = OpcionHtmlComponent.htmlCapitulo(pregunta, noCapitulo);
+           fragmentoPregunta = FormBodyComponent.capitulo(pregunta, noCapitulo);
         }else{ fragmentoPregunta="";}
         part.append(fragmentoPregunta);
         return part.toString();
@@ -158,7 +149,7 @@ public class RespuestaHtmlComponent {
     private String subcapitulo(Pregunta pregunta) {
     String subCapitulo = pregunta.getSubCapitulo().getSubCapitulo();
     if (!Objects.equals(subCapituloAnterior, subCapitulo) && Objects.nonNull(subCapitulo)) {
-           fragmentoPregunta =  OpcionHtmlComponent.htmlSubCapitulo(subCapitulo);
+           fragmentoPregunta =  FormBodyComponent.subCapitulo(subCapitulo);
         }else{ fragmentoPregunta="";}
         return fragmentoPregunta;
     }

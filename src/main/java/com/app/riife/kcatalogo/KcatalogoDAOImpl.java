@@ -64,7 +64,7 @@ public class KcatalogoDAOImpl implements KcatalogoDAO{
     }
 
     @Override
-    public int addKcatalogo(Kcatalogo kca) {
+    public int add(Kcatalogo kca) {
         valor = 0;
         int claveCatalogo = jdbcTemplate.queryForObject("select nvl(max(clavecatalogo),0)+ 1 from kcatalogo where catalogo =" + kca.getCatalogo(), Integer.class);
         kca.setClaveCatalogo(claveCatalogo);
@@ -93,7 +93,7 @@ public class KcatalogoDAOImpl implements KcatalogoDAO{
     }
 
     @Override
-    public int editKcatalogo(Kcatalogo kca) {
+    public int update(Kcatalogo kca) {
         valor = 0;
         sql = "UPDATE kcatalogo SET idcuestionario = ?, catalogo = ?, descripcorta = ?, descripcion = ?, observaciones = ? WHERE idcuestionario||clavecatalogo||catalogo = ? ";
         try {
@@ -111,7 +111,7 @@ public class KcatalogoDAOImpl implements KcatalogoDAO{
     }
 
     @Override
-    public Kcatalogo getKcatalogo(String llave) {
+    public Kcatalogo get(String llave) {
 
         Kcatalogo kca = null;
         sql = "select kca.idcuestionario,\n"
@@ -133,7 +133,7 @@ public class KcatalogoDAOImpl implements KcatalogoDAO{
     }
 
     @Override
-    public int deleteKcatalogo(String llave, int opcion) {
+    public int delete(String llave, int opcion) {
         valor = 0;
         sql = "UPDATE kcatalogo SET IDESTATUS= ? where idcuestionario||clavecatalogo||catalogo = ?";
         try {

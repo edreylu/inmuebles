@@ -46,7 +46,7 @@ public class SubCapituloDAOImpl implements SubCapituloDAO{
     }
 
     @Override
-    public List<SubCapitulo> getRecordsByCuestionario(int idCuestionario) {
+    public List<SubCapitulo> getRecordsByIdCuestionario(int idCuestionario) {
         sql = "select sc.idcuestionario,\n"
                 + "       (select cu.cuestionario from cuestionario cu where cu.idcuestionario = sc.idcuestionario) cuestionario,\n"
                 + "       sc.idsubcapitulo, \n"
@@ -63,7 +63,7 @@ public class SubCapituloDAOImpl implements SubCapituloDAO{
     }
 
     @Override
-    public int addSubCapitulo(SubCapitulo sc) {
+    public int add(SubCapitulo sc) {
         int valor = 0;
         int idSubCapitulo = jdbcTemplate.queryForObject("select nvl(max(idsubcapitulo),0)+ 1 from subcapitulo", Integer.class);
         sc.setIdSubCapitulo(idSubCapitulo);
@@ -85,7 +85,7 @@ public class SubCapituloDAOImpl implements SubCapituloDAO{
     }
 
     @Override
-    public int editSubCapitulo(SubCapitulo sc) {
+    public int update(SubCapitulo sc) {
         int valor = 0;
         sql = "UPDATE subcapitulo SET idcuestionario = ?, subcapitulo = ? WHERE idsubcapitulo = ? ";
         try {
@@ -100,7 +100,7 @@ public class SubCapituloDAOImpl implements SubCapituloDAO{
     }
 
     @Override
-    public SubCapitulo getSubCapitulo(int id) {
+    public SubCapitulo get(int id) {
 
         SubCapitulo sc = null;
         sql = "select sc.idcuestionario,\n"
@@ -118,7 +118,7 @@ public class SubCapituloDAOImpl implements SubCapituloDAO{
     }
 
     @Override
-    public int deleteSubCapitulo(int id, int opcion) {
+    public int delete(int id, int opcion) {
         int valor = 0;
         sql = "UPDATE subcapitulo SET IDESTATUS= ? where idsubcapitulo = ?";
 

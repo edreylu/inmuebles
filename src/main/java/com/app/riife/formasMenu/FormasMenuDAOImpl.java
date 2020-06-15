@@ -68,7 +68,7 @@ public class FormasMenuDAOImpl implements FormasMenuDAO{
     }
 
     @Override
-    public int addFormaMenu(FormasMenu menu) {
+    public int add(FormasMenu menu) {
         int valor = 0;
         int noUsuario = jdbcTemplate.queryForObject("select nvl(max(no_forma),0)+ 1 from formas_menu ", Integer.class);
         menu.setNoFormaMenu(noUsuario);
@@ -90,7 +90,7 @@ public class FormasMenuDAOImpl implements FormasMenuDAO{
     }
 
     @Override
-    public int editFormaMenu(FormasMenu menu) {
+    public int update(FormasMenu menu) {
         int valor = 0;
         int tipoForma = menu.getNoFormaPadre() > 0 ? 3 : 1;
         sql = "UPDATE FORMAS_MENU set TITULO = ? ,URL = ? ,ICONO = ? ,NO_TIPO_FORMA = ? , NO_FORMA_PADRE = ? "
@@ -110,7 +110,7 @@ public class FormasMenuDAOImpl implements FormasMenuDAO{
     }
 
     @Override
-    public FormasMenu getFormaMenu(int id) {
+    public FormasMenu get(int id) {
 
         FormasMenu menu = null;
         sql = "SELECT ME.NO_FORMA as ID_MENU,ME.TITULO as DESCRIPCION,ME.URL as ENLACE,ME.ICONO as ICONO,\n"
@@ -131,7 +131,7 @@ public class FormasMenuDAOImpl implements FormasMenuDAO{
     }
 
     @Override
-    public int deleteFormaMenu(int id) {
+    public int delete(int id) {
         int valor = 0;
         sql = "DELETE FROM FORMAS_MENU WHERE NO_FORMA = ? ";
         try {
@@ -217,7 +217,7 @@ public class FormasMenuDAOImpl implements FormasMenuDAO{
     }
 
     @Override
-    public boolean existsHijos(int clave) {
+    public boolean existsChild(int clave) {
         int valor = 0;
         sql = "  SELECT COUNT(*) "
                 + "  FROM FORMAS_MENU "

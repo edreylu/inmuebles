@@ -8,13 +8,9 @@ package com.app.riife.respuesta;
 import com.app.riife.inicio.SessionControl;
 import com.app.riife.cuestionario.Cuestionario;
 import com.app.riife.util.Mensaje;
-import com.app.riife.pregunta.Pregunta;
 import com.app.riife.util.Procedure;
 import com.app.riife.cuestionario.CuestionarioService;
-import com.app.riife.pregunta.PreguntaService;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,16 +28,10 @@ public class RespuestaControl {
 
     @Autowired
     private SessionControl session;
-    @Autowired
-    private RespuestaHtmlComponent respuestaHtmlComponent;
     private final RespuestaService encuestaService;
     private final CuestionarioService cuestionarioService;
-    private final PreguntaService preguntaService;
     private final RespuestaService respuestaService;
     private List<Cuestionario> cuestionarios;
-    private List<Pregunta> preguntas;
-    private List<Respuesta> respuestas;
-    private List<Respuesta> respuestasToSend;
     private List<String> forms;
     private ObjectRespuestas objectRespuestas;
     private String html;
@@ -50,13 +40,11 @@ public class RespuestaControl {
 
     @Autowired
     public RespuestaControl(RespuestaService encuestaService, CuestionarioService cuestionarioService, 
-            PreguntaService preguntaService, RespuestaService respuestaService) {
+            RespuestaService respuestaService) {
         this.encuestaService = encuestaService;
         this.cuestionarioService = cuestionarioService;
-        this.preguntaService = preguntaService;
         this.respuestaService = respuestaService;
     }
-    
     
 
     @GetMapping("encuestas")
@@ -69,24 +57,14 @@ public class RespuestaControl {
     @GetMapping(value = "encuestas/responder/{id}")
     public String responder(@PathVariable("id") int id, Model model) {
         idCapitulo = 0;
-        preguntas = preguntaService.listPreguntasById(id);
-        respuestas = respuestaService.listRespuestasByIdAndUsuario(id, session.getUsuario().getNoUsuario());
-
-        forms = obtenerEncuesta();
+        forms = respuestaService.getForms(id, session.getUsuario().getNoUsuario());
         return session.url("redirect:/encuestas/respuestas");
     }
 
     @PostMapping(value = "encuestas/updateEncuesta/{id}/{idCapitulo}")
     public String responder(@PathVariable("id") int id, @PathVariable("idCapitulo") int idCap,
             @ModelAttribute("preguntasRespuestas") ObjectRespuestas respuestasEnTurno) {
-
-        respuestasToSend = respuestasEnTurno.getRespuestas()
-                .stream()
-                .filter(respuesta -> respuesta.getPregunta().getIdPregunta() != 0)
-                .map(respuestaHtmlComponent::respuestaMap)
-                .collect(Collectors.toList());
-        respuestasToSend.forEach((res)-> System.out.println(res.getRespuesta()+": respuesta especifica:"+res.getRespuestaEspecifica()));
-        Procedure proc = encuestaService.ActRespuesta(respuestasToSend);
+        Procedure proc = encuestaService.ActRespuesta(respuestasEnTurno);
         if (proc.getError() != -1) {
             System.out.println("CORRECTO!: " + proc.getMensaje());
         } else {
@@ -104,12 +82,6 @@ public class RespuestaControl {
         model.addAttribute("htmlEncuesta", html);
         model.addAttribute("objectRespuestas", objectRespuestas);
         return session.url("encuestas/responder");
-    }
-
-    public List<String> obtenerEncuesta() {
-        Objects.requireNonNull(preguntas);
-        List<String> listaForms = respuestaHtmlComponent.getPreguntasHtml(preguntas, respuestas);
-        return listaForms;
     }
 
 }

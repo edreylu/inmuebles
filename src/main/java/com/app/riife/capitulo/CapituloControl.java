@@ -59,13 +59,13 @@ public class CapituloControl {
     @PostMapping(value = "capitulos/add")
     public String agregar(Capitulo ca, RedirectAttributes redirectAttrs) {
         ca.getUsuarioRegistro().setNoUsuario(session.noUsuarioActivo());
-        msg.crearMensaje(capituloService.addCapitulo(ca), redirectAttrs);
+        msg.crearMensaje(capituloService.add(ca), redirectAttrs);
         return "redirect:/capitulos";
     }
 
     @GetMapping(value = "capitulos/editar/{id}")
     public String editar(@PathVariable("id") int id, Model model) {
-        capitulo = capituloService.getCapitulo(id);
+        capitulo = capituloService.get(id);
         String validUrl = "redirect:/capitulos/principal";
         if(Objects.nonNull(capitulo)){
         cuestionarios = cuestionarioService.listAll();
@@ -80,14 +80,14 @@ public class CapituloControl {
     public String editar(@PathVariable("id") int id, Capitulo ca, RedirectAttributes redirectAttrs) {
         ca.getUsuarioModif().setNoUsuario(session.getUsuario().getNoUsuario());
         ca.setIdCapitulo(id);
-        msg.crearMensaje(capituloService.editCapitulo(ca), redirectAttrs);
+        msg.crearMensaje(capituloService.update(ca), redirectAttrs);
         return "redirect:/capitulos";
     }
 
     @GetMapping("capitulos/eliminar/{id}/{idestatus}")
     public String eliminar(@PathVariable("id") int id, @PathVariable("idestatus") int idestatus,
             RedirectAttributes redirectAttrs) {
-        msg.crearMensaje(capituloService.deleteCapitulo(id, idestatus), redirectAttrs);
+        msg.crearMensaje(capituloService.delete(id, idestatus), redirectAttrs);
         return "redirect:/capitulos";
     }
 

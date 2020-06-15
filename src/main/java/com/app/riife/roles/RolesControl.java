@@ -55,14 +55,14 @@ public class RolesControl {
     @PostMapping(value = "roles/add")
     public String agregar(Roles rol, RedirectAttributes redirectAttrs) {
         rol = Roles.inicializarAdd(rol);
-        msg.crearMensaje(rolesService.addRole(rol), redirectAttrs);
+        msg.crearMensaje(rolesService.add(rol), redirectAttrs);
         
         return "redirect:/roles";
     }
 
     @GetMapping(value = "roles/editar/{id}")
     public String editar(@PathVariable("id") int id, Model model) {
-        rol = rolesService.getRole(id);
+        rol = rolesService.get(id);
         String validUrl = Objects.isNull(rol) ? "redirect:/roles" : "roles/editar";
         model.addAttribute("rol", rol);
         return session.url(validUrl);
@@ -72,20 +72,20 @@ public class RolesControl {
     public String editar(@PathVariable("id") int id, Roles rol, RedirectAttributes redirectAttrs) {
         rol.setNoRol(id);
         rol = Roles.inicializarEdit(rol);
-        msg.crearMensaje(rolesService.editRole(rol), redirectAttrs);
+        msg.crearMensaje(rolesService.update(rol), redirectAttrs);
         
         return "redirect:/roles";
     }
 
     @GetMapping("roles/eliminar/{id}")
     public String eliminar(@PathVariable("id") int id, RedirectAttributes redirectAttrs) {
-        msg.crearMensaje(rolesService.deleteRole(id), redirectAttrs);
+        msg.crearMensaje(rolesService.delete(id), redirectAttrs);
         return "redirect:/roles";
     }
 
     @GetMapping(value = "roles/asignar/{id}")
     public String asignar(@PathVariable("id") int id, Model model) {
-        rol = rolesService.getRole(id);
+        rol = rolesService.get(id);
         String validUrl = "redirect:/roles";
         if(Objects.nonNull(rol)){
         model.addAttribute("noRol", id);
@@ -102,7 +102,7 @@ public class RolesControl {
     public String asignar(@PathVariable("id") int id, @ModelAttribute("rolFormas") RolFormas rolFormas,
             RedirectAttributes redirectAttrs) {
         rolFormas.setNoRol(id);
-        msg.crearMensaje(rolesService.assignFormaMenu(rolFormas), redirectAttrs);
+        msg.crearMensaje(rolesService.assignFormaMenuToRol(rolFormas), redirectAttrs);
         return "redirect:/roles";
     }
 

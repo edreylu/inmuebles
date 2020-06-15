@@ -33,89 +33,89 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     @Override
-    public Mensaje addUsuario(Usuario usuario) {
-        int valor = usuarioDAO.addUsuario(usuario);
+    public Mensaje add(Usuario usuario) {
+        int valor = usuarioDAO.add(usuario);
         if (valor >= 1) {
             usuarioDAO.deleteRolToUsuario(usuario.getNoUsuario());
             usuarioDAO.assignRolToUsuario(usuario);
-            msg = new Mensaje("Agregado correctamente", 1);
+            msg = Mensaje.CREATE("Agregado correctamente", 1);
         } else {
-            msg = new Mensaje("No se pudo agregar", 2);
+            msg = Mensaje.CREATE("No se pudo agregar", 2);
         }
         return msg;
     }
 
     @Override
-    public Usuario getUsuario(int id) {
-        return usuarioDAO.getUsuario(id);
+    public Usuario get(int id) {
+        return usuarioDAO.get(id);
     }
 
     @Override
-    public Mensaje editUsuario(Usuario usuario) {
-        int valor = usuarioDAO.editUsuario(usuario);
+    public Mensaje update(Usuario usuario) {
+        int valor = usuarioDAO.update(usuario);
         if (valor >= 1) {
             usuarioDAO.deleteRolToUsuario(usuario.getNoUsuario());
             usuarioDAO.assignRolToUsuario(usuario);
-            msg = new Mensaje("Editado correctamente", 1);
+            msg = Mensaje.CREATE("Editado correctamente", 1);
         } else {
-            msg = new Mensaje("No se pudo editar", 2);
+            msg = Mensaje.CREATE("No se pudo editar", 2);
         }
         return msg;
     }
 
     @Override
-    public Mensaje deleteUsuario(int id, int opcion) {
-        int valor = usuarioDAO.deleteUsuario(id, opcion);
+    public Mensaje delete(int id, int opcion) {
+        int valor = usuarioDAO.delete(id, opcion);
         if (valor >= 1) {
             boolean existe = usuarioDAO.existsRolAssignedToUsuario(id);
             if (existe) {
                 usuarioDAO.deleteRolToUsuario(id);
             }
-            msg = new Mensaje("Ejecutado correctamente", 1);
+            msg = Mensaje.CREATE("Ejecutado correctamente", 1);
         } else {
-            msg = new Mensaje("No se pudo ejecutar", 2);
+            msg = Mensaje.CREATE("No se pudo ejecutar", 2);
         }
         return msg;
     }
 
     @Override
-    public Usuario existsUsuario(Login login) {
-        return usuarioDAO.existsUsuario(login);
+    public Usuario exists(Login login) {
+        return usuarioDAO.exists(login);
     }
 
     @Override
-    public Mensaje resetPasaporte(int id) {
-        int valor = usuarioDAO.resetPasaporte(id);
+    public Mensaje resetPass(int id) {
+        int valor = usuarioDAO.resetPass(id);
         if (valor == 1) {
-            msg = new Mensaje("Actualizado correctamente", 1);
+            msg = Mensaje.CREATE("Actualizado correctamente", 1);
         } else {
-            msg = new Mensaje("No se pudo Actualizar", 2);
+            msg = Mensaje.CREATE("No se pudo Actualizar", 2);
         }
         return msg;
     }
 
     @Override
-    public Mensaje changePasaporte(Login login) {
+    public Mensaje changePass(Login login) {
         boolean isValidUser;
         int valor = 0;
         if (Objects.equals(login.getContraseña(), login.getContraseña2())) {
-            msg = new Mensaje("Contraseña actual y nueva no pueden ser iguales", 2);
+            msg = Mensaje.CREATE("Contraseña actual y nueva no pueden ser iguales", 2);
             
         } else if (Objects.equals(login.getUsuario(), login.getContraseña2())) {
-            msg = new Mensaje("Contraseña nueva y usuario no pueden ser iguales", 2);
+            msg = Mensaje.CREATE("Contraseña nueva y usuario no pueden ser iguales", 2);
         }
           else {
-            Usuario usuario = usuarioDAO.existsUsuario(login);
+            Usuario usuario = usuarioDAO.exists(login);
             if (usuario.getNoUsuario() > 0) {
-                valor = usuarioDAO.changePasaporte(usuario.getNoUsuario(), login.getContraseña2());
+                valor = usuarioDAO.changePass(usuario.getNoUsuario(), login.getContraseña2());
                 isValidUser = valor > 0;
                 if (isValidUser) {
-                    msg = new Mensaje("Cambiado correctamente", 1);
+                    msg = Mensaje.CREATE("Cambiado correctamente", 1);
                 } else {
-                    msg = new Mensaje("No se pudo Actualizar Password", 2);
+                    msg = Mensaje.CREATE("No se pudo Actualizar Password", 2);
                 }
             } else {
-                msg = new Mensaje("No existe Usuario", 2);
+                msg = Mensaje.CREATE("No existe Usuario", 2);
             }
         }
         return msg;

@@ -75,7 +75,7 @@ public class CapituloDAOImpl implements CapituloDAO{
     }
     
     @Override
-    public int addCapitulo(Capitulo ca) {
+    public int add(Capitulo ca) {
         int valor = 0;
         int idCapitulo = jdbcTemplate.queryForObject("select nvl(max(idcapitulo),0)+ 1 from capitulo", Integer.class);
         ca.setIdCapitulo(idCapitulo);
@@ -104,7 +104,7 @@ public class CapituloDAOImpl implements CapituloDAO{
     }
     
     @Override
-    public int editCapitulo(Capitulo ca) {
+    public int update(Capitulo ca) {
         int valor = 0;
         sql = "UPDATE capitulo SET idcuestionario = ?, capitulo = ?, fechamodif = SYSDATE, nousuariomodif = ? WHERE idcapitulo = ? ";
         try {
@@ -120,7 +120,7 @@ public class CapituloDAOImpl implements CapituloDAO{
     }
     
     @Override
-    public Capitulo getCapitulo(int id) {
+    public Capitulo get(int id) {
 
         Capitulo ca = null;
         sql = "select ca.idcuestionario, "
@@ -144,7 +144,7 @@ public class CapituloDAOImpl implements CapituloDAO{
     }
     
     @Override
-    public int deleteCapitulo(int id, int opcion) {
+    public int delete(int id, int opcion) {
         int valor = 0;
         sql = "UPDATE capitulo SET IDESTATUS= ? where idcapitulo = ?";
         try {

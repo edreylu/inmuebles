@@ -80,6 +80,10 @@ public class Pregunta {
 
         return pregunta;
     }
+    
+    public static Pregunta preguntaHtml(){
+    return new Pregunta();
+    }
 
     @Override
     public String toString() {

@@ -78,7 +78,7 @@ public class PreguntaControl {
         pregunta.setUsuarioRegistro(new Usuario(session.noUsuarioActivo()));
         pregunta = Pregunta.preguntaAddAjustes(pregunta);
         System.out.println(pregunta.toString());
-        msg.crearMensaje(preguntaService.addPregunta(pregunta), redirectAttrs);
+        msg.crearMensaje(preguntaService.add(pregunta), redirectAttrs);
         
         return "redirect:/preguntas";
     }
@@ -86,12 +86,12 @@ public class PreguntaControl {
     @GetMapping(value = "preguntas/editar/{id}")
     public String editar(@PathVariable("id") int id, Model model) {
         
-        pregunta = preguntaService.getPregunta(id);
+        pregunta = preguntaService.get(id);
         String validUrl = "redirect:/preguntas";
         if(Objects.nonNull(pregunta)){
         cuestionarios = cuestionarioService.listAll();
         capitulos = capituloService.listByCuestionario(pregunta.getCuestionario().getIdCuestionario());
-        subcapitulos = subCapituloService.listByCuestionario(pregunta.getCuestionario().getIdCuestionario());
+        subcapitulos = subCapituloService.listByIdCuestionario(pregunta.getCuestionario().getIdCuestionario());
         catalogos = Objects.equals(pregunta.getEnCatalogo(),"S") ? kcatalogoService.listOnlyCatalogo(): null;
         
         model.addAttribute("cuestionarios", cuestionarios);
@@ -111,7 +111,7 @@ public class PreguntaControl {
         pregunta.setUsuarioModif(new Usuario(session.noUsuarioActivo()));
         pregunta = Pregunta.preguntaEditAjustes(pregunta);
         System.out.println(pregunta.toString());
-        msg.crearMensaje(preguntaService.editPregunta(pregunta), redirectAttrs);
+        msg.crearMensaje(preguntaService.update(pregunta), redirectAttrs);
         
         return "redirect:/preguntas";
     }
@@ -119,82 +119,9 @@ public class PreguntaControl {
     @GetMapping("preguntas/eliminar/{id}/{idestatus}")
     public String eliminar(@PathVariable("id") int id, @PathVariable("idestatus") int idestatus,
             RedirectAttributes redirectAttrs) {
-        msg.crearMensaje(preguntaService.deletePregunta(id, idestatus), redirectAttrs);
+        msg.crearMensaje(preguntaService.delete(id, idestatus), redirectAttrs);
         
         return "redirect:/preguntas";
-    }
-
-    @GetMapping("preguntas/refreshCapitulos/{id}/{idPregunta}")
-    public String getCapitulos(@PathVariable("id") int id, @PathVariable("idPregunta") int idPregunta, Model model) {
-        System.out.println("valor pasado como pasametro: " + id);
-        capitulos = capituloService.listByCuestionario(id);
-        if (idPregunta != 0) {
-            model.addAttribute("pregunta", pregunta);
-        }
-        model.addAttribute("capitulos", capitulos);
-
-        String vista = idPregunta == 0 ? "preguntas/agregar" : "preguntas/editar";
-        return vista + " :: #capitulos";
-    }
-
-    //Refresh de combos
-    @GetMapping("preguntas/refreshSubCapitulos/{id}/{idPregunta}")
-    public String getSubCapitulos(@PathVariable("id") int id, @PathVariable("idPregunta") int idPregunta, Model model) {
-        System.out.println("valor pasado como pasametro: " + id);
-        subcapitulos = subCapituloService.listByCuestionario(id);
-        if (idPregunta != 0) {
-            model.addAttribute("pregunta", pregunta);
-        }
-        model.addAttribute("subcapitulos", subcapitulos);
-        String vista = idPregunta == 0 ? "preguntas/agregar" : "preguntas/editar";
-        return vista + " :: #subcapitulos";
-    }
-
-    @GetMapping("preguntas/refreshEnCatalogo/{id}/{idPregunta}")
-    public String getRefreshEnCatalogo(Model model, @PathVariable("id") String id, 
-            @PathVariable("idPregunta") int idPregunta) {
-        System.out.println("valor de idPregunta y id: " + idPregunta + ":" + id);
-        catalogos = Objects.equals(id,"S") ? kcatalogoService.listOnlyCatalogo(): null;
-        if (idPregunta != 0) {
-            pregunta.setEnCatalogo(id);
-            model.addAttribute("pregunta", pregunta);
-        } else {
-            model.addAttribute("enCatalogo", id);
-        }
-        model.addAttribute("catalogos", catalogos);
-        String vista = idPregunta == 0 ? "preguntas/agregar" : "preguntas/editar";
-        return vista + " :: #opcionesTodas";
-    }
-
-    @GetMapping("preguntas/refreshEnCatalogoEspecificar/{id}/{idPregunta}")
-    public String getRefreshEnCatalogoEspecificar(Model model, @PathVariable("id") String id, 
-            @PathVariable("idPregunta") int idPregunta) {
-        System.out.println("valor de tipo y id: " + idPregunta + ":" + id);
-        if (idPregunta != 0) {
-            pregunta.setEspecificarPor(id);
-            model.addAttribute("pregunta", pregunta);
-        } else {
-            model.addAttribute("especificarPor", id);
-        }
-
-        String vista = idPregunta == 0 ? "preguntas/agregar" : "preguntas/editar";
-        return vista + " :: #opcionesEnCatalogo";
-    }
-
-    @GetMapping("preguntas/refreshTodo/{id}/{idPregunta}")
-    public String getRefreshTodo(Model model, @PathVariable("id") String id, 
-            @PathVariable("idPregunta") int idPregunta) {
-        System.out.println("valor de tipo y id: " + idPregunta + ":" + id);
-        catalogos = Objects.equals(id,"S") ? kcatalogoService.listOnlyCatalogo(): null;
-        if (idPregunta != 0) {
-            pregunta.setEnCatalogo(id);
-            model.addAttribute("pregunta", pregunta);
-        } else {
-            model.addAttribute("enCatalogo", id);
-        }
-        model.addAttribute("catalogos", catalogos);
-        String vista = idPregunta == 0 ? "preguntas/agregar" : "preguntas/editar";
-        return vista + " :: #opcionesTodas";
     }
 
 }

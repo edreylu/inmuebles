@@ -33,5 +33,9 @@ public class Mensaje {
         String clase = tipoMensajes[msg.getResult()];
         return mensaje(msg.getMensaje(), clase, redirectAttrs);
     }
+    
+    public static Mensaje CREATE(String mensaje, int result){
+    return new Mensaje(mensaje,result);
+    }
    
 }

@@ -3,23 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.app.riife.cuestionario;
+package com.app.riife.objectHtml;
 
+import com.app.riife.kcatalogo.Kcatalogo;
+import com.app.riife.respuesta.Respuesta;
 import java.util.List;
 
 /**
  *
  * @author Edward Reyes
  */
-public interface CuestionarioDAO {
+public interface ObjectHtml {
     
-    List<Cuestionario> getRecords();
-
-    int add(Cuestionario cu);
-
-    int update(Cuestionario cu);
-
-    Cuestionario get(int id);
-
-    int delete(int id, int opcion);
+    String create(List<Kcatalogo> catalogos, Respuesta respuesta, int noRespuesta);
+    
 }

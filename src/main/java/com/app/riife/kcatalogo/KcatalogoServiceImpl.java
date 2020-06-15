@@ -31,44 +31,44 @@ public class KcatalogoServiceImpl implements KcatalogoService{
     }
 
     @Override
-    public Mensaje addKcatalogo(Kcatalogo kcatalogo) {
-        int valor = kcatalogoDAO.addKcatalogo(kcatalogo);
+    public Mensaje add(Kcatalogo kcatalogo) {
+        int valor = kcatalogoDAO.add(kcatalogo);
         if (valor >= 1) {
-            msg = new Mensaje("Agregado correctamente", 1);
+            msg = Mensaje.CREATE("Agregado correctamente", 1);
             System.out.println("se agrego registro: " + valor);
         } else {
-            msg = new Mensaje("No se pudo agregar", 2);
+            msg = Mensaje.CREATE("No se pudo agregar", 2);
             System.err.println("no se agrego registro");
         }
         return msg;
     }
 
     @Override
-    public Kcatalogo getKcatalogo(String id) {
-        return kcatalogoDAO.getKcatalogo(id);
+    public Kcatalogo get(String id) {
+        return kcatalogoDAO.get(id);
     }
 
     @Override
-    public Mensaje editKcatalogo(Kcatalogo kcatalogo) {
-        int valor = kcatalogoDAO.editKcatalogo(kcatalogo);
+    public Mensaje update(Kcatalogo kcatalogo) {
+        int valor = kcatalogoDAO.update(kcatalogo);
         if (valor >= 1) {
-            msg = new Mensaje("Editado correctamente", 1);
+            msg = Mensaje.CREATE("Editado correctamente", 1);
             System.out.println("se edito registro: " + valor);
         } else {
-            msg = new Mensaje("No se pudo editar", 2);
+            msg = Mensaje.CREATE("No se pudo editar", 2);
             System.err.println("no se edito registro");
         }
         return msg;
     }
 
     @Override
-    public Mensaje deleteKcatalogo(String id, int opcion) {
-        int valor = kcatalogoDAO.deleteKcatalogo(id, opcion);
+    public Mensaje delete(String id, int opcion) {
+        int valor = kcatalogoDAO.delete(id, opcion);
         if (valor >= 1) {
-            msg = new Mensaje("Ejecutado correctamente", 1);
+            msg = Mensaje.CREATE("Ejecutado correctamente", 1);
             System.out.println("se elimino registro: ");
         } else {
-            msg = new Mensaje("No se pudo ejecutar", 2);
+            msg = Mensaje.CREATE("No se pudo ejecutar", 2);
             System.err.println("no se elimino registro");
         }
         return msg;

@@ -16,13 +16,13 @@ public interface PreguntaService {
     
     List<Pregunta> listAll();
 
-    Mensaje addPregunta(Pregunta pr);
+    Mensaje add(Pregunta pr);
 
-    Pregunta getPregunta(int id);
+    Pregunta get(int id);
 
-    Mensaje editPregunta(Pregunta pr);
+    Mensaje update(Pregunta pr);
 
-    Mensaje deletePregunta(int id, int opcion);
+    Mensaje delete(int id, int opcion);
 
-    List<Pregunta> listPreguntasById(int idCuestionario);
+    List<Pregunta> listByIdCuestionario(int idCuestionario);
 }

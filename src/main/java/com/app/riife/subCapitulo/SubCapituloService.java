@@ -16,13 +16,13 @@ public interface SubCapituloService {
     
     List<SubCapitulo> listAll();
 
-    Mensaje addSubCapitulo(SubCapitulo subCapitulo);
+    Mensaje add(SubCapitulo subCapitulo);
     
-    SubCapitulo getSubCapitulo(int id);
+    SubCapitulo get(int id);
 
-    Mensaje editSubCapitulo(SubCapitulo subCapitulo);
+    Mensaje update(SubCapitulo subCapitulo);
 
-    Mensaje deleteSubCapitulo(int id, int opcion);
+    Mensaje delete(int id, int opcion);
 
-    List<SubCapitulo> listByCuestionario(int idCuestionario);
+    List<SubCapitulo> listByIdCuestionario(int idCuestionario);
 }

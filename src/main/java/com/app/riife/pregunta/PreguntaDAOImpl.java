@@ -75,7 +75,7 @@ public class PreguntaDAOImpl implements PreguntaDAO{
     }
 
     @Override
-    public int addPregunta(Pregunta pr) {
+    public int add(Pregunta pr) {
         int valor = 0;
         int idPregunta = jdbcTemplate.queryForObject("select nvl(max(idpregunta),0)+ 1 from pregunta", Integer.class);
         pr.setIdPregunta(idPregunta);
@@ -147,7 +147,7 @@ public class PreguntaDAOImpl implements PreguntaDAO{
     }
 
     @Override
-    public int editPregunta(Pregunta pr) {
+    public int update(Pregunta pr) {
         int valor = 0;
         sql = "UPDATE pregunta\n "
                 + "SET idcuestionario = ?,\n "
@@ -211,7 +211,7 @@ public class PreguntaDAOImpl implements PreguntaDAO{
     }
 
     @Override
-    public Pregunta getPregunta(int id) {
+    public Pregunta get(int id) {
 
         Pregunta pr = null;
         sql = "select pr.idcuestionario,\n"
@@ -257,7 +257,7 @@ public class PreguntaDAOImpl implements PreguntaDAO{
     }
 
     @Override
-    public int deletePregunta(int id, int opcion) {
+    public int delete(int id, int opcion) {
         int valor = 0;
         sql = "UPDATE pregunta SET IDESTATUS= ? where idpregunta = ?";
         try {
@@ -269,7 +269,7 @@ public class PreguntaDAOImpl implements PreguntaDAO{
     }
 
     @Override
-    public List<Pregunta> getRecordsPreguntas(int idCuestionario) {
+    public List<Pregunta> getRecordsByIdCuestionario(int idCuestionario) {
         sql = "select pr.idcuestionario,\n"
                 + "                (select cu.cuestionario from cuestionario cu where cu.idcuestionario = pr.idcuestionario) cuestionario,\n"
                 + "                pr.idpregunta,\n"

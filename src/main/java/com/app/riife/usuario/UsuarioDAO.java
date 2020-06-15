@@ -14,25 +14,25 @@ import java.util.List;
  */
 public interface UsuarioDAO {
      
-    Usuario existsUsuario(Login login);
+    Usuario exists(Login login);
 
     List<Usuario> getRecords();
 
-    int addUsuario(Usuario us);
+    int add(Usuario us);
 
-    int editUsuario(Usuario us);
+    int update(Usuario us);
 
-    Usuario getUsuario(int id);
+    Usuario get(int id);
 
-    int deleteUsuario(int id, int opcion);
+    int delete(int id, int opcion);
 
     int assignRolToUsuario(Usuario usuario);
 
     int deleteRolToUsuario(int id);
 
-    int resetPasaporte(int us);
+    int resetPass(int us);
 
-    int changePasaporte(int noUsuario, String contraseñaNueva);
+    int changePass(int noUsuario, String contraseñaNueva);
 
     boolean existsRolAssignedToUsuario(int noUsuario);
 

@@ -18,15 +18,15 @@ public interface RolesDAO {
 
     int addRol(Roles rol);
 
-    int editRol(Roles rol);
+    int updateRol(Roles rol);
 
     Roles getRol(int noRol);
 
     int deleteRol(int noRol);
 
-    void assignFormaMenu(int noRol, int noForma);
+    void assignFormaMenuToRol(int noRol, int noForma);
 
-    void deleteFormaMenu(int noRol);
+    void deleteFormaMenuToRol(int noRol);
 
     int deleteRolToUsuario(int noUsuario);
 
@@ -34,5 +34,5 @@ public interface RolesDAO {
 
     boolean existsRolesFormas(int noRol);
 
-    List<FormasMenu> getRecordsFormas(int noRol);
+    List<FormasMenu> getRecordsFormasById(int noRol);
 }

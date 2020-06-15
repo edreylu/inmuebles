@@ -54,13 +54,13 @@ public class FormasMenuControl {
 
     @PostMapping(value = "formas/add")
     public String agregar(FormasMenu formas, RedirectAttributes redirectAttrs) {
-        msg.crearMensaje(formasMenuService.addFormasMenu(formas), redirectAttrs);
+        msg.crearMensaje(formasMenuService.add(formas), redirectAttrs);
         return "redirect:/formas";
     }
 
     @GetMapping(value = "formas/editar/{id}")
     public String editar(@PathVariable("id") int id, Model model) {
-        forma = formasMenuService.getFormasMenu(id);
+        forma = formasMenuService.get(id);
         String validUrl = "redirect:/formas";
         if(Objects.nonNull(forma)){
         formasPadre = formasMenuService.listAllFathers();
@@ -74,13 +74,13 @@ public class FormasMenuControl {
     @PostMapping(value = "formas/update/{id}")
     public String editar(@PathVariable("id") int id, FormasMenu forma, RedirectAttributes redirectAttrs) {
         forma.setNoFormaMenu(id);
-        msg.crearMensaje(formasMenuService.editFormasMenu(forma), redirectAttrs);
+        msg.crearMensaje(formasMenuService.update(forma), redirectAttrs);
         return "redirect:/formas";
     }
 
     @GetMapping("formas/eliminar/{id}")
     public String eliminar(@PathVariable("id") int id, RedirectAttributes redirectAttrs) {
-        msg.crearMensaje(formasMenuService.deleteFormasMenu(id), redirectAttrs);
+        msg.crearMensaje(formasMenuService.delete(id), redirectAttrs);
         return "redirect:/formas";
     }
 

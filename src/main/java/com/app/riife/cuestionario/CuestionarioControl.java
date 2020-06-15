@@ -51,13 +51,13 @@ public class CuestionarioControl {
     @PostMapping(value = "cuestionarios/add")
     public String agregar(Cuestionario cu, RedirectAttributes redirectAttrs) {
         cu.getUsuarioRegistro().setNoUsuario(session.noUsuarioActivo());
-        msg.crearMensaje(cuestionarioService.addCuestionario(cu), redirectAttrs);
+        msg.crearMensaje(cuestionarioService.add(cu), redirectAttrs);
         return "redirect:/cuestionarios";
     }
 
     @GetMapping(value = "cuestionarios/editar/{id}")
     public String editar(@PathVariable("id") int id, Model model) {
-        cuestionario = cuestionarioService.getCuestionario(id);
+        cuestionario = cuestionarioService.get(id);
         String validUrl = Objects.isNull(cuestionario) ? 
                 "redirect:/cuestionarios" : "cuestionarios/editar";
         model.addAttribute("cuestionario", cuestionario);
@@ -69,14 +69,14 @@ public class CuestionarioControl {
     public String editar(@PathVariable("id") int id, Cuestionario cu, RedirectAttributes redirectAttrs) {
         cu.getUsuarioModif().setNoUsuario(session.noUsuarioActivo());
         cu.setIdCuestionario(id);
-        msg.crearMensaje(cuestionarioService.editCuestionario(cu), redirectAttrs);
+        msg.crearMensaje(cuestionarioService.update(cu), redirectAttrs);
         return "redirect:/cuestionarios";
     }
 
     @GetMapping("cuestionarios/eliminar/{id}/{idestatus}")
     public String eliminar(@PathVariable("id") int id, @PathVariable("idestatus") int idestatus, 
             RedirectAttributes redirectAttrs) {
-        msg.crearMensaje(cuestionarioService.deleteCuestionario(id, idestatus), redirectAttrs);
+        msg.crearMensaje(cuestionarioService.delete(id, idestatus), redirectAttrs);
         return "redirect:/cuestionarios";
     }
 

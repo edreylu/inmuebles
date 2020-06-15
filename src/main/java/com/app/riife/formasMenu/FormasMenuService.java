@@ -18,19 +18,19 @@ public interface FormasMenuService {
 
     List<FormasMenu> listAllFathers();
 
-    Mensaje addFormasMenu(FormasMenu formasMenu);
+    Mensaje add(FormasMenu formasMenu);
 
-    FormasMenu getFormasMenu(int id);
+    FormasMenu get(int id);
 
-    Mensaje editFormasMenu(FormasMenu formasMenu);
+    Mensaje update(FormasMenu formasMenu);
 
-    Mensaje deleteFormasMenu(int id);
+    Mensaje delete(int id);
 
     List<String> getPermissionToPages(int noUsuario);
 
     List<FormasMenu> getMenu(int noUsuario);
 
-    boolean existsHijos(int clave);
+    boolean existsChild(int clave);
 
     boolean existsRolFormas(int noForma);
 }

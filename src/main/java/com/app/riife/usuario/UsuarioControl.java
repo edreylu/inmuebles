@@ -58,14 +58,14 @@ public class UsuarioControl {
 
     @PostMapping(value = "usuarios/add")
     public String agregar(Usuario us, RedirectAttributes redirectAttrs) {
-        msg.crearMensaje(usuarioService.addUsuario(us), redirectAttrs);
+        msg.crearMensaje(usuarioService.add(us), redirectAttrs);
         
         return "redirect:/usuarios";
     }
 
     @GetMapping(value = "usuarios/editar/{id}")
     public String editar(@PathVariable("id") int id, Model model) {
-        usuario = usuarioService.getUsuario(id);
+        usuario = usuarioService.get(id);
         String validUrl = "redirect:/usuarios";
         if(Objects.nonNull(usuario)){
         model.addAttribute("usuario", usuario);
@@ -79,7 +79,7 @@ public class UsuarioControl {
     @PostMapping(value = "usuarios/update/{id}")
     public String editar(@PathVariable("id") int id, Usuario us, RedirectAttributes redirectAttrs) {
         us.setNoUsuario(id);
-        msg.crearMensaje(usuarioService.editUsuario(us), redirectAttrs);
+        msg.crearMensaje(usuarioService.update(us), redirectAttrs);
         
         return "redirect:/usuarios";
     }
@@ -87,14 +87,14 @@ public class UsuarioControl {
     @GetMapping("usuarios/eliminar/{id}/{idestatus}")
     public String eliminar(@PathVariable("id") int id, @PathVariable("idestatus") int idestatus, 
             RedirectAttributes redirectAttrs) {
-        msg.crearMensaje(usuarioService.deleteUsuario(id, idestatus), redirectAttrs);
+        msg.crearMensaje(usuarioService.delete(id, idestatus), redirectAttrs);
         
         return "redirect:/usuarios";
     }
 
     @GetMapping(value = "usuarios/updatePassword/{id}")
     public String modificarPasaporte(@PathVariable("id") int id, RedirectAttributes redirectAttrs) {
-        msg.crearMensaje(usuarioService.resetPasaporte(id), redirectAttrs);
+        msg.crearMensaje(usuarioService.resetPass(id), redirectAttrs);
         return "redirect:/usuarios";
     }
 }
