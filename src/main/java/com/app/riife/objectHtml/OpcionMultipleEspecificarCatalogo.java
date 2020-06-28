@@ -6,30 +6,37 @@
 package com.app.riife.objectHtml;
 
 import com.app.riife.kcatalogo.Kcatalogo;
+import com.app.riife.kcatalogo.KcatalogoService;
 import com.app.riife.pregunta.Pregunta;
 import com.app.riife.respuesta.Respuesta;
 import java.util.List;
 import java.util.Objects;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
  * @author Edward Reyes
  */
-public class OpcionMultipleEspecificarCatalogo implements ObjectHtml{
-    
-    private Pregunta pregunta;
-    private String fragmentoPregunta,checked, respuestaNormal, respuestaEspecifica, display, validaNumericos = "";
-    private int maxLenght = 0;
-    private StringBuilder part;
+public class OpcionMultipleEspecificarCatalogo implements ObjectHtml {
+
+    private final KcatalogoService kcatalogoService;
+
+    @Autowired
+    public OpcionMultipleEspecificarCatalogo(KcatalogoService kcatalogoService) {
+        this.kcatalogoService = kcatalogoService;
+    }
 
     @Override
-    public String create(List<Kcatalogo> catalogos, Respuesta respuesta, int noRespuesta) {
-        part = new StringBuilder();
-        pregunta = respuesta.getPregunta();
-        respuestaNormal = Objects.isNull(respuesta.getRespuesta()) ? "" : respuesta.getRespuesta();
-        respuestaEspecifica = Objects.isNull(respuesta.getRespuestaEspecifica()) ? ""
+    public String create(Respuesta respuesta) {
+        StringBuilder part = new StringBuilder();
+        Pregunta pregunta = respuesta.getPregunta();
+        List<Kcatalogo> catalogos = kcatalogoService.listCatalogoEncuesta(pregunta.getCatalogo());
+        String respuestaNormal = Objects.isNull(respuesta.getRespuesta()) ? "" : respuesta.getRespuesta();
+        String respuestaEspecifica = Objects.isNull(respuesta.getRespuestaEspecifica()) ? ""
                 : respuesta.getRespuestaEspecifica();
-         //condicionaes para valores de tipo de dato y maxlenght
+        int maxLenght = 0;
+        String validaNumericos = "";
+        //condicionaes para valores de tipo de dato y maxlenght
         if (Objects.nonNull(pregunta.getTipoDeDatoxCatalogo())) {
             validaNumericos = !pregunta.getTipoDeDatoxCatalogo()
                     .equalsIgnoreCase("VARCHAR2") ? "onkeypress='return validaNumericos(event)'" : "";
@@ -40,42 +47,58 @@ public class OpcionMultipleEspecificarCatalogo implements ObjectHtml{
         } else {
             maxLenght = 10;
         }
-        fragmentoPregunta = pregunta.getCabeceraPregunta()
+
+        String fragmentoPregunta = pregunta.getCabeceraPregunta()
                 + " <section class=\"row\">\n"
                 + "  <div class=\"col-md-8\">\n"
                 + "  <div class=\"form-group\">\n";
         part.append(fragmentoPregunta);
-        String[] elementosPipe = respuestaEspecifica.split("\\|",-1);
-        int contador=0;
+
+        String[] elementosPipe = respuestaEspecifica.split("\\|", -1);
+        int contador = 0;
+
         for (Kcatalogo catalogo : catalogos) {
-            checked = respuestaNormal.contains(catalogo.getDescripcion()) ? "checked" : "";
+            String checked = respuestaNormal.contains(catalogo.getDescripcion()) ? "checked" : "";
             respuestaEspecifica = elementosPipe[contador];
-            display = !respuestaEspecifica.equals("") ? "block" : "none";
+            String display = !respuestaEspecifica.equals("") ? "block" : "none";
+
             fragmentoPregunta = " <div class=\"input-group mb-3\" id=\"check\">\n"
-                    + "  <div class=\"input-group-prepend\">\n"
-                    + "    <div class=\"input-group-text\">\n"
-                    + "     <input type=\"checkbox\" onclick=\"getOmec(\'" + noRespuesta + "',"
-                    + "     '" + catalogo.getClaveCatalogo()+ "','" + catalogo.getDescripcion()+ "')\" "
-                    + "     value=\"" + catalogo.getDescripcion() + "\" "
-                    + "      name=\"respuestas[" + noRespuesta + "].respuesta\" "
-                    + "      aria-label=\"Checkbox for following text input\" " + checked + "> \n"
-                    + "     <div style=\"font: 12px Arial, Helvetica, sans-serif;\" >"
-                    + catalogo.getDescripcion() + ": *</div>\n"
-                    + "    </div>\n"
+                    + " <div class=\"input-group-prepend\">\n"
+                    + " <div class=\"input-group-text\">\n"
+                    + " <input type=\"checkbox\" "
+                    + " onclick=\"getOmec(\'"
+                    + respuesta.getNoRespuesta() + "',"
+                    + " '" + catalogo.getClaveCatalogo() + "','"
+                    + catalogo.getDescripcion() + "')\" "
+                    + " value=\"" + catalogo.getDescripcion() + "\" "
+                    + " name=\"respuestas[" + respuesta.getNoRespuesta() + "].respuesta\" "
+                    + " aria-label=\"Checkbox for following text input\" "
+                    + checked + "> \n"
+                    + " <div style=\"font: 12px Arial, Helvetica, sans-serif;\" >"
+                    + catalogo.getDescripcion() + ": </div>\n"
                     + " </div>\n"
-                    + " <input type=\"text\" id=\"respuestas[" + noRespuesta + "].respuestaEspecifica_"+catalogo.getClaveCatalogo()+"\" "
-                    + " name=\"respuestas[" + noRespuesta + "].respuestaEspecifica\" "
-                    + " class=\"form-control\" maxlength=\"" + maxLenght + "\" " + validaNumericos
-                    + " value=\"" + respuestaEspecifica + "\" style=\"display:" + display + "\" aria-label=\"Text input with checkbox\">\n"
+                    + " </div>\n"
+                    + " <input type=\"text\" "
+                    + " id=\"respuestas[" + respuesta.getNoRespuesta() + "].respuestaEspecifica_"
+                    + catalogo.getClaveCatalogo() + "\" "
+                    + " name=\"respuestas[" + respuesta.getNoRespuesta() + "].respuestaEspecifica\" "
+                    + " class=\"form-control\" "
+                    + " maxlength=\"" + maxLenght + "\" "
+                    + validaNumericos
+                    + " value=\"" + respuestaEspecifica + "\" "
+                    + " style=\"display:" + display + "\" "
+                    + " aria-label=\"Text input with checkbox\">\n"
                     + " </div>\n";
             part.append(fragmentoPregunta);
+
             contador++;
         }
-        fragmentoPregunta = "  </div>\n"
+        fragmentoPregunta = " </div>\n"
                 + " </div>\n"
                 + " </section></div></div><br/>";
         part.append(fragmentoPregunta);
+
         return part.toString();
     }
-    
+
 }

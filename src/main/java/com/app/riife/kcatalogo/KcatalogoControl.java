@@ -5,7 +5,6 @@
  */
 package com.app.riife.kcatalogo;
 
-import com.app.riife.inicio.SessionControl;
 import com.app.riife.cuestionario.Cuestionario;
 import com.app.riife.util.Mensaje;
 import com.app.riife.cuestionario.CuestionarioService;
@@ -26,8 +25,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class KcatalogoControl {
 
-    @Autowired
-    private SessionControl session;
     private final KcatalogoService kcatalogoService;
     private final CuestionarioService cuestionarioService;
     private List<Kcatalogo> catalogos;
@@ -45,7 +42,7 @@ public class KcatalogoControl {
     public String listar(Model model) {
         catalogos = kcatalogoService.listAll();
         model.addAttribute("lista", catalogos);
-        return session.url("kcatalogos/principal");
+        return "kcatalogos/principal";
     }
 
     @GetMapping("kcatalogos/agregar")
@@ -53,7 +50,7 @@ public class KcatalogoControl {
         cuestionarios = cuestionarioService.listAll();
         model.addAttribute("cuestionarios", cuestionarios);
         model.addAttribute(new Kcatalogo());
-        return session.url("kcatalogos/agregar");
+        return "kcatalogos/agregar";
     }
 
     @PostMapping(value = "kcatalogos/add")
@@ -72,7 +69,7 @@ public class KcatalogoControl {
         model.addAttribute("cuestionarios", cuestionarios);
         validUrl = "kcatalogos/editar";
         }
-        return session.url(validUrl);
+        return validUrl;
     }
 
     @PostMapping(value = "kcatalogos/update/{llave}")

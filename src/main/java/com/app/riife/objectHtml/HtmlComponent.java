@@ -6,11 +6,10 @@
 package com.app.riife.objectHtml;
 
 import com.app.riife.cicloEscolar.CicloEscolar;
+import com.app.riife.inicio.SessionComponent;
 import com.app.riife.inmueble.Inmueble;
-import com.app.riife.kcatalogo.Kcatalogo;
-import com.app.riife.kcatalogo.KcatalogoService;
 import com.app.riife.pregunta.Pregunta;
-import com.app.riife.inicio.SessionControl;
+import com.app.riife.kcatalogo.KcatalogoService;
 import com.app.riife.respuesta.Respuesta;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,27 +25,23 @@ import org.springframework.stereotype.Component;
 @Component
 public class HtmlComponent {
 
+    private final SessionComponent session;
+    private final KcatalogoService kcatalogoService;
+    private String capituloAnterior = "";
+    private String subCapituloAnterior = "";
+    int noCapitulo = 0;
+
     @Autowired
-    SessionControl session;
-    @Autowired
-    private KcatalogoService kcatalogoService;
-    @Autowired
-    private FormBodyComponent formBody;
-    private String fragmentoPregunta,
-            capituloAnterior = "",
-            subCapituloAnterior = "",
-            cabeceraPregunta,
-            catalogoPregunta;
-    private int noPregunta,
-            noCapitulo,
-            noRespuesta;
-    private StringBuilder part;
-    private List<Kcatalogo> catalogos;
+    public HtmlComponent(SessionComponent session, KcatalogoService kcatalogoService) {
+        this.session = session;
+        this.kcatalogoService = kcatalogoService;
+    }
     
+
     public List<String> getPreguntasHtml(List<Pregunta> preguntas, List<Respuesta> respuestas) {
-        noPregunta = 0;
-        noRespuesta = 0;
-        noCapitulo = 0;
+        String cabeceraPregunta;
+        int noPregunta = 0;
+        int noRespuesta = 0;
         List<String> listForms = new ArrayList<>();
         StringBuilder htmlPreguntas = new StringBuilder();
 
@@ -57,23 +52,24 @@ public class HtmlComponent {
                 Optional<Respuesta> respuestaOp = respuestas.stream()
                         .filter((res) -> res.getPregunta().getIdPregunta() == pregunta.getIdPregunta())
                         .findFirst();
-                
+
                 Respuesta respuesta = respuestaOp.orElse(new Respuesta());
                 respuesta.setPregunta(pregunta);
+                respuesta.setNoRespuesta(noRespuesta);
                 noPregunta++;
-                cabeceraPregunta=formBody.headerAndOther(respuesta,noRespuesta);
+                cabeceraPregunta = FormBody.headerAndOther(respuesta);
                 pregunta.setCabeceraPregunta(cabeceraPregunta);
                 respuesta.setPregunta(pregunta);
                 htmlPreguntas.append(capitulo(pregunta));
                 htmlPreguntas.append(subcapitulo(pregunta));
-                htmlPreguntas.append(bodyPregunta(respuesta, noRespuesta));
+                htmlPreguntas.append(bodyPregunta(respuesta));
                 capituloAnterior = pregunta.getCapitulo().getCapitulo();
                 subCapituloAnterior = Objects.isNull(pregunta.getSubCapitulo().getSubCapitulo())
                         ? "" : pregunta.getSubCapitulo().getSubCapitulo();
                 //este bloque coloca el boton siguiente que finaliza el capitulo y abre el siguiente.
                 if (!Objects.equals(capituloAnterior, preguntas.get(noPregunta < preguntas.size()
                         ? noPregunta : noRespuesta).getCapitulo().getCapitulo())) {
-                    htmlPreguntas.append(FormBodyComponent.siguiente());
+                    htmlPreguntas.append(FormBody.siguiente());
                     listForms.add(htmlPreguntas.toString());
                     htmlPreguntas = new StringBuilder();
                 }
@@ -81,76 +77,74 @@ public class HtmlComponent {
             }
 
             //parte final de la encuesta
-            htmlPreguntas.append(FormBodyComponent.finalizarEncuesta());
+            htmlPreguntas.append(FormBody.finalizarEncuesta());
             listForms.add(htmlPreguntas.toString());
         }
         //no hay cuestionario
         if (listForms.size() < 1) {
-            listForms.add(FormBodyComponent.sinEncuesta());
+            listForms.add(FormBody.sinEncuesta());
         }
         return listForms;
     }
-    
-    private String bodyPregunta(Respuesta respuesta, int noRespuesta) {
-        part = new StringBuilder();
-        Pregunta pregunta = respuesta.getPregunta();
-        catalogoPregunta = Objects.isNull(pregunta.getCatalogo()) ? "" : pregunta.getCatalogo();
-        String opcionMultiple = pregunta.getOpcionMultiple();
-        String especificarxcatalogo = pregunta.getEspecificarxCatalogo();
-        String especificarOtro = pregunta.getOtroEspecificar();
-        String enCatalogo = pregunta.getEnCatalogo();
-        
-        if (Objects.equals(enCatalogo, "S"))
-            catalogos = kcatalogoService.listCatalogoEncuesta(catalogoPregunta);
-        //opciones multiple
-        ObjectHtml objectHtml = null;
-        if (Objects.equals(opcionMultiple, "S")) {
 
-            if (Objects.equals(especificarxcatalogo, "N") && Objects.equals(especificarOtro, "N"))
-                objectHtml = new OpcionMultipleSinEspecificar();
-            
-            else if (Objects.equals(especificarxcatalogo, "S") && Objects.equals(especificarOtro, "N"))
-                objectHtml = new OpcionMultipleEspecificarCatalogo();
-            
-            if (Objects.equals(especificarxcatalogo, "N") && Objects.equals(especificarOtro, "S"))
-                objectHtml = new OpcionMultipleEspecificarOtro();
-            
+    private String bodyPregunta(Respuesta respuesta) {
+        Pregunta pregunta = respuesta.getPregunta();
+        boolean isOpcionMultiple = Objects.equals(pregunta.getOpcionMultiple(), "S");
+        boolean isEspecificarxcatalogo = Objects.equals(pregunta.getEspecificarxCatalogo(), "S");
+        boolean isEspecificarOtro = Objects.equals(pregunta.getOtroEspecificar(), "S");
+        boolean isEnCatalogo = Objects.equals(pregunta.getEnCatalogo(), "S");
+        //Sin opcion multiple sin catalogo (abierto) (default)
+        ObjectHtml objectHtml = new OpcionTextoLibre();
+
+        //opciones multiple
+        if (isOpcionMultiple) {
+
+            if (!isEspecificarxcatalogo && !isEspecificarOtro) {
+                objectHtml = new OpcionMultipleSinEspecificar(kcatalogoService);
+            } 
+            else if (isEspecificarxcatalogo && !isEspecificarOtro) {
+                objectHtml = new OpcionMultipleEspecificarCatalogo(kcatalogoService);
+            }
+
+            if (!isEspecificarxcatalogo && isEspecificarOtro) {
+                objectHtml = new OpcionMultipleEspecificarOtro(kcatalogoService);
+            }
 
         } //No opcion multiple
         else {
 
             //No opcion multiple con catalogo
-            if (Objects.equals(enCatalogo, "S")) {
+            if (isEnCatalogo) {
 
-                if (Objects.equals(especificarxcatalogo, "N") && Objects.equals(especificarOtro, "S"))
-                    objectHtml = new ListaDesplegableEspecificarOtro();
-                
-                else if (Objects.equals(especificarxcatalogo, "N") && Objects.equals(especificarOtro, "N"))
-                    objectHtml = new ListaDesplegableSinEspecificar();
-                
+                if (!isEspecificarxcatalogo && isEspecificarOtro) {
+                    objectHtml = new ListaDesplegableEspecificarOtro(kcatalogoService);
+                } else if (!isEspecificarxcatalogo && !isEspecificarOtro) {
+                    objectHtml = new ListaDesplegableSinEspecificar(kcatalogoService);
+                }
 
-            } //Sin opcion multiple sin catalogo (abierto)
-            else objectHtml = new OpcionTextoLibre();
+            } 
         }
-        part.append(objectHtml.create(catalogos, respuesta, noRespuesta));
-        return part.toString();
+        String object = objectHtml.create(respuesta);
+        return object;
     }
 
     private String capitulo(Pregunta pregunta) {
-        part = new StringBuilder();
-        if (!Objects.equals(capituloAnterior, pregunta.getCapitulo().getCapitulo())) {
-           noCapitulo++;
-           fragmentoPregunta = FormBodyComponent.capitulo(pregunta, noCapitulo);
-        }else{ fragmentoPregunta="";}
-        part.append(fragmentoPregunta);
-        return part.toString();
+        String fragmentoPregunta = "";
+        boolean isNewCapitulo =!Objects.equals(capituloAnterior, pregunta.getCapitulo().getCapitulo());
+        if (isNewCapitulo) {
+            noCapitulo++;
+            fragmentoPregunta = FormBody.capitulo(pregunta, noCapitulo);
+        }
+        return fragmentoPregunta;
     }
 
     private String subcapitulo(Pregunta pregunta) {
-    String subCapitulo = pregunta.getSubCapitulo().getSubCapitulo();
-    if (!Objects.equals(subCapituloAnterior, subCapitulo) && Objects.nonNull(subCapitulo)) {
-           fragmentoPregunta =  FormBodyComponent.subCapitulo(subCapitulo);
-        }else{ fragmentoPregunta="";}
+        String fragmentoPregunta = "";
+        String subCapitulo = pregunta.getSubCapitulo().getSubCapitulo();
+        boolean isNewSubCapitulo = !Objects.equals(subCapituloAnterior, subCapitulo) && Objects.nonNull(subCapitulo);
+        if (isNewSubCapitulo) {
+            fragmentoPregunta = FormBody.subCapitulo(subCapitulo);
+        }
         return fragmentoPregunta;
     }
 
@@ -158,11 +152,11 @@ public class HtmlComponent {
 
         Objects.requireNonNull(res);
         if (res.getPregunta().getOpcionMultiple().equals("S")) {
-            if(Objects.nonNull(res.getRespuesta())){
-            res.setRespuesta(replaceCaracter(res.getRespuesta(), 1));
+            if (Objects.nonNull(res.getRespuesta())) {
+                res.setRespuesta(replaceCaracter(res.getRespuesta(), 1));
             }
-            if(Objects.nonNull(res.getRespuestaEspecifica())){
-            res.setRespuestaEspecifica(replaceCaracter(res.getRespuestaEspecifica(), 1));
+            if (Objects.nonNull(res.getRespuestaEspecifica())) {
+                res.setRespuestaEspecifica(replaceCaracter(res.getRespuestaEspecifica(), 1));
             }
         }
         res.setRespuesta(Objects.nonNull(res.getRespuesta()) ? res.getRespuesta().toUpperCase() : res.getRespuesta());

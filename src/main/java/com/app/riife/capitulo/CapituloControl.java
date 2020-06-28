@@ -7,8 +7,8 @@ package com.app.riife.capitulo;
 
 import com.app.riife.cuestionario.Cuestionario;
 import com.app.riife.util.Mensaje;
-import com.app.riife.inicio.SessionControl;
 import com.app.riife.cuestionario.CuestionarioService;
+import com.app.riife.inicio.SessionComponent;
 import java.util.List;
 import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class CapituloControl {
     
-    @Autowired
-    private SessionControl session;
+    private final SessionComponent session;
     private final CapituloService capituloService;
     private final CuestionarioService cuestionarioService;
     private List<Capitulo> capitulos;
@@ -36,16 +35,18 @@ public class CapituloControl {
     private final Mensaje msg = new Mensaje();
     
     @Autowired
-    public CapituloControl(CapituloService capituloService, CuestionarioService cuestionarioService) {
+    public CapituloControl(CapituloService capituloService, CuestionarioService cuestionarioService, 
+            SessionComponent session) {
         this.capituloService = capituloService;
         this.cuestionarioService = cuestionarioService;
+        this.session = session;
     }
     
     @GetMapping("capitulos")
     public String listar(Model model) {
         capitulos = capituloService.listAll();
         model.addAttribute("lista", capitulos);
-        return session.url("capitulos/principal");
+        return "capitulos/principal";
     }
 
     @GetMapping("capitulos/agregar")
@@ -53,7 +54,7 @@ public class CapituloControl {
         cuestionarios = cuestionarioService.listAll();
         model.addAttribute("cuestionarios", cuestionarios);
         model.addAttribute(new Capitulo());
-        return session.url("capitulos/agregar");
+        return "capitulos/agregar";
     }
 
     @PostMapping(value = "capitulos/add")
@@ -73,7 +74,7 @@ public class CapituloControl {
         model.addAttribute("cuestionarios", cuestionarios);
         validUrl = "capitulos/editar";
         }
-        return session.url(validUrl);
+        return validUrl;
     }
 
     @PostMapping(value = "capitulos/update/{id}")

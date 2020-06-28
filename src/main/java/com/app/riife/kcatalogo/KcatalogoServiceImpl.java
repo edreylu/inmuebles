@@ -7,6 +7,7 @@ package com.app.riife.kcatalogo;
 
 import com.app.riife.util.Mensaje;
 import java.util.List;
+import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -76,7 +77,8 @@ public class KcatalogoServiceImpl implements KcatalogoService{
 
     @Override
     public List<Kcatalogo> listCatalogoEncuesta(String catalogo) {
-        return kcatalogoDAO.getRecordsEncuesta(catalogo);
+        String catalogoPregunta = Objects.isNull(catalogo) ? "" : catalogo;
+        return kcatalogoDAO.getRecordsEncuesta(catalogoPregunta);
     }
 
     @Override

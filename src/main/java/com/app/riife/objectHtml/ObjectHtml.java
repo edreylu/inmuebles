@@ -5,9 +5,7 @@
  */
 package com.app.riife.objectHtml;
 
-import com.app.riife.kcatalogo.Kcatalogo;
 import com.app.riife.respuesta.Respuesta;
-import java.util.List;
 
 /**
  *
@@ -15,6 +13,6 @@ import java.util.List;
  */
 public interface ObjectHtml {
     
-    String create(List<Kcatalogo> catalogos, Respuesta respuesta, int noRespuesta);
+    String create(Respuesta respuesta);
     
 }

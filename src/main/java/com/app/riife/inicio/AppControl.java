@@ -3,6 +3,10 @@ package com.app.riife.inicio;
 import com.app.riife.formasMenu.FormasMenu;
 import com.app.riife.util.Mensaje;
 import com.app.riife.formasMenu.FormasMenuService;
+import static com.app.riife.inicio.NavBarUtil.BEGIN_NAV;
+import static com.app.riife.inicio.NavBarUtil.CHILD_LINKS;
+import static com.app.riife.inicio.NavBarUtil.FATHER;
+import static com.app.riife.inicio.NavBarUtil.FINAL_FATHER;
 import com.app.riife.usuario.Usuario;
 import com.app.riife.usuario.UsuarioService;
 import java.sql.SQLException;
@@ -21,13 +25,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class AppControl implements NavBarUtil{
 
-    @Autowired
-    private HttpSession session;
+    private final SessionComponent session;
     private final UsuarioService usuarioService;
     private final FormasMenuService formasMenuService;
-    private List<String> pantallas;
     private Usuario usuario;
-    private List<FormasMenu> formas;
     Mensaje msg = new Mensaje();
     @Value("${google.recaptcha.sitio}")
     private String key;
@@ -35,7 +36,8 @@ public class AppControl implements NavBarUtil{
     private String contextPath;
     
     @Autowired
-    public AppControl(UsuarioService usuarioService, FormasMenuService formasMenuService) {
+    public AppControl(SessionComponent session, UsuarioService usuarioService, FormasMenuService formasMenuService) {
+        this.session = session;
         this.usuarioService = usuarioService;
         this.formasMenuService = formasMenuService;
     }
@@ -49,7 +51,7 @@ public class AppControl implements NavBarUtil{
     @GetMapping("login")
     public String index(Model model) {
         model.addAttribute("key", key);
-        return session.getAttribute("usuario") != null ? "redirect:/menu" : "/login";
+        return "/login";
     }
 
     @PostMapping(value = "loginProcess")
@@ -58,9 +60,9 @@ public class AppControl implements NavBarUtil{
         if (!Objects.equals(login.getUsuario(), login.getContraseña())) {
             usuario = usuarioService.exists(login);
             if (usuario.getNoUsuario() > 0) {
-                pantallas = formasMenuService.getPermissionToPages(usuario.getNoUsuario());
-                formas = formasMenuService.getMenu(usuario.getNoUsuario());
-                String html = menuHtml();
+                List<String> pantallas = formasMenuService.getPermissionToPages(usuario.getNoUsuario());
+                List<FormasMenu> formas = formasMenuService.getMenu(usuario.getNoUsuario());
+                String html = menuHtml(formas);
                 session.setAttribute("usuario", usuario);
                 session.setAttribute("pantallas", pantallas);
                 session.setAttribute("html", html);
@@ -77,17 +79,15 @@ public class AppControl implements NavBarUtil{
     }
 
     @GetMapping("menu")
-    public String menu() {
-        return Objects.nonNull(session.getAttribute("usuario")) ? "/menu" : "redirect:/login";
+    public String menu(Model model) {
+        Usuario usuarioMenu = session.getUsuario();
+        model.addAttribute("usuario", usuarioMenu);
+        return "/menu";
     }
 
     @GetMapping("/logout")
     public String logout() {
-        System.out.println("logout()");
-        session.removeAttribute("usuario");
-        session.removeAttribute("pantallas");
-        session.removeAttribute("html");
-        session.invalidate();
+        session.closeSession();
         return "redirect:/";
     }
 
@@ -98,7 +98,7 @@ public class AppControl implements NavBarUtil{
         return "redirect:/login";
     }
 
-    public String menuHtml() {
+    public String menuHtml(List<FormasMenu> formas) {
         
         StringBuilder html = new StringBuilder();
         int contador = 1, sizeList = formas.size();

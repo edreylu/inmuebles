@@ -5,7 +5,7 @@
  */
 package com.app.riife.formasMenu;
 
-import com.app.riife.inicio.SessionControl;
+import com.app.riife.inicio.SessionComponent;
 import com.app.riife.util.Mensaje;
 import java.util.List;
 import java.util.Objects;
@@ -24,8 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class FormasMenuControl {
 
-    @Autowired
-    private SessionControl session;
+    private final SessionComponent session;
     private final FormasMenuService formasMenuService;
     private List<FormasMenu> formas;
     private List<FormasMenu> formasPadre;
@@ -33,7 +32,8 @@ public class FormasMenuControl {
     private final Mensaje msg = new Mensaje();
     
     @Autowired
-    public FormasMenuControl(FormasMenuService formasMenuService) {
+    public FormasMenuControl(SessionComponent session, FormasMenuService formasMenuService) {
+        this.session = session;
         this.formasMenuService = formasMenuService;
     }
 
@@ -41,15 +41,15 @@ public class FormasMenuControl {
     public String listar(Model model) {
         formas = formasMenuService.listAll();
         model.addAttribute("lista", formas);
-        return session.url("formas/principal");
+        return "formas/principal";
     }
-
+    
     @GetMapping("formas/agregar")
     public String agregar(Model model) {
         formasPadre = formasMenuService.listAllFathers();
         model.addAttribute("formasp", formasPadre);
         model.addAttribute(new FormasMenu());
-        return session.url("formas/agregar");
+        return "formas/agregar";
     }
 
     @PostMapping(value = "formas/add")
@@ -68,7 +68,7 @@ public class FormasMenuControl {
         model.addAttribute("forma", forma);
         validUrl = "formas/editar";
         }
-        return session.url(validUrl);
+        return validUrl;
     }
 
     @PostMapping(value = "formas/update/{id}")

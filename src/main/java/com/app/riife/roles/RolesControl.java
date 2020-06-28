@@ -5,8 +5,8 @@
  */
 package com.app.riife.roles;
 
-import com.app.riife.inicio.SessionControl;
 import com.app.riife.formasMenu.FormasMenu;
+import com.app.riife.inicio.SessionComponent;
 import com.app.riife.util.Mensaje;
 import java.util.List;
 import java.util.Objects;
@@ -26,8 +26,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class RolesControl {
 
-    @Autowired
-    private SessionControl session;
     private final RolesService rolesService;
     private List<Roles> roles;
     private List<FormasMenu> formas;
@@ -43,13 +41,13 @@ public class RolesControl {
     public String listar(Model model) {
         roles = rolesService.listAll();
         model.addAttribute("lista", roles);
-        return session.url("roles/principal");
+        return "roles/principal";
     }
 
     @GetMapping("roles/agregar")
     public String agregar(Model model) {
         model.addAttribute(new Roles());
-        return session.url("roles/agregar");
+        return "roles/agregar";
     }
 
     @PostMapping(value = "roles/add")
@@ -65,7 +63,7 @@ public class RolesControl {
         rol = rolesService.get(id);
         String validUrl = Objects.isNull(rol) ? "redirect:/roles" : "roles/editar";
         model.addAttribute("rol", rol);
-        return session.url(validUrl);
+        return validUrl;
     }
 
     @PostMapping(value = "roles/update/{id}")
@@ -95,7 +93,7 @@ public class RolesControl {
         model.addAttribute("rolFormas", rolFormas);
         validUrl = "roles/asignar";
         }
-        return session.url(validUrl);
+        return validUrl;
     }
 
     @PostMapping(value = "roles/updateAgregarFormas/{id}")

@@ -5,7 +5,6 @@
  */
 package com.app.riife.subCapitulo;
 
-import com.app.riife.inicio.SessionControl;
 import com.app.riife.cuestionario.Cuestionario;
 import com.app.riife.util.Mensaje;
 import com.app.riife.cuestionario.CuestionarioService;
@@ -26,8 +25,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class SubCapituloControl {
 
-    @Autowired
-    private SessionControl session;
     private final SubCapituloService subCapituloService;
     private final CuestionarioService cuestionarioService;
     private List<SubCapitulo> subCapitulos;
@@ -45,7 +42,7 @@ public class SubCapituloControl {
     public String listar(Model model) {
         subCapitulos = subCapituloService.listAll();
         model.addAttribute("lista", subCapitulos);
-        return session.url("subcapitulos/principal");
+        return "subcapitulos/principal";
     }
 
     @GetMapping("subcapitulos/agregar")
@@ -53,7 +50,7 @@ public class SubCapituloControl {
         cuestionarios = cuestionarioService.listAll();
         model.addAttribute("cuestionarios", cuestionarios);
         model.addAttribute(new SubCapitulo());
-        return session.url("subcapitulos/agregar");
+        return "subcapitulos/agregar";
     }
 
     @PostMapping(value = "subcapitulos/add")
@@ -73,7 +70,7 @@ public class SubCapituloControl {
         model.addAttribute("cuestionarios", cuestionarios);
         validUrl="subcapitulos/editar";
         }
-        return session.url(validUrl);
+        return validUrl;
     }
 
     @PostMapping(value = "subcapitulos/update/{id}")

@@ -5,7 +5,7 @@
  */
 package com.app.riife.cuestionario;
 
-import com.app.riife.inicio.SessionControl;
+import com.app.riife.inicio.SessionComponent;
 import com.app.riife.util.Mensaje;
 import java.util.List;
 import java.util.Objects;
@@ -24,14 +24,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class CuestionarioControl {
 
-    @Autowired
-    private SessionControl session;
+    private final SessionComponent session;
     private final CuestionarioService cuestionarioService;
     private List<Cuestionario> cuestionarios;
     private Cuestionario cuestionario;
     private final Mensaje msg = new Mensaje();
+    
     @Autowired
-    public CuestionarioControl(CuestionarioService cuestionarioService) {
+    public CuestionarioControl(SessionComponent session, CuestionarioService cuestionarioService) {
+        this.session = session;
         this.cuestionarioService = cuestionarioService;
     }
     
@@ -39,13 +40,13 @@ public class CuestionarioControl {
     public String listar(Model model) {
         cuestionarios = cuestionarioService.listAll();
         model.addAttribute("lista", cuestionarios);
-        return session.url("cuestionarios/principal");
+        return "cuestionarios/principal";
     }
 
     @GetMapping("cuestionarios/agregar")
     public String agregar(Model model) {
         model.addAttribute(new Cuestionario());
-        return session.url("cuestionarios/agregar");
+        return "cuestionarios/agregar";
     }
 
     @PostMapping(value = "cuestionarios/add")
@@ -61,7 +62,7 @@ public class CuestionarioControl {
         String validUrl = Objects.isNull(cuestionario) ? 
                 "redirect:/cuestionarios" : "cuestionarios/editar";
         model.addAttribute("cuestionario", cuestionario);
-        return session.url(validUrl);
+        return validUrl;
         
     }
 

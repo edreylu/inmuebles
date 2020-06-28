@@ -7,9 +7,6 @@ package com.app.riife.pregunta;
 
 import com.app.riife.capitulo.Capitulo;
 import com.app.riife.capitulo.CapituloService;
-import com.app.riife.cuestionario.Cuestionario;
-import com.app.riife.cuestionario.CuestionarioService;
-import com.app.riife.inicio.SessionControl;
 import com.app.riife.kcatalogo.KcatalogoService;
 import com.app.riife.subCapitulo.SubCapitulo;
 import com.app.riife.subCapitulo.SubCapituloService;

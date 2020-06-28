@@ -5,7 +5,6 @@
  */
 package com.app.riife.usuario;
 
-import com.app.riife.inicio.SessionControl;
 import com.app.riife.util.Mensaje;
 import com.app.riife.roles.Roles;
 import com.app.riife.roles.RolesService;
@@ -26,8 +25,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class UsuarioControl {
 
-    @Autowired
-    private SessionControl session;
     private final UsuarioService usuarioService;
     private final RolesService rolesService;
     private List<Usuario> usuarios;
@@ -41,11 +38,11 @@ public class UsuarioControl {
         this.rolesService = rolesService;
     }
 
-    @GetMapping("usuarios")
+    @GetMapping("/usuarios")
     public String listar(Model model) {
         usuarios = usuarioService.listAll();
         model.addAttribute("lista", usuarios);
-        return session.url("usuarios/principal");
+        return "usuarios/principal";
     }
 
     @GetMapping("usuarios/agregar")
@@ -53,7 +50,7 @@ public class UsuarioControl {
         model.addAttribute(new Usuario());
         roles = rolesService.listAll();
         model.addAttribute("roles", roles);
-        return session.url("usuarios/agregar");
+        return "usuarios/agregar";
     }
 
     @PostMapping(value = "usuarios/add")
@@ -73,7 +70,7 @@ public class UsuarioControl {
         model.addAttribute("roles", roles);
         validUrl = "usuarios/editar";
         }
-        return session.url(validUrl);
+        return validUrl;
     }
 
     @PostMapping(value = "usuarios/update/{id}")

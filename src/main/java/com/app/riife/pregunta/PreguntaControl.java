@@ -10,8 +10,8 @@ import com.app.riife.cuestionario.Cuestionario;
 import com.app.riife.util.Mensaje;
 import com.app.riife.subCapitulo.SubCapitulo;
 import com.app.riife.capitulo.CapituloService;
-import com.app.riife.inicio.SessionControl;
 import com.app.riife.cuestionario.CuestionarioService;
+import com.app.riife.inicio.SessionComponent;
 import com.app.riife.kcatalogo.KcatalogoService;
 import com.app.riife.subCapitulo.SubCapituloService;
 import com.app.riife.usuario.Usuario;
@@ -32,8 +32,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class PreguntaControl {
 
-    @Autowired
-    private SessionControl session;
+    private final SessionComponent session;
     private final PreguntaService preguntaService;
     private final CuestionarioService cuestionarioService;
     private final CapituloService capituloService;
@@ -48,8 +47,10 @@ public class PreguntaControl {
     private final Mensaje msg = new Mensaje();
 
     @Autowired
-    public PreguntaControl(PreguntaService preguntaService, CuestionarioService cuestionarioService, 
-            CapituloService capituloService, SubCapituloService subCapituloService, KcatalogoService kcatalogoService) {
+    public PreguntaControl(SessionComponent session, PreguntaService preguntaService, 
+            CuestionarioService cuestionarioService, CapituloService capituloService, 
+            SubCapituloService subCapituloService, KcatalogoService kcatalogoService) {
+        this.session = session;
         this.preguntaService = preguntaService;
         this.cuestionarioService = cuestionarioService;
         this.capituloService = capituloService;
@@ -62,7 +63,7 @@ public class PreguntaControl {
     public String listar(Model model) {
         preguntas = preguntaService.listAll();
         model.addAttribute("lista", preguntas);
-        return session.url("preguntas/principal");
+        return "preguntas/principal";
     }
 
     @GetMapping("preguntas/agregar")
@@ -70,7 +71,7 @@ public class PreguntaControl {
         cuestionarios = cuestionarioService.listAll();
         model.addAttribute("cuestionarios", cuestionarios);
         model.addAttribute(new Pregunta());
-        return session.url("preguntas/agregar");
+        return "preguntas/agregar";
     }
 
     @PostMapping(value = "preguntas/add")
@@ -101,7 +102,7 @@ public class PreguntaControl {
         model.addAttribute("pregunta", pregunta);
         validUrl = "preguntas/editar";
         }
-        return session.url(validUrl);
+        return validUrl;
     }
 
     @PostMapping(value = "preguntas/update/{id}")

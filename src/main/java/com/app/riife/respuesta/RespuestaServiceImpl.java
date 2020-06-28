@@ -9,7 +9,7 @@ import com.app.riife.cuestionario.CuestionarioDAO;
 import com.app.riife.cuestionario.Cuestionario;
 import com.app.riife.objectHtml.HtmlComponent;
 import com.app.riife.pregunta.Pregunta;
-import com.app.riife.pregunta.PreguntaService;
+import com.app.riife.pregunta.PreguntaDAO;
 import com.app.riife.util.Procedure;
 import java.util.List;
 import java.util.Objects;
@@ -27,15 +27,15 @@ public class RespuestaServiceImpl implements RespuestaService{
     private final HtmlComponent htmlComponent;
     private final RespuestaDAO respuestaDAO;
     private final CuestionarioDAO cuestionarioDAO;
-    private final PreguntaService preguntaService;
+    private final PreguntaDAO preguntaDAO;
     private List<Respuesta> respuestasToSend;
 
     @Autowired
     public RespuestaServiceImpl(RespuestaDAO respuestaDAO, CuestionarioDAO cuestionarioDAO, 
-            PreguntaService preguntaService, HtmlComponent htmlComponent) {
+            PreguntaDAO preguntaDAO, HtmlComponent htmlComponent) {
         this.respuestaDAO = respuestaDAO;
         this.cuestionarioDAO = cuestionarioDAO;
-        this.preguntaService = preguntaService;
+        this.preguntaDAO = preguntaDAO;
         this.htmlComponent = htmlComponent;
     }
     
@@ -69,7 +69,7 @@ public class RespuestaServiceImpl implements RespuestaService{
 
     @Override
     public List<String> getForms(int idCuestionario, int noUsuario) {
-        List<Pregunta> preguntas = preguntaService.listByIdCuestionario(idCuestionario);
+        List<Pregunta> preguntas = preguntaDAO.getRecordsByIdCuestionario(idCuestionario);
         List<Respuesta> respuestas = respuestaDAO.getRecordsRespuestas(idCuestionario, noUsuario);
         Objects.requireNonNull(preguntas);
         List<String> listaForms = htmlComponent.getPreguntasHtml(preguntas, respuestas);

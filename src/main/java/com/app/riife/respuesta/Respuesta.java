@@ -48,6 +48,7 @@ public class Respuesta {
     private Usuario usuarioRegistro = new Usuario();
     private Usuario usuarioModif = new Usuario();
     private int operacion;
+    private int noRespuesta;
     
     public Respuesta(Respuesta respuesta) {
         this.cuestionario = respuesta.getCuestionario();

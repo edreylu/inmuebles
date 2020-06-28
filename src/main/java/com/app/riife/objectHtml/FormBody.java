@@ -8,50 +8,31 @@ package com.app.riife.objectHtml;
 import com.app.riife.pregunta.Pregunta;
 import com.app.riife.respuesta.Respuesta;
 import java.util.Objects;
-import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Edward Reyes
  */
-@Component
-public class FormBodyComponent {
-    
-    private String observaciones,
-            cabeceraPregunta,
-            catalogoPregunta,
-            claveCatalogo;
-    private Pregunta pregunta;
-    private int idRespuesta = 0,
-            idInmueble = 0,
-            idCicloEscolar = 0,
-            noUsuario = 0,
-            Operacion = 0,
-            idRevision = 0,
-            noPregunta;
-    
-    private void initialize(Respuesta respuesta){
-        
-        idRespuesta = respuesta.getIdRespuesta();
-        idInmueble = respuesta.getInmueble().getIdInmueble();
-        idCicloEscolar = respuesta.getCicloEscolar().getIdCicloEscolar();
-        noUsuario = respuesta.getUsuarioRegistro().getNoUsuario();
-        Operacion = respuesta.getIdRespuesta() != 0 ? 3 : 1;
-        idRevision = respuesta.getIdRevision();
-        observaciones = Objects.isNull(respuesta.getObservaciones()) ? ""
+public class FormBody {
+
+    public static String headerAndOther(Respuesta respuesta) {
+        int idRespuesta = respuesta.getIdRespuesta();
+        int idInmueble = respuesta.getInmueble().getIdInmueble();
+        int idCicloEscolar = respuesta.getCicloEscolar().getIdCicloEscolar();
+        int noUsuario = respuesta.getUsuarioRegistro().getNoUsuario();
+        int Operacion = respuesta.getIdRespuesta() != 0 ? 3 : 1;
+        int idRevision = respuesta.getIdRevision();
+        String observaciones = Objects.isNull(respuesta.getObservaciones()) ? ""
                 : respuesta.getObservaciones();
-    }
-    
-    public String headerAndOther(Respuesta respuesta, int noRespuesta) {
-        initialize(respuesta);
-        pregunta = respuesta.getPregunta();
-        catalogoPregunta = Objects.isNull(pregunta.getCatalogo()) ? "" : pregunta.getCatalogo();
-        claveCatalogo = Objects.isNull(pregunta.getCatalogo()) ? ""
+        int noRespuesta = respuesta.getNoRespuesta();
+        Pregunta pregunta = respuesta.getPregunta();
+        String catalogoPregunta = Objects.isNull(pregunta.getCatalogo()) ? "" : pregunta.getCatalogo();
+        String claveCatalogo = Objects.isNull(pregunta.getCatalogo()) ? ""
                 : pregunta.getCuestionario().getIdCuestionario() + ""
                 + pregunta.getCatalogo() + ""
                 + pregunta.getClaveCatalogo();
-        noPregunta = noRespuesta+1;
-        cabeceraPregunta = " <div class=\"card bg-light mb-3\" style=\"width: 100%;\"><div class=\"card-body\">"
+        int noPregunta = noRespuesta + 1;
+        String cabeceraPregunta = " <div class=\"card bg-light mb-3\" style=\"width: 100%;\"><div class=\"card-body\">"
                 + "        <br/><section class=\"row\">"
                 + "        <section class=\"col-md-12\">\n"
                 + "        <h6>" + noPregunta + ".- " + pregunta.getPregunta() + "</h6>\n"
@@ -70,7 +51,7 @@ public class FormBodyComponent {
                 + "      </section></section><br/>";
         return cabeceraPregunta;
     }
-    
+
     public static String siguiente() {
         return "<input type=\"submit\" class=\"btn btn-success\" value=\"Siguiente\"></form>\n"
                 + " </div> </div><br/>\n";
@@ -104,7 +85,7 @@ public class FormBodyComponent {
                 + "        <br/>\n"
                 + "        <br/>\n";
     }
-    
+
     public static String capitulo(Pregunta pregunta, int noCapitulo) {
         return " <div>\n"
                 + "    <div class=\"card mb-3 bg-light\" style=\"width: 100%;\"><div class=\"card-body\">"
@@ -117,7 +98,7 @@ public class FormBodyComponent {
                 + "      </div>\n"
                 + "    </section>\n"
                 + "    </div></div><br />\n"
-        //tab de capitulo
+                //tab de capitulo
                 + " <section class=\"col-md-12\">\n"
                 + "        <h4 class=\"text-center\">"
                 + pregunta.getCapitulo().getCapitulo()
@@ -130,7 +111,7 @@ public class FormBodyComponent {
                 + "  action=\"updateEncuesta/" + pregunta.getCuestionario().getIdCuestionario()
                 + "/" + noCapitulo + "\" object=\"objectRespuestas\" >\n";
     }
-    
+
     public static String subCapitulo(String subcapitulo) {
         return " <section class=\"row\">\n"
                 + "      <section class=\"col-md-12\">\n"
@@ -141,6 +122,5 @@ public class FormBodyComponent {
                 + "      </section>\n"
                 + "    </section>";
     }
-    
-    
+
 }
