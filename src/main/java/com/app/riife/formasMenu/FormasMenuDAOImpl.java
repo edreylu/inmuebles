@@ -194,8 +194,6 @@ public class FormasMenuDAOImpl implements FormasMenuDAO{
                 + "                      and   RU.NO_USUARIO =" + noUsuario
                 + "                      AND   NVL(ME.NO_FORMA_PADRE,0) > 0 \n"
                 + "                      order by 4, 1";
-
-        System.out.println(sql);
         try {
             listaMenu = jdbcTemplate.query(sql, new Object[]{estatus, estatus}, (rs) -> {
                 List<FormasMenu> listaFormas = new ArrayList<>();

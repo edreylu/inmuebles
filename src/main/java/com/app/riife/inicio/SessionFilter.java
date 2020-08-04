@@ -22,12 +22,13 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 /**
  *
  * @author Edward Reyes
  */
 @WebFilter(urlPatterns = {"/capitulos/*", "/cuestionarios/*", "/encuestas/*", "/formas/*",
-    "/kcatalogos/*", "/preguntas/*", "/roles/*", "/subcapitulos/*", "/usuarios/*", "/menu"},
+    "/kcatalogos/*", "/preguntas/*", "/roles/*", "/subcapitulos/*", "/usuarios/*", "/menu", "/login"},
         dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD})
 
 public class SessionFilter implements Filter {
@@ -44,19 +45,21 @@ public class SessionFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
-        
+
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
-        
+
+        httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+
         boolean isAuthenticated = Objects.nonNull(httpRequest.getSession().getAttribute("usuario"));
         boolean existsForma;
-        
+
         String requestURI = httpRequest.getRequestURI();
         String contextPath = httpRequest.getContextPath();
-        
+
         if (isAuthenticated) {
-            Usuario usuario = (Usuario) httpRequest.getSession().getAttribute("usuario");
-            LOG.log(Level.INFO, "Usuario: {0} RequestURI: {1}", new Object[]{usuario.getClave(),requestURI});
+            //Usuario usuario = (Usuario) httpRequest.getSession().getAttribute("usuario");
+            //LOG.log(Level.INFO, "Usuario: {0} RequestURI: {1}", new Object[]{usuario.getClave(),requestURI});
             List<String> pantallas = (List<String>) httpRequest.getSession().getAttribute("pantallas");
             pantallas.add("menu");
             existsForma = findForma(pantallas, requestURI);
@@ -66,10 +69,12 @@ public class SessionFilter implements Filter {
             }
 
         } else {
-            LOG.log(Level.INFO, "RequestURI: {0}", requestURI);
-            httpResponse.sendRedirect(contextPath + "/login");
+            if (!requestURI.contains("/login")) {
+                //LOG.log(Level.INFO, "RequestURI: {0}", requestURI);
+                httpResponse.sendRedirect(contextPath + "/login");
+            }
         }
-        
+
         chain.doFilter(request, response);
     }
 

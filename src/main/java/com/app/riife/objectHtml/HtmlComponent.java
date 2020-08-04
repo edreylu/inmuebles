@@ -29,7 +29,7 @@ public class HtmlComponent {
     private final KcatalogoService kcatalogoService;
     private String capituloAnterior = "";
     private String subCapituloAnterior = "";
-    int noCapitulo = 0;
+    private int noCapitulo;
 
     @Autowired
     public HtmlComponent(SessionComponent session, KcatalogoService kcatalogoService) {
@@ -42,6 +42,7 @@ public class HtmlComponent {
         String cabeceraPregunta;
         int noPregunta = 0;
         int noRespuesta = 0;
+        noCapitulo = 0;
         List<String> listForms = new ArrayList<>();
         StringBuilder htmlPreguntas = new StringBuilder();
 

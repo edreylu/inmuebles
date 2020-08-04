@@ -54,14 +54,16 @@ public class OpcionMultipleEspecificarCatalogo implements ObjectHtml {
                 + "  <div class=\"form-group\">\n";
         part.append(fragmentoPregunta);
 
-        String[] elementosPipe = respuestaEspecifica.split("\\|", -1);
+        String[] elementsPipe = respuestaEspecifica.split("\\|", -1);
         int contador = 0;
 
         for (Kcatalogo catalogo : catalogos) {
             String checked = respuestaNormal.contains(catalogo.getDescripcion()) ? "checked" : "";
-            respuestaEspecifica = elementosPipe[contador];
+            respuestaEspecifica = elementsPipe[contador];
             String display = !respuestaEspecifica.equals("") ? "block" : "none";
-
+            String hasCase = catalogo.getDescripcion().equals("NO TIENE") ? "class=\"noTiene_"+respuesta.getNoRespuesta()+"\" " 
+                    : "class=\"case_"+respuesta.getNoRespuesta()+"\" ";
+            String hasCaseInput = catalogo.getDescripcion().equals("NO TIENE") ? "" : "caseIn_"+respuesta.getNoRespuesta();
             fragmentoPregunta = " <div class=\"input-group mb-3\" id=\"check\">\n"
                     + " <div class=\"input-group-prepend\">\n"
                     + " <div class=\"input-group-text\">\n"
@@ -72,6 +74,7 @@ public class OpcionMultipleEspecificarCatalogo implements ObjectHtml {
                     + catalogo.getDescripcion() + "')\" "
                     + " value=\"" + catalogo.getDescripcion() + "\" "
                     + " name=\"respuestas[" + respuesta.getNoRespuesta() + "].respuesta\" "
+                    + hasCase
                     + " aria-label=\"Checkbox for following text input\" "
                     + checked + "> \n"
                     + " <div style=\"font: 12px Arial, Helvetica, sans-serif;\" >"
@@ -82,7 +85,7 @@ public class OpcionMultipleEspecificarCatalogo implements ObjectHtml {
                     + " id=\"respuestas[" + respuesta.getNoRespuesta() + "].respuestaEspecifica_"
                     + catalogo.getClaveCatalogo() + "\" "
                     + " name=\"respuestas[" + respuesta.getNoRespuesta() + "].respuestaEspecifica\" "
-                    + " class=\"form-control\" "
+                    + " class=\"form-control "+ hasCaseInput+"\" "
                     + " maxlength=\"" + maxLenght + "\" "
                     + validaNumericos
                     + " value=\"" + respuestaEspecifica + "\" "

@@ -10,6 +10,7 @@ import com.app.riife.util.Procedure;
 import com.app.riife.cuestionario.CuestionarioService;
 import com.app.riife.inicio.SessionComponent;
 import java.util.List;
+import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,12 +18,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.context.annotation.SessionScope;
 
 /**
  *
  * @author usuario
  */
 @Controller
+@SessionScope
 public class RespuestaControl {
 
     private final SessionComponent session;
@@ -66,11 +69,15 @@ public class RespuestaControl {
 
     @GetMapping(value = "encuestas/respuestas")
     public String siguiente(Model model) {
+        if(Objects.nonNull(session.getUsuario())){
         html = forms.get(idCapitulo);
         objectRespuestas = new ObjectRespuestas();
         model.addAttribute("htmlEncuesta", html);
         model.addAttribute("objectRespuestas", objectRespuestas);
         return "encuestas/responder";
+        }else{
+        return "";
+        }
     }
 
 }

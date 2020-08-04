@@ -6,7 +6,6 @@
 package com.app.riife.roles;
 
 import com.app.riife.formasMenu.FormasMenu;
-import com.app.riife.inicio.SessionComponent;
 import com.app.riife.util.Mensaje;
 import java.util.List;
 import java.util.Objects;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
@@ -24,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @author usuario
  */
 @Controller
+@SessionScope
 public class RolesControl {
 
     private final RolesService rolesService;

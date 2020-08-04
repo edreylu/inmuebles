@@ -9,7 +9,9 @@
     </head>
     <body>
         <header th:replace="layout :: header"></header>
-        <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
+        
+        <div class="container mt-4 col-lg-3">
+           <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
              class="alert alert-dismissable">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <center><strong><div th:text="${mensaje}"></div></strong></center>
@@ -26,8 +28,6 @@
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <center><strong>Has salido de session.</strong></center>
         </div>
-        <div class="container mt-3 col-lg-3">
-           
             <div class="modal-dialog text-center">
                 <div class="modal-content">
                     <div class="col-12 user-img">
