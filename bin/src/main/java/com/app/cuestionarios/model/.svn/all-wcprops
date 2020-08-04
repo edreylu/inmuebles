@@ -1,0 +1,119 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/model
+END
+Respuesta.class
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/model/Respuesta.class
+END
+FormasMenu.class
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/model/FormasMenu.class
+END
+Capitulo.class
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/model/Capitulo.class
+END
+Mensaje.class
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/model/Mensaje.class
+END
+Roles.class
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/model/Roles.class
+END
+Pregunta.class
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/model/Pregunta.class
+END
+PreguntasRespuestas.class
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/model/PreguntasRespuestas.class
+END
+Usuario.class
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/model/Usuario.class
+END
+SubCapitulo.class
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/model/SubCapitulo.class
+END
+ImagenRespuesta.class
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/model/ImagenRespuesta.class
+END
+CentroTrabajo.class
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/model/CentroTrabajo.class
+END
+Inmueble.class
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/model/Inmueble.class
+END
+CicloEscolar.class
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/model/CicloEscolar.class
+END
+Kestatus.class
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/model/Kestatus.class
+END
+RolFormas.class
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/model/RolFormas.class
+END
+Kcatalogo.class
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/model/Kcatalogo.class
+END
+Cuestionario.class
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/model/Cuestionario.class
+END
+Encuesta.class
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/model/Encuesta.class
+END
+Login.class
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/model/Login.class
+END

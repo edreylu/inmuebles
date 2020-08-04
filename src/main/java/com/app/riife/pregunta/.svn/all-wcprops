@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/pregunta
+END
+PreguntaRowMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/pregunta/PreguntaRowMapper.java
+END
+Pregunta.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/pregunta/Pregunta.java
+END
+PreguntaControl.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/pregunta/PreguntaControl.java
+END
+PreguntaService.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/pregunta/PreguntaService.java
+END
+PreguntaServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/pregunta/PreguntaServiceImpl.java
+END
+PreguntaDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/pregunta/PreguntaDAO.java
+END
+PreguntaDAOImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/pregunta/PreguntaDAOImpl.java
+END

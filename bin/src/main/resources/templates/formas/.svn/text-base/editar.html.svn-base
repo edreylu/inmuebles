@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout :: head">
+        
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body onload="nobackbutton();">
+        <header th:replace="layout :: header"></header>
+       <div class="container mt-2 col-lg-4">
+           <div class="card">
+                <div class="card-header">
+                    <center><b class="tituloPrincipal">Editar Forma</b></center>   
+                </div>
+                <div class="card-body">
+                    <form method="post" action="#" th:action="@{/formas/update/{id}(id=${forma.noFormaMenu})}" th:object="${forma}">
+                        <b class="tituloTexto">Titulo</b>
+                        <input type="text" name="titulo" class="form-control" th:field="${forma.titulo}" required/>
+                        <b class="tituloTexto">URL</b>
+                        <input type="text" name="url" class="form-control" style="text-transform: lowercase;" th:field="${forma.url}"/>
+                        <b class="tituloTexto">Icono</b>
+                        <input type="text" name="icono" class="form-control" style="text-transform: lowercase;" th:field="${forma.icono}"/>
+                         
+                        <b class="tituloTexto">Rol</b>
+                        <select class="form-control browser-default custom-select" name="noFormaPadre" th:field="${forma.noFormaPadre}" required>
+                         <option th:value="${0}">PADRE</option>
+                         <option th:each="forma : ${formasp}"
+                            th:value="${forma.noFormaMenu}"
+                            th:utext="${forma.titulo}"/>
+                        </select>
+                        <br/>
+                        <br/>
+                        <input type="submit" class="btn btn-success" value="Actualizar">
+                        <a href="../principal">Regresar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+    </body>
+</html>

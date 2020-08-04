@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/riife/!svn/ver/1/bin/src/main/resources/templates/roles
+END
+principal.html
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/riife/!svn/ver/1/bin/src/main/resources/templates/roles/principal.html
+END
+asignar.html
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/riife/!svn/ver/1/bin/src/main/resources/templates/roles/asignar.html
+END
+agregar.html
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/riife/!svn/ver/1/bin/src/main/resources/templates/roles/agregar.html
+END
+editar.html
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/riife/!svn/ver/1/bin/src/main/resources/templates/roles/editar.html
+END

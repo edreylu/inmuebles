@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/kcatalogo
+END
+KcatalogoRowMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/kcatalogo/KcatalogoRowMapper.java
+END
+Kcatalogo.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/kcatalogo/Kcatalogo.java
+END
+KcatalogoControl.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/kcatalogo/KcatalogoControl.java
+END
+KcatalogoService.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/kcatalogo/KcatalogoService.java
+END
+KcatalogoServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/kcatalogo/KcatalogoServiceImpl.java
+END
+KcatalogoDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/kcatalogo/KcatalogoDAO.java
+END
+KcatalogoDAOImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/kcatalogo/KcatalogoDAOImpl.java
+END

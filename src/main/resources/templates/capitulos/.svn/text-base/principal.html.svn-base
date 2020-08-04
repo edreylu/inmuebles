@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout :: head">
+        
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <script src="../../static/js/alerta.js"></script>
+    </head>
+    <body onload="nobackbutton();">
+        <header th:replace="layout :: header"></header>
+        
+        <div class="container mt-4" th:switch="${lista}">
+            <center><b class="tituloPrincipal">CAPITULOS</b></center>
+       <h2 th:case="null">No hay Capitulos</h2>
+        <div th:case="*">
+        <div class="card border-info">
+            <div class="card-header text-white">
+                <a id="boton_agregar" style="font-size:15px;color: #333333;" title="Agregar Capitulo" href="agregar" class="fas fa-plus-circle"></a>
+            </div>
+            <div class="card-body table-responsive-md">
+                <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" 
+                     th:if="${mensaje != null}"
+                     class="alert alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <center><strong><div th:text="${mensaje}"></div></strong></center>
+                </div>
+                
+                <table class="table table-sm table-striped table-hover table-bordered table-wrapper-scroll-y my-custom-scrollbar" id="tablaDatos">
+                    <thead>
+                        <tr>
+                            <th style="width:5%">NO</th>
+                            <th style="width:30%">CAPITULO</th>
+                            <th style="width:20%">CUESTIONARIO</th>
+                            <th style="width:10%">FECHA REG.</th>
+                            <th style="width:20%">USUARIO REGISTRO</th>
+                            <th style="width:5%">ESTATUS</th>
+                            <th style="width:5%"> </th>
+                            <th style="width:5%"> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="dato: ${lista}">
+                            <td style="width:5%" th:text="${dato.idCapitulo}"></td>
+                            <td style="width:30%" th:text="${dato.capitulo}"></td>
+                            <td style="width:20%" th:text="${dato.cuestionario.cuestionario}"></td>
+                            <td style="width:10%" th:text="${#calendars.format(dato.fechaRegistro,'dd/MM/yyyy')}"></td>
+                            <td style="width:20%" th:text="${dato.usuarioRegistro.nomUsuario}"></td>
+                            <td style="width:5%" th:text="${dato.idEstatus==1?'A':'I'}"></td>
+                            <td style="width:5%">
+                                <a id="boton_editar" style="font-size:15px;color: #333333;" th:href="@{/capitulos/editar/{id}(id=${dato.idCapitulo})}">
+                                    <i title="Editar Capitulo" class="fas fa-edit"></i>
+                                </a>
+                            </td>
+                            <td style="width:5%">
+                                <a id="boton_eliminar" href="#" style="font-size:15px;color: #333333;" th:onclick="'javascript:mensajeActivarInactivar(\''+ ${dato.idCapitulo} +'\',\''+ ${dato.idEstatus} +'\');'">
+                                    <i class="fas fa-toggle-off" th:if="${dato.idEstatus==2}" title="Activar"></i><i class="fas fa-toggle-on" th:if="${dato.idEstatus==1}" title="Inactivar"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+        </div>
+        </div>
+        
+    </body>
+</html>

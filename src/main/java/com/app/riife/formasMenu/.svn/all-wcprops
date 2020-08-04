@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/formasMenu
+END
+FormasMenuServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/formasMenu/FormasMenuServiceImpl.java
+END
+FormasMenuDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/formasMenu/FormasMenuDAO.java
+END
+FormasMenuDAOImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/formasMenu/FormasMenuDAOImpl.java
+END
+FormasMenuRowMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/formasMenu/FormasMenuRowMapper.java
+END
+FormasMenu.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/formasMenu/FormasMenu.java
+END
+FormasMenuControl.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/formasMenu/FormasMenuControl.java
+END
+FormasMenuService.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/formasMenu/FormasMenuService.java
+END

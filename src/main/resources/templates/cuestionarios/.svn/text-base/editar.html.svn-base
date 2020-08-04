@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout :: head">
+        
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body onload="nobackbutton();">
+        <header th:replace="layout :: header"></header>
+       <div class="container mt-2 col-lg-4">
+           <div class="card">
+                <div class="card-header">
+                    <center><b class="tituloPrincipal">Editar Cuestionario</b></center>   
+                </div>
+                <div class="card-body">
+                    <form method="post" action="#" th:action="@{/cuestionarios/update/{id}(id=${cuestionario.idCuestionario})}" th:object="${cuestionario}">
+                        <b class="tituloTexto">Cuestionario</b>
+                        <input type="text" name="cuestionario" class="form-control" th:field="${cuestionario.cuestionario}" required/>
+                        <br/>
+                        <br/>
+                        <input type="submit" class="btn btn-success" value="Actualizar">
+                        <a href="../principal">Regresar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+    </body>
+</html>

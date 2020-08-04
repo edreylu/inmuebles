@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout :: head">
+        
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body onload="nobackbutton();">
+        <header th:replace="layout :: header"></header>
+       <div class="container mt-2 col-lg-7">
+           <div class="card">
+                <div class="card-header">
+                    <center><b class="tituloPrincipal">Editar Pregunta</b></center>   
+                </div>
+                <div class="card-body">
+                    <form class="needs-validation" novalidate method="post" action="#" th:action="@{/preguntas/update/{id}(id=${pregunta.idPregunta})}" th:object="${pregunta}">
+                        
+                        <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12"><b class="tituloTexto">Pregunta: </b>
+                                <input type="text" name="pregunta" class="form-control" th:field="${pregunta.pregunta}" required/>
+                                <div class="invalid-feedback">Pregunta es requerido</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-12"><b class="tituloTexto">Cuestionario: </b>
+                        <select id="cuestionarios" th:onchange="'getCapitulosSubcapitulos(this,\''+ ${pregunta.idPregunta} +'\');'" class="form-control" name="cuestionario.idCuestionario" th:field="${pregunta.cuestionario.idCuestionario}" required>
+                         <option value="" selected disabled>Selecciona...</option>
+                         <option th:each="cuestionario : ${cuestionarios}"
+                            th:value="${cuestionario.idCuestionario}"
+                            th:utext="${cuestionario.cuestionario}"/>
+                        </select><div class="invalid-feedback">Cuestionario es requerido</div></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6"><b class="tituloTexto">CAPITULO: </b>
+                       <select id="capitulos" class="form-control" name="capitulo.idCapitulo" th:field="${pregunta.capitulo.idCapitulo}" required>
+                         <option value="" selected disabled>Selecciona...</option>
+                         <option th:each="capitulo : ${capitulos}"
+                            th:value="${capitulo.idCapitulo}"
+                            th:utext="${capitulo.capitulo}"/>
+                        </select>
+                        <div class="invalid-feedback">Capitulo es requerido</div>
+                            </div><div class="col-md-6"><b class="tituloTexto">SUBCAPITULO: </b>
+                        <select id="subcapitulos" class="form-control" name="subCapitulo.idSubCapitulo" th:field="${pregunta.subCapitulo.idSubCapitulo}" >
+                         <option value="" selected disabled>Selecciona...</option>
+                         <option th:each="subcapitulo : ${subcapitulos}"
+                            th:value="${subcapitulo.idSubCapitulo}"
+                            th:utext="${subcapitulo.subCapitulo}"/>
+                        </select></div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6"><b class="tituloTexto">Orden Mostrar: </b><input type="text" name="ordenMostrar" class="form-control" th:field="${pregunta.ordenMostrar}" required/>
+                            </div><div class="col-md-6"><b class="tituloTexto">Inciso: </b><input type="text" name="inciso" class="form-control" th:field="${pregunta.inciso}"/></div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6"><b class="tituloTexto">Opcion: </b><input type="text" name="opcion" class="form-control" th:field="${pregunta.opcion}">
+                            </div><div class="col-md-6"><b class="tituloTexto">Instrucciones Llenado: </b><input type="text" name="instruccionesLlenado" class="form-control" th:field="${pregunta.instruccionesLlenado}"></div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6"><b class="tituloTexto">Opcion Multiple: </b>
+                        <select id="opcionMultiple" th:onchange="'getRespuestaOm(this,\''+ ${pregunta.idPregunta} +'\');'" class="form-control chosen-select" name="opcionMultiple" th:field="${pregunta.opcionMultiple}" required>
+                         <option value="" selected disabled>Selecciona...</option>
+                         <option value="S">SI</option>
+                         <option value="N">NO</option>
+                        </select>
+                         <div class="invalid-feedback">Opcion multiple es requerido</div>
+                            </div>
+                         
+                         <div class="col-md-6">
+                         <b class="tituloTexto">En Catalogo: </b>
+                        <select id="enCatalogo" th:onchange="'getEnCatalogo(this,\''+ ${pregunta.idPregunta} +'\');'" class="form-control chosen-select" name="enCatalogo" th:field="${pregunta.enCatalogo}" required>
+                         <option value="" selected disabled>Selecciona...</option>
+                         <option value="S">SI</option>
+                         <option value="N">NO</option>
+                        </select>
+                         <div class="invalid-feedback">En catalogo es requerido</div>
+                         </div>
+                        </div>
+                        <div id="opcionesTodas">
+                        <div class="row">
+                            <div class="col-md-12" th:if="${catalogos!=null}"><b class="tituloTexto">CATALOGOS: </b>
+                         <select id="catalogos" class="form-control chosen-select" name="catalogo" th:field="${pregunta.catalogo}" required>
+                         <option value="" selected disabled>Selecciona...</option>
+                         <option th:each="catalogo : ${catalogos}"
+                            th:value="${catalogo.catalogo}"
+                            th:utext="${catalogo.catalogo}"/>
+                        </select>
+                         <div class="invalid-feedback">Catalogo es requerido</div>
+                            </div>
+                        </div>
+                        
+                        <div class="row" th:if="${#strings.equals(pregunta.enCatalogo, 'S')}">
+                            <div class="col-md-12"><b class="tituloTexto">Especificar por: </b>
+                         <select id="especificarPor" th:onchange="'getEnCatalogoEspecificar(this,\''+ ${pregunta.idPregunta} +'\');'" class="form-control chosen-select" name="especificarPor" th:field="${pregunta.especificarPor}" required>
+                         <option value="" selected disabled>Selecciona...</option>
+                         <option value="C">Por catalogo</option>
+                         <option value="O">Por otro</option>
+                         <option value="N">Por Ninguna</option>
+                        </select>
+                         <div class="invalid-feedback">Especificar es requerido</div>
+                            </div>
+                        </div>
+                        <div id="opcionesEnCatalogo">
+                        <div class="row" th:if="${#strings.equals(pregunta.especificarPor, 'C') and #strings.equals(pregunta.enCatalogo, 'S')}">
+                            <div class="col-md-12"><b class="tituloTexto">Tipo de Catalogo: </b>
+                         <select id="tipoDeDatoxCatalogo" class="form-control chosen-select" name="tipoDeDatoxCatalogo" th:field="${pregunta.tipoDeDatoxCatalogo}" required>
+                         <option value="" selected disabled>Selecciona...</option>
+                         <option value="VARCHAR2">VARCHAR2</option>
+                         <option value="NUMBER">NUMBER</option>
+                        </select></select><div class="invalid-feedback">Tipo de dato es requerido</div></div>
+                        </div>
+                        
+                        <div class="row" th:if="${#strings.equals(pregunta.especificarPor, 'C') and #strings.equals(pregunta.enCatalogo, 'S')}">
+                            <div class="col-md-6"><b class="tituloTexto">Longitud Maxima Catalogo: </b><input type="text" name="longitudMaximaxCatalogo" class="form-control" th:field="${pregunta.longitudMaximaxCatalogo}" required>
+                            </div><div class="col-md-6"><b class="tituloTexto">Decimales Max Catalogo: </b><input type="text" name="decimalesLongMaxCat" class="form-control" th:field="${pregunta.decimalesLongMaxCat}" required></div>
+                        </div>
+                            
+                            <div class="row" th:if="${#strings.equals(pregunta.enCatalogo, 'N') or #strings.equals(pregunta.especificarPor, 'O')}">
+                            <div class="col-md-12"><b class="tituloTexto">Tipo de dato Otro: </b>
+                        <select id="tipoDeDatoOtro" class="form-control chosen-select" name="tipoDeDatoOtro" th:field="${pregunta.tipoDeDatoOtro}" required>
+                         <option value="" selected disabled>Selecciona...</option>
+                         <option value="VARCHAR2">VARCHAR2</option>
+                         <option value="NUMBER">NUMBER</option>
+                        </select>
+                         </select><div class="invalid-feedback">Tipo de dato es requerido</div>
+                            </div>
+                        </div>
+                        
+                        <div class="row" th:if="${#strings.equals(pregunta.enCatalogo, 'N') or #strings.equals(pregunta.especificarPor, 'O')}">
+                            <div class="col-md-6"><b class="tituloTexto">Longitud maxima Otro: </b><input type="text" name="longitudMaximaOtro" class="form-control" th:field="${pregunta.longitudMaximaOtro}" required></div>
+                            <div class="col-md-6"><b class="tituloTexto">Decimales long maxima otro: </b><input type="text" name="decimalesLongMaxOtro" class="form-control" th:field="${pregunta.decimalesLongMaxOtro}" required>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <input type="submit" class="btn btn-success" value="Actualizar">
+                        <a href="../principal">Regresar</a>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+    </body>
+</html>

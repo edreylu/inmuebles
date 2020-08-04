@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/riife/!svn/ver/1/src/main/resources/templates
+END
+layout.html
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/riife/!svn/ver/1/src/main/resources/templates/layout.html
+END
+finalizar.html
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/riife/!svn/ver/1/src/main/resources/templates/finalizar.html
+END
+subir.html
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/riife/!svn/ver/1/src/main/resources/templates/subir.html
+END
+menu.html
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/riife/!svn/ver/1/src/main/resources/templates/menu.html
+END
+index.html
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/riife/!svn/ver/1/src/main/resources/templates/index.html
+END
+login.html
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/riife/!svn/ver/1/src/main/resources/templates/login.html
+END
+curso.html
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/riife/!svn/ver/1/src/main/resources/templates/curso.html
+END

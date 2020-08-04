@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/respuesta
+END
+RespuestaDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/respuesta/RespuestaDAO.java
+END
+RespuestaDAOImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/respuesta/RespuestaDAOImpl.java
+END
+ObjectRespuestas.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/respuesta/ObjectRespuestas.java
+END
+RespuestaRowMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/respuesta/RespuestaRowMapper.java
+END
+RespuestaUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/respuesta/RespuestaUtil.java
+END
+Respuesta.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/respuesta/Respuesta.java
+END
+ImagenRespuesta.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/respuesta/ImagenRespuesta.java
+END
+RespuestaControl.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/respuesta/RespuestaControl.java
+END
+RespuestaService.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/respuesta/RespuestaService.java
+END
+RespuestaStructRowMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/respuesta/RespuestaStructRowMapper.java
+END
+RespuestaServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/respuesta/RespuestaServiceImpl.java
+END

@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/dao
+END
+EncuestaDAO.class
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/dao/EncuestaDAO.class
+END
+UsuarioDAO.class
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/dao/UsuarioDAO.class
+END
+SubCapituloDAO.class
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/dao/SubCapituloDAO.class
+END
+FormasMenuDAO.class
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/dao/FormasMenuDAO.class
+END
+CapituloDAO.class
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/dao/CapituloDAO.class
+END
+CuestionarioDAO.class
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/dao/CuestionarioDAO.class
+END
+KcatalogoDAO.class
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/dao/KcatalogoDAO.class
+END
+RolesDAO.class
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/dao/RolesDAO.class
+END
+PreguntaDAO.class
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/dao/PreguntaDAO.class
+END

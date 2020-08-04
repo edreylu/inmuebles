@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/riife/!svn/ver/1/src/main/resources/templates/encuestas
+END
+principal.html
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/riife/!svn/ver/1/src/main/resources/templates/encuestas/principal.html
+END
+responder.html
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/riife/!svn/ver/1/src/main/resources/templates/encuestas/responder.html
+END

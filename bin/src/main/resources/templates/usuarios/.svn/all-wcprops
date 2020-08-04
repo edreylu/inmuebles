@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/riife/!svn/ver/1/bin/src/main/resources/templates/usuarios
+END
+principal.html
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/riife/!svn/ver/1/bin/src/main/resources/templates/usuarios/principal.html
+END
+agregar.html
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/riife/!svn/ver/1/bin/src/main/resources/templates/usuarios/agregar.html
+END
+editar.html
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/riife/!svn/ver/1/bin/src/main/resources/templates/usuarios/editar.html
+END

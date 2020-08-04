@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/capitulo
+END
+Capitulo.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/capitulo/Capitulo.java
+END
+CapituloControl.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/capitulo/CapituloControl.java
+END
+CapituloService.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/capitulo/CapituloService.java
+END
+CapituloServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/capitulo/CapituloServiceImpl.java
+END
+CapituloDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/capitulo/CapituloDAO.java
+END
+CapituloDAOImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/capitulo/CapituloDAOImpl.java
+END
+CapituloRowMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/capitulo/CapituloRowMapper.java
+END

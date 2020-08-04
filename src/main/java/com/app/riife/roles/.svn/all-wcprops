@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/roles
+END
+RolesRowMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/roles/RolesRowMapper.java
+END
+RolFormas.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/roles/RolFormas.java
+END
+Roles.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/roles/Roles.java
+END
+RolesControl.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/roles/RolesControl.java
+END
+RolesService.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/roles/RolesService.java
+END
+RolesServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/roles/RolesServiceImpl.java
+END
+RolesDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/roles/RolesDAO.java
+END
+RolesDAOImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/riife/!svn/ver/1/src/main/java/com/app/riife/roles/RolesDAOImpl.java
+END

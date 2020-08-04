@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/rowMapper
+END
+CapituloRowMapper.class
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/rowMapper/CapituloRowMapper.class
+END
+CuestionarioRowMapper.class
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/rowMapper/CuestionarioRowMapper.class
+END
+KcatalogoRowMapper.class
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/rowMapper/KcatalogoRowMapper.class
+END
+RolesRowMapper.class
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/rowMapper/RolesRowMapper.class
+END
+PreguntaRowMapper.class
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/rowMapper/PreguntaRowMapper.class
+END
+UsuarioRowMapper.class
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/rowMapper/UsuarioRowMapper.class
+END
+SubCapituloRowMapper.class
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/rowMapper/SubCapituloRowMapper.class
+END
+FormasMenuRowMapper.class
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/riife/!svn/ver/1/bin/src/main/java/com/app/cuestionarios/rowMapper/FormasMenuRowMapper.class
+END

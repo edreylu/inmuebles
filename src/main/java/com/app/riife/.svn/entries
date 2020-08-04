@@ -1,0 +1,110 @@
+10
+
+dir
+1
+http://172.21.1.25/svn/riife/src/main/java/com/app/riife
+http://172.21.1.25/svn/riife
+
+
+
+2020-05-13T17:46:35.640169Z
+1
+root
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+d8797554-42f2-470d-a4dc-f9f991125dc0
+
+capitulo
+dir
+
+roles
+dir
+
+pregunta
+dir
+
+usuario
+dir
+
+subCapitulo
+dir
+
+centroTrabajo
+dir
+
+inmueble
+dir
+
+cicloEscolar
+dir
+
+RiifeApplication.java
+file
+
+
+
+
+2020-05-13T18:39:29.552926Z
+74694aa2350053b76ea49a5e6dfe259e
+2020-05-13T17:46:35.640169Z
+1
+root
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+304
+
+kestatus
+dir
+
+kcatalogo
+dir
+
+cuestionario
+dir
+
+encuesta
+dir
+
+inicio
+dir
+
+respuesta
+dir
+
+formasMenu
+dir
+
+util
+dir
+
