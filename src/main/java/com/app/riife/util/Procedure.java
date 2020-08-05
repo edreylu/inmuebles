@@ -5,22 +5,38 @@
  */
 package com.app.riife.util;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  *
  * @author Edward Reyes
  */
-@Setter
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Procedure {
     
     private String Mensaje;
     private Integer error;
+
+    public Procedure(String Mensaje, Integer error) {
+        this.Mensaje = Mensaje;
+        this.error = error;
+    }
+
+    public Procedure() {
+    }
+
+    public String getMensaje() {
+        return Mensaje;
+    }
+
+    public void setMensaje(String Mensaje) {
+        this.Mensaje = Mensaje;
+    }
+
+    public Integer getError() {
+        return error;
+    }
+
+    public void setError(Integer error) {
+        this.error = error;
+    }
     
 }

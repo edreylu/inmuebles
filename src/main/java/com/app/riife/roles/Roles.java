@@ -6,19 +6,11 @@
 package com.app.riife.roles;
 
 import java.util.Objects;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  *
  * @author Admin
  */
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
-@Getter
 public class Roles {
 private String insertar;
     private String actualizar;
@@ -35,6 +27,140 @@ private String insertar;
     private Integer noRol;
     private String descripcion;
     private String nombreinsertar;
+
+    public Roles(String insertar, String actualizar, String eliminar, String consultar, String descargar, Boolean insertarSel, Boolean actualizarSel, Boolean eliminarSel, Boolean consultarSel, Boolean descargarSel, String clavebuscada, Integer noRol, String descripcion, String nombreinsertar) {
+        this.insertar = insertar;
+        this.actualizar = actualizar;
+        this.eliminar = eliminar;
+        this.consultar = consultar;
+        this.descargar = descargar;
+        this.insertarSel = insertarSel;
+        this.actualizarSel = actualizarSel;
+        this.eliminarSel = eliminarSel;
+        this.consultarSel = consultarSel;
+        this.descargarSel = descargarSel;
+        this.clavebuscada = clavebuscada;
+        this.noRol = noRol;
+        this.descripcion = descripcion;
+        this.nombreinsertar = nombreinsertar;
+    }
+
+    public Roles() {
+    }
+
+    public String getInsertar() {
+        return insertar;
+    }
+
+    public void setInsertar(String insertar) {
+        this.insertar = insertar;
+    }
+
+    public String getActualizar() {
+        return actualizar;
+    }
+
+    public void setActualizar(String actualizar) {
+        this.actualizar = actualizar;
+    }
+
+    public String getEliminar() {
+        return eliminar;
+    }
+
+    public void setEliminar(String eliminar) {
+        this.eliminar = eliminar;
+    }
+
+    public String getConsultar() {
+        return consultar;
+    }
+
+    public void setConsultar(String consultar) {
+        this.consultar = consultar;
+    }
+
+    public String getDescargar() {
+        return descargar;
+    }
+
+    public void setDescargar(String descargar) {
+        this.descargar = descargar;
+    }
+
+    public Boolean getInsertarSel() {
+        return insertarSel;
+    }
+
+    public void setInsertarSel(Boolean insertarSel) {
+        this.insertarSel = insertarSel;
+    }
+
+    public Boolean getActualizarSel() {
+        return actualizarSel;
+    }
+
+    public void setActualizarSel(Boolean actualizarSel) {
+        this.actualizarSel = actualizarSel;
+    }
+
+    public Boolean getEliminarSel() {
+        return eliminarSel;
+    }
+
+    public void setEliminarSel(Boolean eliminarSel) {
+        this.eliminarSel = eliminarSel;
+    }
+
+    public Boolean getConsultarSel() {
+        return consultarSel;
+    }
+
+    public void setConsultarSel(Boolean consultarSel) {
+        this.consultarSel = consultarSel;
+    }
+
+    public Boolean getDescargarSel() {
+        return descargarSel;
+    }
+
+    public void setDescargarSel(Boolean descargarSel) {
+        this.descargarSel = descargarSel;
+    }
+
+    public String getClavebuscada() {
+        return clavebuscada;
+    }
+
+    public void setClavebuscada(String clavebuscada) {
+        this.clavebuscada = clavebuscada;
+    }
+
+    public Integer getNoRol() {
+        return noRol;
+    }
+
+    public void setNoRol(Integer noRol) {
+        this.noRol = noRol;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getNombreinsertar() {
+        return nombreinsertar;
+    }
+
+    public void setNombreinsertar(String nombreinsertar) {
+        this.nombreinsertar = nombreinsertar;
+    }
+    
+    
     
     public static Roles inicializarAdd(Roles rol) {
         rol.setInsertar("N");

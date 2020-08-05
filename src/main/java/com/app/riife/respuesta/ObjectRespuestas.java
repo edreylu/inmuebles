@@ -5,22 +5,25 @@
  */
 package com.app.riife.respuesta;
 
-import com.app.riife.respuesta.Respuesta;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  *
  * @author Admin
  */
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class ObjectRespuestas {
 List<Respuesta> respuestas = new ArrayList<>();
+
+    public ObjectRespuestas() {
+    }
+
+    public List<Respuesta> getRespuestas() {
+        return respuestas;
+    }
+
+    public void setRespuestas(List<Respuesta> respuestas) {
+        this.respuestas = respuestas;
+    }
+
 }
