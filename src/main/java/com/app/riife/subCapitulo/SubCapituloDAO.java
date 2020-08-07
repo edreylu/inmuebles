@@ -5,7 +5,6 @@
  */
 package com.app.riife.subCapitulo;
 
-import com.app.riife.subCapitulo.SubCapitulo;
 import java.util.List;
 
 /**
@@ -16,14 +15,14 @@ public interface SubCapituloDAO {
     
     List<SubCapitulo> getRecords();
 
-    List<SubCapitulo> getRecordsByCuestionario(int idCuestionario);
+    List<SubCapitulo> getRecordsByIdCuestionario(int idCuestionario);
 
-    int addSubCapitulo(SubCapitulo sc);
+    int add(SubCapitulo sc);
 
-    int editSubCapitulo(SubCapitulo sc);
+    int update(SubCapitulo sc);
 
-    SubCapitulo getSubCapitulo(int id);
+    SubCapitulo get(int id);
 
-    int deleteSubCapitulo(int id, int opcion);
+    int delete(int id, int opcion);
     
 }

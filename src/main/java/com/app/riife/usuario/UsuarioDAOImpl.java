@@ -30,7 +30,7 @@ public class UsuarioDAOImpl implements UsuarioDAO{
     }
     
     @Override
-    public Usuario existsUsuario(Login login) {
+    public Usuario exists(Login login) {
         Usuario us = null;
         sql = "  SELECT NO_USUARIO, NOMBRE,APELLIDO_PATERNO,APELLIDO_MATERNO, CLAVE, CORREO, TELEFONO "
                 + "  FROM USUARIOS "
@@ -53,7 +53,7 @@ public class UsuarioDAOImpl implements UsuarioDAO{
             }
             );
         } catch (DataAccessException e) {
-            System.err.print(e);
+            throw e;
         }
         return us;
     }
@@ -82,7 +82,7 @@ public class UsuarioDAOImpl implements UsuarioDAO{
     }
 
     @Override
-    public int addUsuario(Usuario usuario) {
+    public int add(Usuario usuario) {
         int valor = 0;
         int noUsuario = jdbcTemplate.queryForObject("select nvl(max(no_usuario),0)+ 1 from USUARIOS", Integer.class);
         usuario.setNoUsuario(noUsuario);
@@ -108,7 +108,7 @@ public class UsuarioDAOImpl implements UsuarioDAO{
     }
 
     @Override
-    public int editUsuario(Usuario usuario) {
+    public int update(Usuario usuario) {
         int valor = 0;
         sql = "UPDATE USUARIOS set CLAVE = ?, NOMBRE = ? ,"
                 + " APELLIDO_PATERNO = ? ,APELLIDO_MATERNO = ? ,CORREO = ? , TELEFONO = ?, TELEFONO2 = ? "
@@ -129,7 +129,7 @@ public class UsuarioDAOImpl implements UsuarioDAO{
     }
 
     @Override
-    public Usuario getUsuario(int id) {
+    public Usuario get(int id) {
 
         Usuario usuario = null;
         sql = "select UA.no_usuario,UA.clave,UA.nombre,UA.apellido_paterno,UA.apellido_materno,UA.correo,"
@@ -143,7 +143,7 @@ public class UsuarioDAOImpl implements UsuarioDAO{
     }
 
     @Override
-    public int deleteUsuario(int id, int opcion) {
+    public int delete(int id, int opcion) {
         int valor = 0;
         sql = "UPDATE usuarios SET IDESTATUS= ? where NO_USUARIO = ?";
         try {
@@ -185,7 +185,7 @@ public class UsuarioDAOImpl implements UsuarioDAO{
     }
 
     @Override
-    public int resetPasaporte(int us) {
+    public int resetPass(int us) {
         int valor = 0;
         sql = "UPDATE USUARIOS set PASAPORTE = ENC.ENCRIP(clave) "
                 + " where NO_USUARIO = ? ";
@@ -198,14 +198,14 @@ public class UsuarioDAOImpl implements UsuarioDAO{
     }
 
     @Override
-    public int changePasaporte(int noUsuario, String contraseñaNueva) {
+    public int changePass(int noUsuario, String contraseñaNueva) {
         int valor = 0;
         sql = "UPDATE USUARIOS set PASAPORTE = ENC.ENCRIP(?) "
                 + " where NO_USUARIO = ? ";
         try {
             valor = jdbcTemplate.update(sql, new Object[]{contraseñaNueva, noUsuario});
         } catch (DataAccessException e) {
-            System.err.print(e);
+            throw e;
         }
         return valor;
     }

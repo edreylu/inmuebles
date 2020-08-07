@@ -17,12 +17,12 @@ public interface CapituloDAO {
 
     List<Capitulo> getRecordsByCuestionario(int idCuestionario);
 
-    int addCapitulo(Capitulo ca);
+    int add(Capitulo ca);
 
-    int editCapitulo(Capitulo ca);
+    int update(Capitulo ca);
 
-    Capitulo getCapitulo(int id);
+    Capitulo get(int id);
 
-    int deleteCapitulo(int id, int opcion);
+    int delete(int id, int opcion);
     
 }

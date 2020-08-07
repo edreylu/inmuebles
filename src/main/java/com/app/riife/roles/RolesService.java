@@ -17,17 +17,17 @@ public interface RolesService {
     
     List<Roles> listAll();
 
-    Mensaje addRole(Roles role);
+    Mensaje add(Roles role);
 
-    Roles getRole(int noRol);
+    Roles get(int noRol);
 
-    Mensaje editRole(Roles role);
+    Mensaje update(Roles role);
 
-    Mensaje deleteRole(int noRol);
+    Mensaje delete(int noRol);
 
-    Mensaje assignFormaMenu(RolFormas rolFormas);
+    Mensaje assignFormaMenuToRol(RolFormas rolFormas);
 
-    int deleteRolUsuario(int noRol);
+    int deleteRolToUsuario(int noRol);
 
     List<FormasMenu> listFormasById(int noRol);
 }

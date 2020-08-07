@@ -5,19 +5,18 @@
  */
 package com.app.riife.subCapitulo;
 
-import com.app.riife.util.SessionControl;
 import com.app.riife.cuestionario.Cuestionario;
 import com.app.riife.util.Mensaje;
 import com.app.riife.cuestionario.CuestionarioService;
 import java.util.List;
 import java.util.Objects;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
@@ -25,10 +24,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @author usuario
  */
 @Controller
+@SessionScope
 public class SubCapituloControl {
 
-    @Autowired
-    private SessionControl session;
     private final SubCapituloService subCapituloService;
     private final CuestionarioService cuestionarioService;
     private List<SubCapitulo> subCapitulos;
@@ -42,11 +40,11 @@ public class SubCapituloControl {
         this.cuestionarioService = cuestionarioService;
     }
 
-    @GetMapping("subcapitulos/principal")
+    @GetMapping("subcapitulos")
     public String listar(Model model) {
         subCapitulos = subCapituloService.listAll();
         model.addAttribute("lista", subCapitulos);
-        return session.url("subcapitulos/principal");
+        return "subcapitulos/principal";
     }
 
     @GetMapping("subcapitulos/agregar")
@@ -54,44 +52,44 @@ public class SubCapituloControl {
         cuestionarios = cuestionarioService.listAll();
         model.addAttribute("cuestionarios", cuestionarios);
         model.addAttribute(new SubCapitulo());
-        return session.url("subcapitulos/agregar");
+        return "subcapitulos/agregar";
     }
 
     @PostMapping(value = "subcapitulos/add")
     public String agregar(SubCapitulo sc, RedirectAttributes redirectAttrs) {
-        msg.crearMensaje(subCapituloService.addSubCapitulo(sc), redirectAttrs);
+        msg.crearMensaje(subCapituloService.add(sc), redirectAttrs);
         
-        return "redirect:/subcapitulos/principal";
+        return "redirect:/subcapitulos";
     }
 
     @GetMapping(value = "subcapitulos/editar/{id}")
     public String editar(@PathVariable("id") int id, Model model) {
-        subCapitulo = subCapituloService.getSubCapitulo(id);
-        String validUrl = "redirect:/subcapitulos/principal";
+        subCapitulo = subCapituloService.get(id);
+        String validUrl = "redirect:/subcapitulos";
         if(Objects.nonNull(subCapitulo)){
         cuestionarios = cuestionarioService.listAll();
         model.addAttribute("subCapitulo", subCapitulo);
         model.addAttribute("cuestionarios", cuestionarios);
         validUrl="subcapitulos/editar";
         }
-        return session.url(validUrl);
+        return validUrl;
     }
 
     @PostMapping(value = "subcapitulos/update/{id}")
-    public String editar(@PathVariable("id") int id, @Valid SubCapitulo sc, 
+    public String editar(@PathVariable("id") int id, SubCapitulo sc, 
             RedirectAttributes redirectAttrs) {
         sc.setIdSubCapitulo(id);
-        msg.crearMensaje(subCapituloService.editSubCapitulo(sc), redirectAttrs);
+        msg.crearMensaje(subCapituloService.update(sc), redirectAttrs);
         
-        return "redirect:/subcapitulos/principal";
+        return "redirect:/subcapitulos";
     }
 
     @GetMapping("subcapitulos/eliminar/{id}/{idestatus}")
     public String eliminar(@PathVariable("id") int id, @PathVariable("idestatus") int idestatus, 
             RedirectAttributes redirectAttrs) {
 
-        msg.crearMensaje(subCapituloService.deleteSubCapitulo(id, idestatus), redirectAttrs);
-        return "redirect:/subcapitulos/principal";
+        msg.crearMensaje(subCapituloService.delete(id, idestatus), redirectAttrs);
+        return "redirect:/subcapitulos";
     }
 
 }

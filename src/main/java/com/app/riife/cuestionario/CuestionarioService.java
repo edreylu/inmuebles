@@ -16,11 +16,11 @@ public interface CuestionarioService {
     
     List<Cuestionario> listAll();
     
-    Mensaje addCuestionario(Cuestionario cuestionario);
+    Mensaje add(Cuestionario cuestionario);
     
-    Cuestionario getCuestionario(int id);
+    Cuestionario get(int id);
     
-    Mensaje editCuestionario(Cuestionario cuestionario);
+    Mensaje update(Cuestionario cuestionario);
     
-    Mensaje deleteCuestionario(int id, int opcion);
+    Mensaje delete(int id, int opcion);
 }

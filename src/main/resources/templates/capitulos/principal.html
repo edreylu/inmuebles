@@ -20,7 +20,7 @@ and open the template in the editor.
         <div th:case="*">
         <div class="card border-info">
             <div class="card-header text-white">
-                <a id="boton_agregar" style="font-size:15px;color: #333333;" title="Agregar Capitulo" href="agregar" class="fas fa-plus-circle"></a>
+                <a id="boton_agregar" style="font-size:15px;color: #333333;" title="Agregar Capitulo" th:href="@{/capitulos/agregar}" class="fas fa-plus-circle"></a>
             </div>
             <div class="card-body table-responsive-md">
                 <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" 

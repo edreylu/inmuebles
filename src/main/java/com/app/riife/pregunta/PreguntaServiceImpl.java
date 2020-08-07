@@ -31,49 +31,49 @@ public class PreguntaServiceImpl implements PreguntaService{
     }
 
     @Override
-    public Mensaje addPregunta(Pregunta pr) {
-        int valor = preguntaDAO.addPregunta(pr);
+    public Mensaje add(Pregunta pr) {
+        int valor = preguntaDAO.add(pr);
         if (valor >= 1) {
-            msg = new Mensaje("Agregado correctamente", 1);
+            msg = Mensaje.CREATE("Agregado correctamente", 1);
         } else {
-            msg = new Mensaje("No se pudo agregar", 2);
+            msg = Mensaje.CREATE("No se pudo agregar", 2);
         }
         return msg;
     }
 
     @Override
-    public Pregunta getPregunta(int id) {
-        return preguntaDAO.getPregunta(id);
+    public Pregunta get(int id) {
+        return preguntaDAO.get(id);
     }
 
     @Override
-    public Mensaje editPregunta(Pregunta pr) {
-        int valor = preguntaDAO.editPregunta(pr);
+    public Mensaje update(Pregunta pr) {
+        int valor = preguntaDAO.update(pr);
         if (valor >= 1) {
-            msg = new Mensaje("Editado correctamente", 1);
+            msg = Mensaje.CREATE("Editado correctamente", 1);
             System.out.println("se edito registro: " + valor);
         } else {
-            msg = new Mensaje("No se pudo editar", 2);
+            msg = Mensaje.CREATE("No se pudo editar", 2);
             System.err.println("no se edito registro");
         }
         return msg;
     }
 
     @Override
-    public Mensaje deletePregunta(int id, int opcion) {
-        int valor = preguntaDAO.deletePregunta(id, opcion);
+    public Mensaje delete(int id, int opcion) {
+        int valor = preguntaDAO.delete(id, opcion);
         if (valor >= 1) {
-            msg = new Mensaje("Ejecutado correctamente: se " 
+            msg = Mensaje.CREATE("Ejecutado correctamente: se " 
                     + (opcion == 1 ? "Activó" : "Inactivo") + " registro", 1);
         } else {
-            msg = new Mensaje("No se pudo ejecutar", 2);
+            msg = Mensaje.CREATE("No se pudo ejecutar", 2);
         }
         return msg;
     }
 
     @Override
-    public List<Pregunta> listPreguntasById(int idCuestionario) {
-        return preguntaDAO.getRecordsPreguntas(idCuestionario);
+    public List<Pregunta> listByIdCuestionario(int idCuestionario) {
+        return preguntaDAO.getRecordsByIdCuestionario(idCuestionario);
     }
 
 }

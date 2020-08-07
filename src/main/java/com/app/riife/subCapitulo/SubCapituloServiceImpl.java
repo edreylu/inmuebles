@@ -31,46 +31,46 @@ public class SubCapituloServiceImpl implements SubCapituloService{
     }
 
     @Override
-    public Mensaje addSubCapitulo(SubCapitulo subCapitulo) {
-        int valor = subCapituloDAO.addSubCapitulo(subCapitulo);
+    public Mensaje add(SubCapitulo subCapitulo) {
+        int valor = subCapituloDAO.add(subCapitulo);
         if (valor >= 1) {
-            msg = new Mensaje("Agregado correctamente", 1);
+            msg = Mensaje.CREATE("Agregado correctamente", 1);
         } else {
-            msg = new Mensaje("No se pudo agregar", 2);
+            msg = Mensaje.CREATE("No se pudo agregar", 2);
         }
         return msg;
     }
 
     @Override
-    public SubCapitulo getSubCapitulo(int id) {
-        return subCapituloDAO.getSubCapitulo(id);
+    public SubCapitulo get(int id) {
+        return subCapituloDAO.get(id);
     }
 
     @Override
-    public Mensaje editSubCapitulo(SubCapitulo subCapitulo) {
-        int valor = subCapituloDAO.editSubCapitulo(subCapitulo);
+    public Mensaje update(SubCapitulo subCapitulo) {
+        int valor = subCapituloDAO.update(subCapitulo);
         if (valor >= 1) {
-            msg = new Mensaje("Editado correctamente", 1);
+            msg = Mensaje.CREATE("Editado correctamente", 1);
         } else {
-            msg = new Mensaje("No se pudo editar", 2);
+            msg = Mensaje.CREATE("No se pudo editar", 2);
         }
         return msg;
     }
 
     @Override
-    public Mensaje deleteSubCapitulo(int id, int opcion) {
-        int valor = subCapituloDAO.deleteSubCapitulo(id, opcion);
+    public Mensaje delete(int id, int opcion) {
+        int valor = subCapituloDAO.delete(id, opcion);
         if (valor >= 1) {
-            msg = new Mensaje("Ejecutado correctamente", 1);
+            msg = Mensaje.CREATE("Ejecutado correctamente", 1);
         } else {
-            msg = new Mensaje("No se pudo ejecutar", 2);
+            msg = Mensaje.CREATE("No se pudo ejecutar", 2);
         }
         return msg;
     }
 
     @Override
-    public List<SubCapitulo> listByCuestionario(int idCuestionario) {
-        return subCapituloDAO.getRecordsByCuestionario(idCuestionario);
+    public List<SubCapitulo> listByIdCuestionario(int idCuestionario) {
+        return subCapituloDAO.getRecordsByIdCuestionario(idCuestionario);
     }
 
 }

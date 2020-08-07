@@ -15,11 +15,11 @@ public interface CuestionarioDAO {
     
     List<Cuestionario> getRecords();
 
-    int addCuestionario(Cuestionario cu);
+    int add(Cuestionario cu);
 
-    int editCuestionario(Cuestionario cu);
+    int update(Cuestionario cu);
 
-    Cuestionario getCuestionario(int id);
+    Cuestionario get(int id);
 
-    int deleteCuestionario(int id, int opcion);
+    int delete(int id, int opcion);
 }

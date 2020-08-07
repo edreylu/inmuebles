@@ -17,13 +17,13 @@ public interface KcatalogoDAO {
 
     List<String> getRecordsOnlyCatalogo();
 
-    int addKcatalogo(Kcatalogo kca);
+    int add(Kcatalogo kca);
 
-    int editKcatalogo(Kcatalogo kca);
+    int update(Kcatalogo kca);
 
-    Kcatalogo getKcatalogo(String llave);
+    Kcatalogo get(String llave);
 
-    int deleteKcatalogo(String llave, int opcion);
+    int delete(String llave, int opcion);
 
     List<Kcatalogo> getRecordsEncuesta(String catalogo);
     

@@ -17,19 +17,19 @@ public interface FormasMenuDAO {
 
     List<FormasMenu> getRecordsFather();
 
-    int addFormaMenu(FormasMenu menu);
+    int add(FormasMenu menu);
 
-    int editFormaMenu(FormasMenu menu);
+    int update(FormasMenu menu);
 
-    FormasMenu getFormaMenu(int id);
+    FormasMenu get(int id);
 
-    int deleteFormaMenu(int id);
+    int delete(int id);
 
     List<String> getPermissionToPages(int noUsuario);
 
     List<FormasMenu> getMenu(int noUsuario);
 
-    boolean existsHijos(int clave);
+    boolean existsChild(int clave);
 
     boolean existsRolFormas(int noForma);
 }

@@ -31,39 +31,39 @@ public class CuestionarioServiceImpl implements CuestionarioService{
     }
 
     @Override
-    public Mensaje addCuestionario(Cuestionario cuestionario) {
-        int valor = cuestionarioDAO.addCuestionario(cuestionario);
+    public Mensaje add(Cuestionario cuestionario) {
+        int valor = cuestionarioDAO.add(cuestionario);
         if (valor >= 1) {
-            msg = new Mensaje("Agregado correctamente", 1);
+            msg = Mensaje.CREATE("Agregado correctamente", 1);
         } else {
-            msg = new Mensaje("No se pudo agregar", 2);
+            msg = Mensaje.CREATE("No se pudo agregar", 2);
         }
         return msg;
     }
 
     @Override
-    public Cuestionario getCuestionario(int id) {
-        return cuestionarioDAO.getCuestionario(id);
+    public Cuestionario get(int id) {
+        return cuestionarioDAO.get(id);
     }
 
     @Override
-    public Mensaje editCuestionario(Cuestionario cuestionario) {
-        int valor = cuestionarioDAO.editCuestionario(cuestionario);
+    public Mensaje update(Cuestionario cuestionario) {
+        int valor = cuestionarioDAO.update(cuestionario);
         if (valor >= 1) {
-            msg = new Mensaje("Editado correctamente", 1);
+            msg = Mensaje.CREATE("Editado correctamente", 1);
         } else {
-            msg = new Mensaje("No se pudo editar", 2);
+            msg = Mensaje.CREATE("No se pudo editar", 2);
         }
         return msg;
     }
 
     @Override
-    public Mensaje deleteCuestionario(int id, int opcion) {
-        int valor = cuestionarioDAO.deleteCuestionario(id, opcion);
+    public Mensaje delete(int id, int opcion) {
+        int valor = cuestionarioDAO.delete(id, opcion);
         if (valor >= 1) {
-            msg = new Mensaje("Ejecutado correctamente", 1);
+            msg = Mensaje.CREATE("Ejecutado correctamente", 1);
         } else {
-            msg = new Mensaje("No se pudo ejecutar", 2);
+            msg = Mensaje.CREATE("No se pudo ejecutar", 2);
         }
         return msg;
     }

@@ -15,13 +15,13 @@ public interface PreguntaDAO {
     
     List<Pregunta> getRecords();
 
-    int addPregunta(Pregunta pr);
+    int add(Pregunta pr);
 
-    int editPregunta(Pregunta pr);
+    int update(Pregunta pr);
 
-    Pregunta getPregunta(int id);
+    Pregunta get(int id);
 
-    int deletePregunta(int id, int opcion);
+    int delete(int id, int opcion);
     
-    List<Pregunta> getRecordsPreguntas(int idCuestionario);
+    List<Pregunta> getRecordsByIdCuestionario(int idCuestionario);
 }

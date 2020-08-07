@@ -51,7 +51,7 @@ public class CuestionarioDAOImpl implements CuestionarioDAO{
     }
 
     @Override
-    public int addCuestionario(Cuestionario cu) {
+    public int add(Cuestionario cu) {
         int valor = 0;
         int idCuestionario = jdbcTemplate.queryForObject("select nvl(max(idcuestionario),0)+ 1 from cuestionario", Integer.class);
         cu.setIdCuestionario(idCuestionario);
@@ -72,7 +72,7 @@ public class CuestionarioDAOImpl implements CuestionarioDAO{
     }
 
     @Override
-    public int editCuestionario(Cuestionario cu) {
+    public int update(Cuestionario cu) {
         int valor = 0;
         sql = "UPDATE CUESTIONARIO SET cuestionario = ?, fechamodif = SYSDATE, nousuariomodif = ? WHERE idcuestionario = ? ";
         try {
@@ -86,7 +86,7 @@ public class CuestionarioDAOImpl implements CuestionarioDAO{
     }
 
     @Override
-    public Cuestionario getCuestionario(int id) {
+    public Cuestionario get(int id) {
 
         Cuestionario cu = null;
         sql = "select cu.idcuestionario, "
@@ -108,7 +108,7 @@ public class CuestionarioDAOImpl implements CuestionarioDAO{
     }
 
     @Override
-    public int deleteCuestionario(int id, int opcion) {
+    public int delete(int id, int opcion) {
         int valor = 0;
         sql = "UPDATE CUESTIONARIO SET IDESTATUS= ? where idcuestionario = ?";
         try {

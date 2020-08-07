@@ -17,18 +17,18 @@ public interface UsuarioService {
 
     List<Usuario> listAll();
 
-    Mensaje addUsuario(Usuario usuario);
+    Mensaje add(Usuario usuario);
 
-    Usuario getUsuario(int id);
+    Usuario get(int id);
 
-    Mensaje editUsuario(Usuario usuario);
+    Mensaje update(Usuario usuario);
 
-    Mensaje deleteUsuario(int id, int opcion);
+    Mensaje delete(int id, int opcion);
 
-    Usuario existsUsuario(Login login);
+    Usuario exists(Login login);
 
-    Mensaje resetPasaporte(int id);
+    Mensaje resetPass(int id);
 
-    Mensaje changePasaporte(Login login);
+    Mensaje changePass(Login login);
 
 }

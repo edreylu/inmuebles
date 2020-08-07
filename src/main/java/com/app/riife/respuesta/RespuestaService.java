@@ -17,9 +17,9 @@ public interface RespuestaService {
     
     List<Cuestionario> listAll();
     
-    Procedure ActRespuesta(List<Respuesta> respuestas);
+    Procedure ActRespuesta(ObjectRespuestas respuestas);
     
-    List<Respuesta> listRespuestasByIdAndUsuario(int idCuestionario, int noUsuario);
+    List<String> getForms(int idCuestionario, int noUsuario);
     
     Respuesta getRespuesta(int idCuestionario, int noUsuario, int idPregunta);
     

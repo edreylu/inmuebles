@@ -16,13 +16,13 @@ public interface KcatalogoService {
     
     List<Kcatalogo> listAll();
 
-    Mensaje addKcatalogo(Kcatalogo kcatalogo);
+    Mensaje add(Kcatalogo kcatalogo);
 
-    Kcatalogo getKcatalogo(String id);
+    Kcatalogo get(String id);
 
-    Mensaje editKcatalogo(Kcatalogo kcatalogo);
+    Mensaje update(Kcatalogo kcatalogo);
     
-    Mensaje deleteKcatalogo(String id, int opcion);
+    Mensaje delete(String id, int opcion);
 
     List<Kcatalogo> listCatalogoEncuesta(String catalogo);
 

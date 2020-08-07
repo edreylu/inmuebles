@@ -20,7 +20,7 @@ and open the template in the editor.
         <div th:case="*">
         <div class="card border-info">
             <div class="card-header text-white">
-                <a id="boton_agregar" style="font-size:15px;color: #333333;" title="Agregar Forma" href="agregar" class="fas fa-plus-circle"></a>
+                <a id="boton_agregar" style="font-size:15px;color: #333333;" title="Agregar Forma" th:href="@{/formas/agregar}" class="fas fa-plus-circle"></a>
             </div>
             <div class="card-body table-responsive-md">
                 <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" 
@@ -58,6 +58,7 @@ and open the template in the editor.
                                 <a id="boton_eliminar" href="#" style="font-size:15px;color: #333333;" th:onclick="'javascript:mensajeEliminar(\''+ ${dato.noFormaMenu} +'\');'">
                                     <i title="Eliminar Forma" class="fas fa-trash-alt"></i>
                                 </a>
+                                <input type="hidden" value="formas" id="nombreModulo">
                             </td>
                         </tr>
                     </tbody>

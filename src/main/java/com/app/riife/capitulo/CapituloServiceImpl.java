@@ -24,10 +24,6 @@ public class CapituloServiceImpl implements CapituloService{
     public CapituloServiceImpl(CapituloDAO capituloDAO) {
         this.capituloDAO = capituloDAO;
     }
-
-    public CapituloServiceImpl() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     @Override
     public List<Capitulo> listAll() {
@@ -35,39 +31,39 @@ public class CapituloServiceImpl implements CapituloService{
     }
 
     @Override
-    public Mensaje addCapitulo(Capitulo capitulo) {
-        int valor = capituloDAO.addCapitulo(capitulo);
+    public Mensaje add(Capitulo capitulo) {
+        int valor = capituloDAO.add(capitulo);
         if (valor >= 1) {
-            msg = new Mensaje("Agregado correctamente", 1);
+            msg = Mensaje.CREATE("Agregado correctamente", 1);
         } else {
-            msg = new Mensaje("No se pudo agregar", 2);
+            msg = Mensaje.CREATE("No se pudo agregar", 2);
         }
         return msg;
     }
 
     @Override
-    public Capitulo getCapitulo(int id) {
-        return capituloDAO.getCapitulo(id);
+    public Capitulo get(int id) {
+        return capituloDAO.get(id);
     }
 
     @Override
-    public Mensaje editCapitulo(Capitulo capitulo) {
-        int valor = capituloDAO.editCapitulo(capitulo);
+    public Mensaje update(Capitulo capitulo) {
+        int valor = capituloDAO.update(capitulo);
         if (valor >= 1) {
-            msg = new Mensaje("Editado correctamente", 1);
+            msg = Mensaje.CREATE("Editado correctamente", 1);
         } else {
-            msg = new Mensaje("No se pudo editar", 2);
+            msg = Mensaje.CREATE("No se pudo editar", 2);
         }
         return msg;
     }
 
     @Override
-    public Mensaje deleteCapitulo(int id, int opcion) {
-        int valor = capituloDAO.deleteCapitulo(id, opcion);
+    public Mensaje delete(int id, int opcion) {
+        int valor = capituloDAO.delete(id, opcion);
         if (valor >= 1) {
-            msg = new Mensaje("Ejecutado correctamente", 1);
+            msg = Mensaje.CREATE("Ejecutado correctamente", 1);
         } else {
-            msg = new Mensaje("No se pudo ejecutar", 1);
+            msg = Mensaje.CREATE("No se pudo ejecutar", 1);
         }
         return msg;
     }

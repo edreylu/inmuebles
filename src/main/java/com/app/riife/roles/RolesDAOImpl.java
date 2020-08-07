@@ -66,7 +66,7 @@ public class RolesDAOImpl implements RolesDAO{
     }
 
     @Override
-    public int editRol(Roles rol) {
+    public int updateRol(Roles rol) {
         int valor = 0;
         sql = "UPDATE ROLES set descripcion = ? , insertar =  ? , actualizar = ? , eliminar = ? , consultar = ?, descargar = ?  "
                 + " where no_rol = ? ";
@@ -111,7 +111,7 @@ public class RolesDAOImpl implements RolesDAO{
     }
 
     @Override
-    public void assignFormaMenu(int noRol, int noForma) {
+    public void assignFormaMenuToRol(int noRol, int noForma) {
         sql = "INSERT INTO ROLES_FORMAS_MENU (no_rol, no_forma, prioridad, idestatus) "
                 + "VALUES (?,?,?,?)";
         try {
@@ -124,7 +124,7 @@ public class RolesDAOImpl implements RolesDAO{
     }
 
     @Override
-    public void deleteFormaMenu(int noRol) {
+    public void deleteFormaMenuToRol(int noRol) {
         sql = "DELETE FROM ROLES_FORMAS_MENU WHERE no_rol = ? ";
         try {
             jdbcTemplate.update(sql, new Object[]{
@@ -178,7 +178,7 @@ public class RolesDAOImpl implements RolesDAO{
     }
 
     @Override
-    public List<FormasMenu> getRecordsFormas(int noRol) {
+    public List<FormasMenu> getRecordsFormasById(int noRol) {
         
         List<FormasMenu> listaFormas = new ArrayList<>();
         sql = "SELECT  ME.NO_FORMA AS ID_MENU , ME.TITULO AS DESCRIPCION, ME.URL AS ENLACE, ME.ICONO AS ICONO, ME.NO_FORMA_PADRE AS ID_MENU_PADRE,\n"
