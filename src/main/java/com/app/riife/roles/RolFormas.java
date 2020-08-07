@@ -8,22 +8,48 @@ package com.app.riife.roles;
 import com.app.riife.formasMenu.FormasMenu;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 
 /**
  *
  * @author usuario
  */
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class RolFormas {
   List<FormasMenu> formas = new ArrayList<>();
   String rol;
   int noRol;
+
+    public RolFormas(String rol, int noRol) {
+        this.rol = rol;
+        this.noRol = noRol;
+    }
+
+    public RolFormas() {
+    }
+
+    public List<FormasMenu> getFormas() {
+        return formas;
+    }
+
+    public void setFormas(List<FormasMenu> formas) {
+        this.formas = formas;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    public int getNoRol() {
+        return noRol;
+    }
+
+    public void setNoRol(int noRol) {
+        this.noRol = noRol;
+    }
+  
+  
 }

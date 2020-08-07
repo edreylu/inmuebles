@@ -7,19 +7,11 @@ package com.app.riife.cuestionario;
 
 import com.app.riife.usuario.Usuario;
 import java.util.Date;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  *
  * @author Admin
  */
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Cuestionario {
  private Integer idCuestionario;
  private String cuestionario;
@@ -29,4 +21,83 @@ public class Cuestionario {
  private String fechaModif;
  private Usuario usuarioModif = new Usuario();
  private int idEstatus;
+
+    public Cuestionario(Integer idCuestionario, String cuestionario, Date fechaRegistro, String fechaRegistroStr, String fechaModif, int idEstatus) {
+        this.idCuestionario = idCuestionario;
+        this.cuestionario = cuestionario;
+        this.fechaRegistro = fechaRegistro;
+        this.fechaRegistroStr = fechaRegistroStr;
+        this.fechaModif = fechaModif;
+        this.idEstatus = idEstatus;
+    }
+ 
+    public Cuestionario(){
+    }
+
+    public Integer getIdCuestionario() {
+        return idCuestionario;
+    }
+
+    public void setIdCuestionario(Integer idCuestionario) {
+        this.idCuestionario = idCuestionario;
+    }
+
+    public String getCuestionario() {
+        return cuestionario;
+    }
+
+    public void setCuestionario(String cuestionario) {
+        this.cuestionario = cuestionario;
+    }
+
+    public Date getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(Date fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+
+    public String getFechaRegistroStr() {
+        return fechaRegistroStr;
+    }
+
+    public void setFechaRegistroStr(String fechaRegistroStr) {
+        this.fechaRegistroStr = fechaRegistroStr;
+    }
+
+    public Usuario getUsuarioRegistro() {
+        return usuarioRegistro;
+    }
+
+    public void setUsuarioRegistro(Usuario usuarioRegistro) {
+        this.usuarioRegistro = usuarioRegistro;
+    }
+
+    public String getFechaModif() {
+        return fechaModif;
+    }
+
+    public void setFechaModif(String fechaModif) {
+        this.fechaModif = fechaModif;
+    }
+
+    public Usuario getUsuarioModif() {
+        return usuarioModif;
+    }
+
+    public void setUsuarioModif(Usuario usuarioModif) {
+        this.usuarioModif = usuarioModif;
+    }
+
+    public int getIdEstatus() {
+        return idEstatus;
+    }
+
+    public void setIdEstatus(int idEstatus) {
+        this.idEstatus = idEstatus;
+    }
+    
+    
+ 
 }

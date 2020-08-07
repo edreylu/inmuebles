@@ -5,23 +5,39 @@
  */
 package com.app.riife.util;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
  * @author Admin
  */
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
 public class Mensaje {
     private String mensaje;
     private int result;
+
+    public Mensaje(String mensaje, int result) {
+        this.mensaje = mensaje;
+        this.result = result;
+    }
+
+    public Mensaje() {
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    public int getResult() {
+        return result;
+    }
+
+    public void setResult(int result) {
+        this.result = result;
+    }
 
     public RedirectAttributes mensaje(String mensaje, String clase, RedirectAttributes redirectAttrs) {
         return redirectAttrs.addFlashAttribute("mensaje", mensaje).addFlashAttribute("clase", clase);

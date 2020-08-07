@@ -5,20 +5,11 @@
  */
 package com.app.riife.inmueble;
 
-import java.util.Date;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  *
  * @author Admin
  */
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Inmueble {
  private int idInmueble;
  private String claveInmueble;
@@ -27,4 +18,75 @@ public class Inmueble {
  private String zonaEscolar;
  private String direccionRegional;
  private String domicilio;
+
+    public Inmueble(int idInmueble, String claveInmueble, int idCentroTrabajo, String jefaturaSector, String zonaEscolar, String direccionRegional, String domicilio) {
+        this.idInmueble = idInmueble;
+        this.claveInmueble = claveInmueble;
+        this.idCentroTrabajo = idCentroTrabajo;
+        this.jefaturaSector = jefaturaSector;
+        this.zonaEscolar = zonaEscolar;
+        this.direccionRegional = direccionRegional;
+        this.domicilio = domicilio;
+    }
+
+    public Inmueble() {
+    }
+
+    public int getIdInmueble() {
+        return idInmueble;
+    }
+
+    public void setIdInmueble(int idInmueble) {
+        this.idInmueble = idInmueble;
+    }
+
+    public String getClaveInmueble() {
+        return claveInmueble;
+    }
+
+    public void setClaveInmueble(String claveInmueble) {
+        this.claveInmueble = claveInmueble;
+    }
+
+    public int getIdCentroTrabajo() {
+        return idCentroTrabajo;
+    }
+
+    public void setIdCentroTrabajo(int idCentroTrabajo) {
+        this.idCentroTrabajo = idCentroTrabajo;
+    }
+
+    public String getJefaturaSector() {
+        return jefaturaSector;
+    }
+
+    public void setJefaturaSector(String jefaturaSector) {
+        this.jefaturaSector = jefaturaSector;
+    }
+
+    public String getZonaEscolar() {
+        return zonaEscolar;
+    }
+
+    public void setZonaEscolar(String zonaEscolar) {
+        this.zonaEscolar = zonaEscolar;
+    }
+
+    public String getDireccionRegional() {
+        return direccionRegional;
+    }
+
+    public void setDireccionRegional(String direccionRegional) {
+        this.direccionRegional = direccionRegional;
+    }
+
+    public String getDomicilio() {
+        return domicilio;
+    }
+
+    public void setDomicilio(String domicilio) {
+        this.domicilio = domicilio;
+    }
+ 
+ 
 }

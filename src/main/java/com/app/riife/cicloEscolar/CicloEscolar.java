@@ -5,19 +5,11 @@
  */
 package com.app.riife.cicloEscolar;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  *
  * @author Admin
  */
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class CicloEscolar {
     private int idCicloEscolar;
     private int idRevision;
@@ -25,4 +17,67 @@ public class CicloEscolar {
     private String fechaInicial;
     private String fechaFinal;
     private int idEstatus;
+
+    public CicloEscolar(int idCicloEscolar, int idRevision, String cicloEscolar, String fechaInicial, String fechaFinal, int idEstatus) {
+        this.idCicloEscolar = idCicloEscolar;
+        this.idRevision = idRevision;
+        this.cicloEscolar = cicloEscolar;
+        this.fechaInicial = fechaInicial;
+        this.fechaFinal = fechaFinal;
+        this.idEstatus = idEstatus;
+    }
+    
+    public CicloEscolar(){
+    
+    }
+
+    public int getIdCicloEscolar() {
+        return idCicloEscolar;
+    }
+
+    public void setIdCicloEscolar(int idCicloEscolar) {
+        this.idCicloEscolar = idCicloEscolar;
+    }
+
+    public int getIdRevision() {
+        return idRevision;
+    }
+
+    public void setIdRevision(int idRevision) {
+        this.idRevision = idRevision;
+    }
+
+    public String getCicloEscolar() {
+        return cicloEscolar;
+    }
+
+    public void setCicloEscolar(String cicloEscolar) {
+        this.cicloEscolar = cicloEscolar;
+    }
+
+    public String getFechaInicial() {
+        return fechaInicial;
+    }
+
+    public void setFechaInicial(String fechaInicial) {
+        this.fechaInicial = fechaInicial;
+    }
+
+    public String getFechaFinal() {
+        return fechaFinal;
+    }
+
+    public void setFechaFinal(String fechaFinal) {
+        this.fechaFinal = fechaFinal;
+    }
+
+    public int getIdEstatus() {
+        return idEstatus;
+    }
+
+    public void setIdEstatus(int idEstatus) {
+        this.idEstatus = idEstatus;
+    }
+    
+    
 }
