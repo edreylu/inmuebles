@@ -38,11 +38,10 @@ and open the template in the editor.
         </form>
         
     </div>
-              <center><form method="post" th:action="@{/finalizar}" class="container">
+              <form method="post" th:action="@{/finalizar}" class="container">
         <div class="col-md-6 text-center"><br/><button id="submit" type="submit" class="btn btn-primary" th:disabled="${session.user.pdfIne==null}">
                             <i class="fas fa-sign-in-alt"></i> <span>Finalizar Registro</span> </button></div>
         </form>
-                  </center> 
         </div>
         </div>
     </body>

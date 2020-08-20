@@ -14,8 +14,8 @@ and open the template in the editor.
         <header th:replace="layout :: header"></header>
        <div class="container mt-2 col-lg-7">
            <div class="card">
-                <div class="card-header">
-                    <center><b class="tituloPrincipal">Editar Pregunta</b></center>   
+                <div class="card-header text-center">
+                <b class="tituloPrincipal">Editar Pregunta</b>
                 </div>
                 <div class="card-body">
                     <form class="needs-validation" novalidate method="post" action="#" th:action="@{/preguntas/update/{id}(id=${pregunta.idPregunta})}" th:object="${pregunta}">
@@ -115,7 +115,7 @@ and open the template in the editor.
                          <option value="" selected disabled>Selecciona...</option>
                          <option value="VARCHAR2">VARCHAR2</option>
                          <option value="NUMBER">NUMBER</option>
-                        </select></select><div class="invalid-feedback">Tipo de dato es requerido</div></div>
+                        </select><div class="invalid-feedback">Tipo de dato es requerido</div></div>
                         </div>
                         
                         <div class="row" th:if="${#strings.equals(pregunta.especificarPor, 'C') and #strings.equals(pregunta.enCatalogo, 'S')}">
@@ -130,7 +130,7 @@ and open the template in the editor.
                          <option value="VARCHAR2">VARCHAR2</option>
                          <option value="NUMBER">NUMBER</option>
                         </select>
-                         </select><div class="invalid-feedback">Tipo de dato es requerido</div>
+                         <div class="invalid-feedback">Tipo de dato es requerido</div>
                             </div>
                         </div>
                         

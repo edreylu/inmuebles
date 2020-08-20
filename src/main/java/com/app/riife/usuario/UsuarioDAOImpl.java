@@ -22,7 +22,7 @@ public class UsuarioDAOImpl implements UsuarioDAO{
     private final JdbcTemplate jdbcTemplate;
     private String sql = "";
     private final int estatus = 1;
-    private List lista = null;
+    private List<Usuario> lista = null;
 
     @Autowired
     public UsuarioDAOImpl(JdbcTemplate jdbcTemplate) {

@@ -5,7 +5,6 @@
  */
 package com.app.riife.formasMenu;
 
-import com.app.riife.inicio.SessionComponent;
 import com.app.riife.util.Mensaje;
 import java.util.List;
 import java.util.Objects;
@@ -26,7 +25,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @SessionScope
 public class FormasMenuControl {
 
-    private final SessionComponent session;
     private final FormasMenuService formasMenuService;
     private List<FormasMenu> formas;
     private List<FormasMenu> formasPadre;
@@ -34,8 +32,7 @@ public class FormasMenuControl {
     private final Mensaje msg = new Mensaje();
     
     @Autowired
-    public FormasMenuControl(SessionComponent session, FormasMenuService formasMenuService) {
-        this.session = session;
+    public FormasMenuControl(FormasMenuService formasMenuService) {
         this.formasMenuService = formasMenuService;
     }
 

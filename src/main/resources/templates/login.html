@@ -12,21 +12,20 @@
         
         <div class="container mt-4 col-lg-3">
            <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
-             class="alert alert-dismissable">
+             style="font-weight: bold;" class="alert alert-dismissable text-center" th:text="${mensaje}">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <center><strong><div th:text="${mensaje}"></div></strong></center>
         </div>
-        <div th:if="${param.error}" class="alert alert-danger alert-dismissable" role="alert">
+        <div th:if="${param.error}" style="font-weight: bold;" class="alert alert-danger alert-dismissable text-center" role="alert">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <center><strong>Usuario o contraseña invalido.</strong></center>
+            Usuario o contraseña invalido.
         </div>
-        <div th:if="${param.iguales}" class="alert alert-danger alert-dismissable" role="alert">
+        <div th:if="${param.iguales}" style="font-weight: bold;" class="alert alert-danger alert-dismissable text-center" role="alert">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <center><strong>Usuario y contraseña no pueden ser iguales.</strong></center>
+            Usuario y contraseña no pueden ser iguales.
         </div>
-        <div th:if="${param.logout}" class="alert alert-success alert-dismissable" role="alert">
+        <div th:if="${param.logout}" style="font-weight: bold;" class="alert alert-success alert-dismissable text-center" role="alert">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <center><strong>Has salido de session.</strong></center>
+            Has salido de session.
         </div>
             <div class="modal-dialog text-center">
                 <div class="modal-content">
@@ -49,11 +48,10 @@
                                     </div>
                             </div>
                         </div>
-                        <center>
-                        <div class="form-group" id="user-group">
+                        
+                        <div class="form-group text-center" id="user-group">
                             <div class="g-recaptcha" th:attr="data-sitekey=${key}" data-callback="enabledSubmit"></div>
                         </div>
-                        </center>
                         
                         <button id="submit" type="submit" class="btn btn-primary" >
                             <i class="fas fa-sign-in-alt"></i> <span>Ingresar</span> </button>

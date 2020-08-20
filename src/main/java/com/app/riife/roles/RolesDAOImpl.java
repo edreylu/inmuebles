@@ -21,7 +21,7 @@ import org.springframework.stereotype.Repository;
 public class RolesDAOImpl implements RolesDAO{
 
     private final JdbcTemplate jdbcTemplate;
-    private List lista = null;
+    private List<Roles> lista = null;
     private String sql = "";
 
     @Autowired

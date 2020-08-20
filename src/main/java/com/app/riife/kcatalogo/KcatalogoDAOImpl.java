@@ -19,7 +19,7 @@ import org.springframework.stereotype.Repository;
 public class KcatalogoDAOImpl implements KcatalogoDAO{
 
     private final JdbcTemplate jdbcTemplate;
-    private List lista = null;
+    private List<Kcatalogo> lista = null;
     private String sql = "";
     private int estatus = 1,
             valor = 0;
@@ -51,16 +51,18 @@ public class KcatalogoDAOImpl implements KcatalogoDAO{
         return lista;
     }
 
-    @Override
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
     public List<String> getRecordsOnlyCatalogo() {
+    	List listaStr = null;
         sql = "select catalogo from kcatalogo GROUP BY catalogo order by 1";
 
         try {
-            lista = jdbcTemplate.queryForList(sql);
+        	listaStr = jdbcTemplate.queryForList(sql);
         } catch (DataAccessException e) {
             System.err.print(e);
         }
-        return lista;
+        return listaStr;
     }
 
     @Override

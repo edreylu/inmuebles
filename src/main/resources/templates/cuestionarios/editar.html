@@ -14,8 +14,8 @@ and open the template in the editor.
         <header th:replace="layout :: header"></header>
        <div class="container mt-2 col-lg-4">
            <div class="card">
-                <div class="card-header">
-                    <center><b class="tituloPrincipal">Editar Cuestionario</b></center>   
+                <div class="card-header text-center">
+                <b class="tituloPrincipal">Editar Cuestionario</b>
                 </div>
                 <div class="card-body">
                     <form method="post" action="#" th:action="@{/cuestionarios/update/{id}(id=${cuestionario.idCuestionario})}" th:object="${cuestionario}">

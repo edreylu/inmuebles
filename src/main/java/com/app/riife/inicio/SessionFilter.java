@@ -5,13 +5,12 @@
  */
 package com.app.riife.inicio;
 
-import com.app.riife.usuario.Usuario;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -33,7 +32,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class SessionFilter implements Filter {
 
-    private static final Logger LOG = Logger.getLogger(SessionFilter.class.getName());
+    //private static final Logger LOG = Logger.getLogger(SessionFilter.class.getName());
     private FilterConfig config = null;
 
     @Override
@@ -60,7 +59,8 @@ public class SessionFilter implements Filter {
         if (isAuthenticated) {
             //Usuario usuario = (Usuario) httpRequest.getSession().getAttribute("usuario");
             //LOG.log(Level.INFO, "Usuario: {0} RequestURI: {1}", new Object[]{usuario.getClave(),requestURI});
-            List<String> pantallas = (List<String>) httpRequest.getSession().getAttribute("pantallas");
+            @SuppressWarnings("unchecked")
+			List<String> pantallas = (List<String>) httpRequest.getSession().getAttribute("pantallas");
             pantallas.add("menu");
             existsForma = findForma(pantallas, requestURI);
 

@@ -19,7 +19,7 @@ import org.springframework.stereotype.Repository;
 public class SubCapituloDAOImpl implements SubCapituloDAO{
 
     private final JdbcTemplate jdbcTemplate;
-    private List lista = null;
+    private List<SubCapitulo> lista = null;
     private String sql = "";
     private final int estatus = 1;
     

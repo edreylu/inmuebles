@@ -20,7 +20,7 @@ import org.springframework.stereotype.Repository;
 public class PreguntaDAOImpl implements PreguntaDAO{
 
     private final JdbcTemplate jdbcTemplate;
-    private List lista = null;
+    private List<Pregunta> lista = null;
     private String sql = "";
     private final int estatus = 1;
 

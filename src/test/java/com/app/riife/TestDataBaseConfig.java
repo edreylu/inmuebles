@@ -5,15 +5,10 @@
  */
 package com.app.riife;
 
-import com.app.riife.capitulo.CapituloDAO;
-import com.app.riife.capitulo.CapituloDAOImpl;
-import com.app.riife.capitulo.CapituloService;
-import com.app.riife.capitulo.CapituloServiceImpl;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 /**
@@ -34,19 +29,4 @@ public class TestDataBaseConfig {
         return dataSource;
     }
     
-    @Bean
-    public JdbcTemplate getJdbcTemplate(){
-    JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
-    return jdbcTemplate;
-    }
-    
-    @Bean
-    public CapituloDAO getCapituloDAO(){
-    return new CapituloDAOImpl(getJdbcTemplate());
-    }
-    
-    @Bean
-    public CapituloService getCapituloService(){
-    return new CapituloServiceImpl(getCapituloDAO());
-    }
 }

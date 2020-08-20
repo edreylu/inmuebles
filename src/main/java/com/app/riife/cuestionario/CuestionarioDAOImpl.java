@@ -20,7 +20,7 @@ public class CuestionarioDAOImpl implements CuestionarioDAO{
 
     
     private final JdbcTemplate jdbcTemplate;
-    private List lista = null;
+    private List<Cuestionario> lista = null;
     private String sql;
 
     @Autowired

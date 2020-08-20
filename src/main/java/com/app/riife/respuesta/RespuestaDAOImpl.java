@@ -26,9 +26,8 @@ import org.springframework.stereotype.Repository;
 public class RespuestaDAOImpl implements RespuestaDAO {
     
     private final JdbcTemplate jdbcTemplate;
-    private List lista = null;
+    private List<Respuesta> lista = null;
     private String sql;
-    private final int estatus = 1;
 
     @Autowired
     public RespuestaDAOImpl(JdbcTemplate jdbcTemplate) {

@@ -14,8 +14,8 @@ and open the template in the editor.
         <header th:replace="layout :: header"></header>
        <div class="container mt-2 col-lg-4">
            <div class="card">
-                <div class="card-header">
-                    <center><b class="tituloPrincipal">Editar Forma</b></center>   
+                <div class="card-header text-center">
+                <b class="tituloPrincipal">Editar Forma</b>
                 </div>
                 <div class="card-body">
                     <form method="post" action="#" th:action="@{/formas/update/{id}(id=${forma.noFormaMenu})}" th:object="${forma}">

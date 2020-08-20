@@ -15,7 +15,7 @@ and open the template in the editor.
         <header th:replace="layout :: header"></header>
         
         <div class="container mt-4" th:switch="${lista}">
-            <center><b class="tituloPrincipal">ENCUESTAS</b></center>
+        <div class="text-center"><b class="tituloPrincipal">ENCUESTAS</b></div>
        <h2 th:case="null">No hay Encuestas</h2>
         <div th:case="*">
         <div class="card border-info">
@@ -24,9 +24,10 @@ and open the template in the editor.
             <div class="card-body table-responsive-md">
                 <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" 
                      th:if="${mensaje != null}"
-                     class="alert alert-dismissable">
+                     class="alert alert-dismissable text-center"
+                     style="font-weight: bold;"
+                     th:text="${mensaje}">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <center><strong><div th:text="${mensaje}"></div></strong></center>
                 </div>
                 
                 <table>
@@ -45,6 +46,7 @@ and open the template in the editor.
                     </div>
                   </div>
                     <br/>
+                    </tr>
                     </tbody>
                 </table>
                 

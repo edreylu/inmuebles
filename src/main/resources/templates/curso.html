@@ -22,12 +22,12 @@ and open the template in the editor.
                 <div class="card-body mt-3">
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-md-6"><b class="tituloTexto">NOMBRE CURSO: </b><label th:text="${curso.nombreCurso}" />
-                            </div><div class="col-md-6"><b class="tituloTexto">DIRIGIDO A: </b><label th:text="${curso.dirigidoA}" /></div>
+                            <div class="col-md-6"><b class="tituloTexto">NOMBRE CURSO: </b><label th:text="${curso.nombreCurso}"></label>
+                            </div><div class="col-md-6"><b class="tituloTexto">DIRIGIDO A: </b><label th:text="${curso.dirigidoA}"></label></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6"><b class="tituloTexto">HORAS PRESENCIALES: </b><label th:text="${curso.horasPresenciales}" />
-                            </div><div class="col-md-6"><b class="tituloTexto">HORAS EN LINEA: </b><label th:text="${curso.horasLinea}" /></div>
+                            <div class="col-md-6"><b class="tituloTexto">HORAS PRESENCIALES: </b><label th:text="${curso.horasPresenciales}"></label>
+                            </div><div class="col-md-6"><b class="tituloTexto">HORAS EN LINEA: </b><label th:text="${curso.horasLinea}"></label></div>
                         </div>
                     </div>
                 </div>
@@ -41,11 +41,11 @@ and open the template in the editor.
                     <div class="panel-body">
                         <div class="row">
                             
-                            <div class="col-md-6"><b class="tituloTexto">SEDE: </b><label th:text="${cursosede.nombreSede}" />
-                            </div><div class="col-md-6"><b class="tituloTexto">MUNICIPIO: </b><label th:text="${cursosede.municipio}" /></div>
-                            <div class="col-md-6"><b class="tituloTexto">CALLE: </b><label th:text="${cursosede.calle}" />
-                            </div><div class="col-md-6"><b class="tituloTexto">COLONIA: </b><label th:text="${cursosede.colonia}" /></div>
-                            <div class="col-md-6"><b class="tituloTexto">DISPONIBILIDAD: </b><label th:text="${disponibilidad.disponibiliad}"/></div>
+                            <div class="col-md-6"><b class="tituloTexto">SEDE: </b><label th:text="${cursosede.nombreSede}"></label>
+                            </div><div class="col-md-6"><b class="tituloTexto">MUNICIPIO: </b><label th:text="${cursosede.municipio}"></label></div>
+                            <div class="col-md-6"><b class="tituloTexto">CALLE: </b><label th:text="${cursosede.calle}"></label>
+                            </div><div class="col-md-6"><b class="tituloTexto">COLONIA: </b><label th:text="${cursosede.colonia}"></label></div>
+                            <div class="col-md-6"><b class="tituloTexto">DISPONIBILIDAD: </b><label th:text="${disponibilidad.disponibiliad}"></label></div>
                             <div class="col-md-6"><br/><button id="submit" type="submit" class="btn btn-primary">
                             <i class="fas fa-sign-in-alt"></i> <span>Continuar</span> </button></div>
                         </div>

@@ -19,7 +19,7 @@ import org.springframework.stereotype.Repository;
 public class CapituloDAOImpl implements CapituloDAO{
 
     private final JdbcTemplate jdbcTemplate;
-    private List lista = null;
+    private List<Capitulo> lista = null;
     private String sql;
     
     @Autowired

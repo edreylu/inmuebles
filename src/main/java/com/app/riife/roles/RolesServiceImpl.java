@@ -85,7 +85,7 @@ public class RolesServiceImpl implements RolesService{
         if (existe) {
             rolesDAO.deleteFormaMenuToRol(rolFormas.getNoRol());
         }
-        for (Iterator it = rolFormas.getFormas().iterator(); it.hasNext();) {
+        for (Iterator<?> it = rolFormas.getFormas().iterator(); it.hasNext();) {
             FormasMenu x = (FormasMenu) it.next();
             if (x.isMenuSeleccionado()) {
                 rolesDAO.assignFormaMenuToRol(rolFormas.getNoRol(), x.getNoFormaMenu());

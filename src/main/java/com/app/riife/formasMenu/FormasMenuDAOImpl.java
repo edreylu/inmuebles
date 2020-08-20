@@ -21,7 +21,7 @@ import org.springframework.stereotype.Repository;
 public class FormasMenuDAOImpl implements FormasMenuDAO{
 
     private final JdbcTemplate jdbcTemplate;
-    private List lista = null;
+    private List<FormasMenu> lista = null;
     private String sql = "";
     private final int estatus = 1;
     
@@ -53,7 +53,7 @@ public class FormasMenuDAOImpl implements FormasMenuDAO{
 
     @Override
     public List<FormasMenu> getRecordsFather() {
-        List listaFormas = null;
+        List<FormasMenu> listaFormas = null;
         sql = "SELECT NO_FORMA as ID_MENU, TITULO as DESCRIPCION,'' as ENLACE,'' as ICONO, '' as PADRE, '' AS ID_MENU_PADRE\n"
                 + "              FROM FORMAS_MENU            \n"
                 + "              WHERE (NO_FORMA_PADRE IS NULL OR NO_FORMA_PADRE =0)\n"
